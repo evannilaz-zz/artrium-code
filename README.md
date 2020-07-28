@@ -1,5 +1,5 @@
 # Artrium Code
-### Codename: Interactive Editor for Web, for [Samsung SW Contest](https://www.juniorsoftwarecup.com/Contest/About).
+### Interactive Editor for Web, for [Samsung SW Contest](https://www.juniorsoftwarecup.com/Contest/About).
 
 ## Necessary Features
 - [ ] Brackets/Quotes Autocomplete

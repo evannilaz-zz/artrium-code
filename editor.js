@@ -61,17 +61,21 @@ function keyUpEvent(event) {
     const key = event.key;
     push(key,"up");
     symbolAutocomplete(key);
-    if (keyHistory.up[0] === "{" && keyHistory.up[1] === "Enter" && !(keyHistory.up.includes("Backspace"))) {
+    if (keyHistory.up[0] === "{" && keyHistory.up[1] === "Enter" && !keyHistory.up.includes("Backspace")) {
         let cursor = editor.selectionStart;
         editor.value = stringInsert(editor.value,cursor,"\n");
         cursor = editor.selectionStart;
         editor.value = stringInsert(editor.value,cursor - 2,"\t");
         editor.setSelectionRange(cursor - 1, cursor - 1);
     }
+    
+    const openingIndex = editor.value.lastIndexOf("{");
+    const closingIndex = editor.value.lastIndexOf("}");
 
-    // if (editor.value.lastIndexOf("{") < editor.value.lastIndexOf("}") && editor.selectionStart < editor.value.lastIndexOf("}")) {
-    //     editor.value = stringInsert(editor.value,editor.selectionStart - 2,"\t");
-    // }
+    if (openingIndex < closingIndex && openingIndex + 3 < editor.selectionStart && editor.selectionStart < closingIndex && keyHistory.down.includes("Enter")) {
+        editor.value = stringInsert(editor.value,editor.selectionStart,"\t");
+        editor.setSelectionRange(editor.selectionStart - 2,editor.selectionStart - 2);
+    }
 }
 
 function init() {
