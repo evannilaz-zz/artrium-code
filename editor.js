@@ -30,7 +30,7 @@ function moveCursor(count,cursor = editor.selectionStart) {
 }
 
 function bracketAutocomplete(key) {
-    function closeBracket(closing) {
+    function closeBracket(closer) {
         function checkMultipleBracket(closer) {
             console.log(editor.value[cursor] + editor.value[cursor + 1]);
             if (editor.value[cursor] + editor.value[cursor + 1] === `${closer}${closer}`) {
@@ -39,7 +39,7 @@ function bracketAutocomplete(key) {
             }
         }
         const cursor = editor.selectionStart;
-        editor.value = stringInsert(editor.value,cursor,closing);
+        editor.value = stringInsert(editor.value,cursor,closer);
         moveCursor(0,cursor);
         brackets.forEach((bracket) => {
             checkMultipleBracket(bracket);
