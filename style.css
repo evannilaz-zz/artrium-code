@@ -9,6 +9,17 @@
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
+    tab-size: 3;
+}
+
+::selection {
+    background: #f1f2f6;
+    color: #222f3e;
+}
+
+::-moz-selection {
+    background: #f1f2f6;
+    color: #222f3e;
 }
 
 body {
@@ -53,7 +64,6 @@ body {
     height: 2960px;
     background: none;
     border: none;
-    /* color: #676E95; */
     color: #d3e1e8;
 }
 

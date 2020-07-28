@@ -12,27 +12,6 @@ function stringInsert(thisString,index,string,rem = 0) {
     return thisString.slice(0,index) + string + thisString.slice(index + rem);
 }
 
-function symbolAutocomplete(key) {
-    function autocomplete(closing) {
-        const cursor = editor.selectionStart;
-        editor.value = stringInsert(editor.value,cursor,closing);
-        editor.setSelectionRange(cursor,cursor);
-    }
-    symbols.forEach((symbol) => {
-        if (key === symbol) {
-            if (symbol === "{") {
-                autocomplete("}");
-            } else if (symbol === "(") {
-                autocomplete(")");
-            } else if (symbol === "[") {
-                autocomplete("]");
-            } else {
-                autocomplete(symbol);
-            }
-        }
-    });
-}
-
 function push(key,history) {
     if (!(key === "Shift" || key === " " || key === "Control")) {
         if (keyHistory[history].length >= 2) {
@@ -44,6 +23,37 @@ function push(key,history) {
         }
         keyHistory[history].push(key);
     }
+}
+
+function bracketAutocomplete(key) {
+    function closeBracket(closing) {
+        function checkMultipleBracket(closer) {
+            console.log(editor.value[cursor] + editor.value[cursor + 1]);
+            if (editor.value[cursor] + editor.value[cursor + 1] === `${closer}${closer}`) {
+                editor.value = editor.value.slice(0,cursor) + editor.value.slice(cursor + 2);
+                editor.setSelectionRange(cursor,cursor);
+            }
+        }
+        const cursor = editor.selectionStart;
+        editor.value = stringInsert(editor.value,cursor,closing);
+        editor.setSelectionRange(cursor,cursor);
+        ["}",")","]","\"","'","`"].forEach((bracket) => {
+            checkMultipleBracket(bracket);
+        });
+    }
+    symbols.forEach((symbol) => {
+        if (key === symbol) {
+            if (symbol === "{") {
+                closeBracket("}");
+            } else if (symbol === "(") {
+                closeBracket(")");
+            } else if (symbol === "[") {
+                closeBracket("]");
+            } else {
+                closeBracket(symbol);
+            }
+        }
+    });
 }
 
 function keyDownEvent(event) {
@@ -60,7 +70,7 @@ function keyDownEvent(event) {
 function keyUpEvent(event) {
     const key = event.key;
     push(key,"up");
-    symbolAutocomplete(key);
+    bracketAutocomplete(key);
     if (keyHistory.up[0] === "{" && keyHistory.up[1] === "Enter" && !keyHistory.up.includes("Backspace")) {
         let cursor = editor.selectionStart;
         editor.value = stringInsert(editor.value,cursor,"\n");
