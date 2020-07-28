@@ -1,6 +1,6 @@
 const editor = document.querySelector("textarea");
 
-let symbols = ["(","{","[","\"","'","`"];
+let brackets = ["(","{","[","\"","'","`"];
 
 let keyHistory = {
     full: new Array(),
@@ -25,32 +25,36 @@ function push(key,history) {
     }
 }
 
+function moveCursor(count,cursor = editor.selectionStart) {
+    editor.setSelectionRange(cursor + count, cursor + count);
+}
+
 function bracketAutocomplete(key) {
     function closeBracket(closing) {
         function checkMultipleBracket(closer) {
             console.log(editor.value[cursor] + editor.value[cursor + 1]);
             if (editor.value[cursor] + editor.value[cursor + 1] === `${closer}${closer}`) {
                 editor.value = editor.value.slice(0,cursor) + editor.value.slice(cursor + 2);
-                editor.setSelectionRange(cursor,cursor);
+                moveCursor(0,cursor);
             }
         }
         const cursor = editor.selectionStart;
         editor.value = stringInsert(editor.value,cursor,closing);
-        editor.setSelectionRange(cursor,cursor);
-        ["}",")","]","\"","'","`"].forEach((bracket) => {
+        moveCursor(0,cursor);
+        brackets.forEach((bracket) => {
             checkMultipleBracket(bracket);
         });
     }
-    symbols.forEach((symbol) => {
-        if (key === symbol) {
-            if (symbol === "{") {
+    brackets.forEach((bracket) => {
+        if (key === bracket) {
+            if (bracket === "{") {
                 closeBracket("}");
-            } else if (symbol === "(") {
+            } else if (bracket === "(") {
                 closeBracket(")");
-            } else if (symbol === "[") {
+            } else if (bracket === "[") {
                 closeBracket("]");
             } else {
-                closeBracket(symbol);
+                closeBracket(bracket);
             }
         }
     });
@@ -63,7 +67,7 @@ function keyDownEvent(event) {
     if (key === "Tab") {
         event.preventDefault();
         editor.value = stringInsert(editor.value,editor.selectionStart,"\t");
-        editor.setSelectionRange(editor.selectionStart - 2,editor.selectionStart - 2);
+        moveCursor(-2);
     }
 }
 
@@ -76,7 +80,7 @@ function keyUpEvent(event) {
         editor.value = stringInsert(editor.value,cursor,"\n");
         cursor = editor.selectionStart;
         editor.value = stringInsert(editor.value,cursor - 2,"\t");
-        editor.setSelectionRange(cursor - 1, cursor - 1);
+        moveCursor(-1,cursor);
     }
     
     const openingIndex = editor.value.lastIndexOf("{");
@@ -84,7 +88,7 @@ function keyUpEvent(event) {
 
     if (openingIndex < closingIndex && openingIndex + 3 < editor.selectionStart && editor.selectionStart < closingIndex && keyHistory.down.includes("Enter")) {
         editor.value = stringInsert(editor.value,editor.selectionStart,"\t");
-        editor.setSelectionRange(editor.selectionStart - 2,editor.selectionStart - 2);
+        moveCursor(-2);
     }
 }
 
