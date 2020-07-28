@@ -52,7 +52,8 @@ function keyDownEvent(event) {
     push(key,"down");
     if (key === "Tab") {
         event.preventDefault();
-        editor.value += "\t";
+        editor.value = stringInsert(editor.value,editor.selectionStart,"\t");
+        editor.setSelectionRange(editor.selectionStart - 2,editor.selectionStart - 2);
     }
 }
 
