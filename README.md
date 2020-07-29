@@ -1,4 +1,4 @@
-<div style="@import url('https://rsms.me/inter/inter.css'); @supports (font-variation-settings: normal) { html { font-family: 'Inter var', sans-serif }}; font-family: -apple-system, 'inter', 'manrope', sans-serif;">
+<div style="@import url('https://rsms.me/inter/inter.css'); @supports (font-variation-settings: normal) { html { font-family: 'Inter var', sans-serif }}; font-family: -apple-system, 'inter', 'manrope', sans-serif !important;">
 
 # Artrium Code
 ### Interactive Editor for Web, for [Samsung SW Contest](https://www.juniorsoftwarecup.com/Contest/About).
