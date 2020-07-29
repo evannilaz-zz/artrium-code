@@ -5,6 +5,7 @@
 
 ## Necessary Features
 - [X] Brackets/Quotes Autocomplete
+- [ ] File Manager (explorer)
 - [ ] Miniplayer for Education Platform (e.g. Inflearn, Coursera)
 - [ ] Debugging via SSH or API
 - [ ] Customizable CSS (theme)
