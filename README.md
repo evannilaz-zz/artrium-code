@@ -2,7 +2,7 @@
 ### Interactive Editor for Web, for [Samsung SW Contest](https://www.juniorsoftwarecup.com/Contest/About).
 
 ## Necessary Features
-- [ ] Brackets/Quotes Autocomplete
+- [X] Brackets/Quotes Autocomplete
 - [ ] Miniplayer for Education Platform (e.g. Inflearn, Coursera)
 - [ ] Debugging via SSH or API
 - [ ] Customizable CSS (theme)
