@@ -12,7 +12,7 @@
 - [ ] Software/Web-app both available
 
 ## Necessary Tech/Knowledge
-- [Python](https://www.python.org) (Tkinter/PyQt5)
+- Python ([Tkinter](https://docs.python.org/3/library/tkinter.html)/[PyQt5](https://pypi.org/project/PyQt5))
 - JavaScript ([Electron](https://www.electronjs.org)/[NodeJS](https://nodejs.org))
 - C/C++ ([GTK+ 2.0](https://developer.gnome.org/gtk-tutorial/stable/))
 
