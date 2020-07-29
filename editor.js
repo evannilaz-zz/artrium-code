@@ -85,7 +85,7 @@ function keyUpEvent(event) {
     const openingIndex = editor.value.lastIndexOf("{");
     const closingIndex = editor.value.lastIndexOf("}");
 
-    if (openingIndex < closingIndex && openingIndex + 3 < editor.selectionStart && editor.selectionStart < closingIndex && keyHistory.down.includes("Enter") && !keyHistory.up.includes("Backspace")) {
+    if (openingIndex < closingIndex && openingIndex + 4 < editor.selectionStart && editor.selectionStart < closingIndex && keyHistory.down.includes("Enter") && !keyHistory.up.includes("Backspace")) {
         editor.value = editor.value.insert(editor.selectionStart,"\t");
         moveCursor(-2);
     }

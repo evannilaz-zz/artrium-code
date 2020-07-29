@@ -57,7 +57,7 @@ body {
 
 #edit textarea {
     font-size: 15px;
-    font-family: "Consolas", "Menlo", monospace !important;
+    font-family: "Cascadia Code SemiLight", "Consolas", "Menlo", "Courier New", monospace !important;
     padding: 20px;
     margin: 0;
     width: 98%;
