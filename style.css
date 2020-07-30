@@ -14,12 +14,12 @@
 
 ::selection {
     background: #f1f2f6;
-    color: #222f3e;
+    color: white;
 }
 
 ::-moz-selection {
     background: #f1f2f6;
-    color: #222f3e;
+    color: white;
 }
 
 body {
