@@ -8,13 +8,15 @@ const deactivateEditor = function() {
     const textarea = document.querySelector("textarea");
     textarea.placeholder = "No file selected";
     textarea.style.pointerEvents = "none";
-    if (fileShortcuts) fileShortcuts.classList.remove("selected");
+    if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
 }
 
 const activateEditor = function() {
     const shortcutId = event.target.id;
     const textarea = document.querySelector("textarea");
     textarea.value = files[shortcutId].code;
+    console.log(fileShortcuts);
+    if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
     event.target.classList.add("selected");
 }
 
@@ -56,7 +58,7 @@ function crtNewFile() {
         event.target.querySelector("input").value = "";
         hide(fileCrtForm);
         hide(fileCrtBtn);
-        displayFile(fileObj);
+        displayFile(fileInfo);
     }
 }
 
@@ -71,11 +73,11 @@ function displayFile(file) {
 
 function init() {
     let loadedFiles = JSON.parse(localStorage.getItem("files"));
-    files = loadedFiles;
     if (loadedFiles !== null) {
         loadedFiles.forEach((loadedFile) => {
             displayFile(loadedFile);
         });
+        files = loadedFiles;
     }
     fileCrtBtn.addEventListener("click",prepNewFile);
     fileCrtForm.addEventListener("submit",crtNewFile);
