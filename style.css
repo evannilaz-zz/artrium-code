@@ -9,17 +9,16 @@
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
-    tab-size: 3;
 }
 
 ::selection {
     background: #f1f2f6;
-    color: white;
+    color: gray;
 }
 
 ::-moz-selection {
     background: #f1f2f6;
-    color: white;
+    color: gray;
 }
 
 body {
@@ -65,6 +64,9 @@ body {
     background: none;
     border: none;
     color: #d3e1e8;
+    -moz-tab-size: 3;
+    -o-tab-size: 3;
+    tab-size: 3;
 }
 
 h3 {

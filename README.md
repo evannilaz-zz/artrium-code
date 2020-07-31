@@ -1,5 +1,3 @@
-<div style="@import url('https://rsms.me/inter/inter.css'); @supports (font-variation-settings: normal) { html { font-family: 'Inter var', sans-serif }}; font-family: -apple-system, 'inter', 'manrope', sans-serif !important;">
-
 # Artrium Code
 ### Interactive Editor for Web, for [Samsung SW Contest](https://www.juniorsoftwarecup.com/Contest/About).
 
@@ -16,4 +14,7 @@
 - JavaScript ([Electron](https://www.electronjs.org)/[NodeJS](https://nodejs.org))
 - C/C++ ([GTK+ 2.0](https://developer.gnome.org/gtk-tutorial/stable/))
 
-</div>
+## Known Bugs & Issues
+- Cursor automatically moving to the last index of bracket after tab
+- Multiple bracket support not working (except quotes)
+- Automatically tabbed after one character is typed in 2~{n}th line in bracket

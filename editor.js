@@ -89,9 +89,15 @@ function keyUpEvent(event) {
         editor.value = editor.value.insert(editor.selectionStart,"\t");
         moveCursor(-2);
     }
+
+    localStorage.setItem("code",JSON.stringify(editor.value));
 }
 
 function init() {
+    const savedCode = JSON.parse(localStorage.getItem("code"));
+    if (savedCode !== null) {
+        editor.value = savedCode;
+    }
     editor.addEventListener("keydown",keyDownEvent);
     editor.addEventListener("keyup",keyUpEvent);
 }
