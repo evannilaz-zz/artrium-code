@@ -2,7 +2,7 @@
 ### Interactive Editor for Web, for [Samsung SW Contest](https://www.juniorsoftwarecup.com/Contest/About).
 
 ## Necessary Features
-- [X] Brackets/Quotes Autocomplete
+- [ ] Brackets/Quotes Autocomplete
 - [ ] File Manager (explorer)
 - [ ] Miniplayer for Education Platform (e.g. Inflearn, Coursera)
 - [ ] Debugging via SSH or API
@@ -15,6 +15,7 @@
 - C/C++ ([GTK+ 2.0](https://developer.gnome.org/gtk-tutorial/stable/))
 
 ## Known Bugs & Issues
-- Cursor automatically moving to the last index of bracket after tab
-- Multiple bracket support not working (except quotes)
-- Automatically tabbed after one character is typed in 2~{n}th line in bracket
+* Bracket/Quote Autocomplete
+  * Cursor automatically moving to the last index of bracket after tab
+  * Multiple bracket support not working (except quotes)
+  * Automatically tabbed after one character is typed in 2~{n}th line in bracket
