@@ -12,6 +12,10 @@ String.prototype.insert = function(index,string) {
     return this.slice(0,index) + string + this.slice(index);
 }
 
+function saveCode() {
+    localStorage.setItem("code",JSON.stringify(editor.value));
+}
+
 function push(key,history) {
     if (!(key === "Shift" || key === " " || key === "Control")) {
         if (keyHistory[history].length >= 2) {
@@ -90,13 +94,13 @@ function keyUpEvent(event) {
         moveCursor(-2);
     }
 
-    localStorage.setItem("code",JSON.stringify(editor.value));
+    saveCode();
 }
 
 function init() {
-    const savedCode = JSON.parse(localStorage.getItem("code"));
+    const loadedCode = JSON.parse(localStorage.getItem("code"));
     if (savedCode !== null) {
-        editor.value = savedCode;
+        editor.value = loadedCode;
     }
     editor.addEventListener("keydown",keyDownEvent);
     editor.addEventListener("keyup",keyUpEvent);
