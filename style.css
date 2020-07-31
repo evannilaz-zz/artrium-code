@@ -9,6 +9,7 @@
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
+    box-sizing: border-box;
 }
 
 ::selection {
@@ -39,28 +40,66 @@ body {
     background: #676E95;
 }
 
-#file {
+#fileExplorer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 20%;
-    height: 3000px;
+    height: 100%;
     background: #3C435E;
     color: white;
     padding-top: 50px;
 }
 
+#fileExplorer>button, #fileExplorer>div, #fileExplorer>form {
+    margin-top: 25px;
+}
+
+#fileExplorer button {
+    background: none;
+    border: 1.5px solid #676E95;
+    color: white;
+    font-size: 14.5px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: border .2s
+}
+
+#fileExplorer button:hover {
+    border: 1.5px solid white;
+}
+
+#fileExplorer input {
+    background: none;
+    border: 1.5px solid #676E95;
+    color: white;
+    width: 300px;
+    height: 30px;
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 5px;
+    transition: border .2s;
+}
+
+#fileExplorer input:focus {
+    border: 1.5px solid white;
+}
+
 #edit {
-    width: 90%;
-    height: 3000px;
+    width: 80%;
+    height: 100%;
     background: #292d3e;
     padding-top: 50px;
 }
 
 #edit textarea {
     font-size: 15px;
-    font-family: "Cascadia Code SemiLight", "Consolas", "Menlo", "Courier New", monospace !important;
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace !important;
     padding: 20px;
     margin: 0;
     width: 98%;
-    height: 2960px;
+    height: 100%;
     background: none;
     border: none;
     color: #d3e1e8;
@@ -72,4 +111,8 @@ body {
 h3 {
     margin: 0;
     font-weight: 600;
+}
+
+.hidden {
+    display: none;
 }

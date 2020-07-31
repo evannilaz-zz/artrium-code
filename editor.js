@@ -99,7 +99,7 @@ function keyUpEvent(event) {
 
 function init() {
     const loadedCode = JSON.parse(localStorage.getItem("code"));
-    if (savedCode !== null) {
+    if (loadedCode !== null) {
         editor.value = loadedCode;
     }
     editor.addEventListener("keydown",keyDownEvent);
