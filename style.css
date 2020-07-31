@@ -52,10 +52,26 @@ body {
 }
 
 #fileExplorer>button, #fileExplorer>div, #fileExplorer>form {
-    margin-top: 25px;
+    margin: 25px 0 0 25px;
+}
+
+.file {
+    border: 1.5px solid #676E95;
+    width: 70%;
+    padding: 5px;
+    padding-right: 12.5px;
+    border-radius: 5px;
+    text-align: right;
+    cursor: pointer;
+    transition: border .2s;
+}
+
+.file:hover, .selected {
+    border: 1.5px solid white;
 }
 
 #fileExplorer button {
+    align-self: center;
     background: none;
     border: 1.5px solid #676E95;
     color: white;

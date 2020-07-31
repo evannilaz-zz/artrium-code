@@ -2,6 +2,21 @@ const fileExp = document.querySelector("#fileExplorer");
 const fileCrtBtn = fileExp.querySelector("button");
 const fileCrtForm = fileExp.querySelector("form");
 let files = new Array();
+let fileShortcuts;
+
+const deactivateEditor = function() {
+    const textarea = document.querySelector("textarea");
+    textarea.placeholder = "No file selected";
+    textarea.style.pointerEvents = "none";
+    if (fileShortcuts) fileShortcuts.classList.remove("selected");
+}
+
+const activateEditor = function() {
+    const shortcutId = event.target.id;
+    const textarea = document.querySelector("textarea");
+    textarea.value = files[shortcutId].code;
+    event.target.classList.add("selected");
+}
 
 function saveFile() {
     localStorage.setItem("files",JSON.stringify(files));
@@ -24,12 +39,19 @@ function crtNewFile() {
     if ((fileName.match(/\./g) || []).length > 1 || fileName.includes(" ") || fileName.includes("?") || fileName.includes("*") || fileName.includes("\"") || fileName.includes("'")) {
         alert("Spaces, dots, and special characters other than file extension are not allowed in file's name.");
         event.target.querySelector("input").value = "";
+    } else if (fileName === "") {
+        hide(fileCrtForm);
+        hide(fileCrtBtn);
+    } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js")) {
+        alert("Only HTML, CSS, JavaScript is supported in Artrium Code currently.");
     } else {
-        const fileObj = {
+        const fileInfo = {
             name: fileName,
-            type: fileName.split(".")[1].toUpperCase()
+            type: fileName.split(".")[1].toUpperCase(),
+            no: files.length,
+            code: ""
         };
-        files.push(fileObj);
+        files.push(fileInfo);
         saveFile();
         event.target.querySelector("input").value = "";
         hide(fileCrtForm);
@@ -41,13 +63,15 @@ function crtNewFile() {
 function displayFile(file) {
     const div = document.createElement("div");
     div.innerText = file.name;
-    div.classList.add("fileName");
+    div.classList.add("file");
     div.classList.add(file.type);
+    div.id = file.no;
     fileExp.appendChild(div);
 }
 
 function init() {
-    const loadedFiles = JSON.parse(localStorage.getItem("files"));
+    let loadedFiles = JSON.parse(localStorage.getItem("files"));
+    files = loadedFiles;
     if (loadedFiles !== null) {
         loadedFiles.forEach((loadedFile) => {
             displayFile(loadedFile);
@@ -55,6 +79,10 @@ function init() {
     }
     fileCrtBtn.addEventListener("click",prepNewFile);
     fileCrtForm.addEventListener("submit",crtNewFile);
+    setInterval(() => {
+        fileShortcuts = document.querySelectorAll(".file");
+        fileShortcuts.forEach((shortcut) => {shortcut.addEventListener("click",activateEditor)});
+    });
 }
 
 init();

@@ -98,6 +98,7 @@ function keyUpEvent(event) {
 }
 
 function init() {
+    deactivateEditor();
     const loadedCode = JSON.parse(localStorage.getItem("code"));
     if (loadedCode !== null) {
         editor.value = loadedCode;
