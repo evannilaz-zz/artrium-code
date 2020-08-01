@@ -13,9 +13,11 @@ navBtn.addEventListener("click",() => {
     const explorer = document.querySelector("#fileExplorer");
     const editor = document.querySelector("#edit");
     if (explorer.style.width === "0%") {
+        explorer.querySelectorAll("*").forEach((element) => {element.style.display = "initial"});
         editor.style.width = "80%";
         explorer.style.width = "20%";
     } else {
+        explorer.querySelectorAll("*").forEach((element) => {element.style.display = "none";})
         explorer.style.width = "0%";
         editor.style.width = "100%";
     }

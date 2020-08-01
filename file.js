@@ -6,12 +6,14 @@ let files = new Array();
 let fileShortcuts;
 let currentFile;
 
+const css = document.querySelector("style");
+
 const saveFile = function() {
     localStorage.setItem("files",JSON.stringify(files));
 }
 
 const deactivateEditor = function() {
-    editor.placeholder = "No file selected";
+    editor.value = "No file selected";
     editor.style.pointerEvents = "none";
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
 }
@@ -52,27 +54,37 @@ function prepNewFile() {
 function crtNewFile() {
     event.preventDefault();
     const fileName = event.target.querySelector("input").value;
-    if ((fileName.match(/\./g) || []).length > 1 || fileName.includes(" ") || fileName.includes("?") || fileName.includes("*") || fileName.includes("\"") || fileName.includes("'")) {
-        alert("Spaces, dots, and special characters other than file extension are not allowed in file's name.");
-        event.target.querySelector("input").value = "";
-    } else if (fileName === "") {
-        hide(fileCrtForm);
-        hide(fileCrtBtn);
-    } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js")) {
-        alert("Only HTML, CSS, JavaScript is supported in Artrium Code currently.");
-    } else {
-        const fileInfo = {
-            name: fileName,
-            type: fileName.split(".")[1].toUpperCase(),
-            no: files.length,
-            code: ""
-        };
-        files.push(fileInfo);
-        saveFile();
-        event.target.querySelector("input").value = "";
-        hide(fileCrtForm);
-        hide(fileCrtBtn);
-        displayFile(fileInfo);
+    let cancel = false;
+    files.forEach((file) => {
+        if (file.name === fileName) {
+            cancel = true;
+            alert("The file with the same name already exists.");
+            return;
+        }
+    });
+    if (cancel === false) {
+        if ((fileName.match(/\./g) || []).length > 1 || fileName.includes(" ") || fileName.includes("?") || fileName.includes("*") || fileName.includes("\"") || fileName.includes("'")) {
+            alert("Spaces, dots, and special characters other than file extension are not allowed in file's name.");
+            event.target.querySelector("input").value = "";
+        } else if (fileName === "") {
+            hide(fileCrtForm);
+            hide(fileCrtBtn);
+        } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js")) {
+            alert("Only HTML, CSS, and JavaScript is supported in Artrium Code currently.");
+        } else {
+            const fileInfo = {
+                name: fileName,
+                type: fileName.split(".")[1].toUpperCase(),
+                no: files.length,
+                code: ""
+            };
+            files.push(fileInfo);
+            saveFile();
+            event.target.querySelector("input").value = "";
+            hide(fileCrtForm);
+            hide(fileCrtBtn);
+            displayFile(fileInfo);
+        }
     }
 }
 
@@ -86,7 +98,7 @@ function displayFile(file) {
 }
 
 function init() {
-    let loadedFiles = JSON.parse(localStorage.getItem("files"));
+    const loadedFiles = JSON.parse(localStorage.getItem("files"));
     if (loadedFiles !== null) {
         loadedFiles.forEach((loadedFile) => {
             displayFile(loadedFile);
