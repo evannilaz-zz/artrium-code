@@ -16,9 +16,9 @@ navToggle.addEventListener("click",() => {
     if (explorer.style.width === "0%") {
         editor.style.width = "80%";
         explorer.style.width = "20%";
-        setTimeout(() => {explorer.querySelectorAll("*").forEach((element) => {element.style.display = "initial"})},240);
+        setTimeout(() => {document.querySelectorAll("#fileExplorer>*").forEach((element) => {element.style.display = "flex"})},240);
     } else {
-        explorer.querySelectorAll("*").forEach((element) => {element.style.display = "none";})
+        document.querySelectorAll("#fileExplorer>*").forEach((element) => {element.style.display = "none";})
         explorer.style.width = "0%";
         editor.style.width = "100%";
     }
