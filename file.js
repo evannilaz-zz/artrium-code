@@ -1,31 +1,44 @@
 const fileExp = document.querySelector("#fileExplorer");
+const editor = document.querySelector("textarea");
 const fileCrtBtn = fileExp.querySelector("button");
 const fileCrtForm = fileExp.querySelector("form");
 let files = new Array();
 let fileShortcuts;
+let currentFile;
+
+const saveFile = function() {
+    localStorage.setItem("files",JSON.stringify(files));
+}
 
 const deactivateEditor = function() {
-    const textarea = document.querySelector("textarea");
-    textarea.placeholder = "No file selected";
-    textarea.style.pointerEvents = "none";
+    editor.placeholder = "No file selected";
+    editor.style.pointerEvents = "none";
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
 }
 
 const activateEditor = function() {
     const shortcutId = event.target.id;
-    const textarea = document.querySelector("textarea");
-    textarea.value = files[shortcutId].code;
-    console.log(fileShortcuts);
+    currentFile = shortcutId;
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
     event.target.classList.add("selected");
-}
-
-function saveFile() {
-    localStorage.setItem("files",JSON.stringify(files));
+    editor.placeholder = "Your Code here...";
+    editor.style.pointerEvents = "all";
+    editor.value = files[shortcutId].code;
 }
 
 function hide(element) {
     element.classList.toggle("hidden");
+}
+
+function deleteFile() {
+    const toDelete = event.target;
+    toDelete.parentElement.removeChild(toDelete);
+    const filtered = files.filter((file) => {
+        return file.no !== parseInt(toDelete.id);
+    });
+    files = filtered;
+    deactivateEditor();
+    saveFile();
 }
 
 function prepNewFile() {
@@ -83,7 +96,10 @@ function init() {
     fileCrtForm.addEventListener("submit",crtNewFile);
     setInterval(() => {
         fileShortcuts = document.querySelectorAll(".file");
-        fileShortcuts.forEach((shortcut) => {shortcut.addEventListener("click",activateEditor)});
+        fileShortcuts.forEach((shortcut) => {
+            shortcut.addEventListener("click",activateEditor);
+            shortcut.addEventListener("contextmenu",deleteFile);
+        });
     });
 }
 

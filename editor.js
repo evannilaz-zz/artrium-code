@@ -1,5 +1,3 @@
-const editor = document.querySelector("textarea");
-
 let brackets = ["(","{","[","\"","'","`"];
 
 let keyHistory = {
@@ -10,10 +8,6 @@ let keyHistory = {
 
 String.prototype.insert = function(index,string) {
     return this.slice(0,index) + string + this.slice(index);
-}
-
-function saveCode() {
-    localStorage.setItem("code",JSON.stringify(editor.value));
 }
 
 function push(key,history) {
@@ -93,18 +87,17 @@ function keyUpEvent(event) {
         editor.value = editor.value.insert(editor.selectionStart,"\t");
         moveCursor(-2);
     }
-
-    saveCode();
 }
 
 function init() {
     deactivateEditor();
-    const loadedCode = JSON.parse(localStorage.getItem("code"));
-    if (loadedCode !== null) {
-        editor.value = loadedCode;
-    }
     editor.addEventListener("keydown",keyDownEvent);
     editor.addEventListener("keyup",keyUpEvent);
+    editor.addEventListener("input",() => {
+        files[currentFile].code = event.target.value;
+        console.log(files[currentFile].code);
+        saveFile();
+    });
 }
 
 init();
