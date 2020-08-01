@@ -69,11 +69,11 @@ nav {
 }
 
 nav>* {
-    margin-left: 30px;
+    margin: 0 10px 0 10px;
 }
 
 nav h3 {
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 nav h3 div {
@@ -89,8 +89,42 @@ nav h3 div:hover {
 }
 
 nav button {
-    border-radius: 17px;
-    padding: 7px 10px 7px 10px;
+    display: flex;
+    border: none;
+    align-items: center;
+    margin-left: auto;
+    justify-self: flex-end;
+}
+
+nav button:hover {
+    border: none;
+}
+
+nav button img {
+    width: 30px;
+    filter: invert(1) opacity(.7);
+    transition: filter .2s;
+}
+
+nav button img:hover {
+    filter: invert(1) opacity(1);
+}
+
+nav>a {
+    display: flex;
+    margin-left: 0;
+    justify-self: flex-end;
+    align-items: center;
+}
+
+nav a img {
+    width: 26px;
+    filter: opacity(.7);
+    transition: filter .2s;
+}
+
+nav>a>img:hover {
+    filter: opacity(1);
 }
 
 #fileExplorer {
