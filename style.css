@@ -77,36 +77,37 @@ nav h3 {
 }
 
 nav h3 div {
-    cursor: pointer;
     height: 2px;
     width: 0;
     background: white;
     transition: width .2s;
 }
 
-nav h3 div:hover {
-    width: 100%;
-}
-
-nav button {
+nav #toggle, nav #download {
     display: flex;
     border: none;
     align-items: center;
-    margin-left: auto;
+    margin-left: 0;
     justify-self: flex-end;
 }
 
-nav button:hover {
+nav #download {
+    position: relative;
+    left: 15px;
+    margin-left: auto;
+}
+
+nav #toggle:hover, nav #download:hover {
     border: none;
 }
 
-nav button img {
+nav #toggle img, nav #download img {
     width: 30px;
     filter: invert(1) opacity(.7);
     transition: filter .2s;
 }
 
-nav button img:hover {
+nav #toggle img:hover, nav #download img:hover {
     filter: invert(1) opacity(1);
 }
 
@@ -123,7 +124,7 @@ nav a img {
     transition: filter .2s;
 }
 
-nav>a>img:hover {
+nav a img:hover {
     filter: opacity(1);
 }
 
