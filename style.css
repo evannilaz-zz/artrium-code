@@ -33,11 +33,34 @@ body {
     color: white;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
 #nav {
+    display: flex;
     position: fixed;
     width: 100vw;
-    height: 50px;
+    height: 35px;
+    align-items: center;
     background: #676E95;
+}
+
+#nav>* {
+    margin-left: 15px;
+}
+
+#nav h3 div {
+    cursor: pointer;
+    height: 2px;
+    width: 0;
+    background: white;
+    transition: width .2s;
+}
+
+#nav h3 div:hover {
+    width: 100%;
 }
 
 #fileExplorer {
@@ -48,7 +71,7 @@ body {
     height: 100%;
     background: #3C435E;
     color: white;
-    padding-top: 50px;
+    padding-top: 35px;
 }
 
 #fileExplorer>button, #fileExplorer>div, #fileExplorer>form {
@@ -108,7 +131,7 @@ body {
     width: 80%;
     height: 100%;
     background: #292d3e;
-    padding-top: 50px;
+    padding-top: 35px;
 }
 
 #edit textarea {
