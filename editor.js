@@ -95,7 +95,6 @@ function init() {
     editor.addEventListener("keyup",keyUpEvent);
     editor.addEventListener("input",() => {
         files[currentFile].code = event.target.value;
-        console.log(files[currentFile].code);
         saveFile();
     });
 }

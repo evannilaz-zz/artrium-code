@@ -31,6 +31,7 @@ function hide(element) {
 }
 
 function deleteFile() {
+    event.preventDefault();
     const toDelete = event.target;
     toDelete.parentElement.removeChild(toDelete);
     const filtered = files.filter((file) => {
