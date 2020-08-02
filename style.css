@@ -43,7 +43,7 @@ a {
 
 button {
     background: none;
-    border: 1.5px solid #676E95;
+    border: 1.5px solid #78909c;
     color: white;
     font-size: 14.5px;
     font-weight: 500;
@@ -63,7 +63,7 @@ nav {
     width: 100%;
     height: 45px;
     align-items: center;
-    background: #676E95;
+    background: #546e7a;
     z-index: 1;
 }
 
@@ -134,7 +134,7 @@ nav a img:hover {
     align-items: center;
     width: 20%;
     height: 100%;
-    background: #3C435E;
+    background: #2c3e50;
     color: white;
     padding-top: 45px;
     transition: width .3s;
@@ -168,10 +168,10 @@ nav a img:hover {
 #edit {
     width: 100%;
     height: 100%;
-    background: #292d3e;
+    background: #34495e;
     padding-left: 20%;
     padding-top: 45px;
-    transition: width .3s, padding-left .3s;
+    transition: padding-left .3s;
 }
 
 #edit textarea {
@@ -201,7 +201,7 @@ h3 {
 .file {
     display: flex;
     justify-content: flex-end;
-    border: 1.5px solid #676E95;
+    border: 1.5px solid #78909c;
     width: 70%;
     padding: 5px;
     padding-right: 10px;
