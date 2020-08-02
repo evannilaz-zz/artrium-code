@@ -14,13 +14,13 @@ navToggle.addEventListener("click",() => {
     const explorer = document.querySelector("#fileExplorer");
     const editor = document.querySelector("#edit");
     if (explorer.style.width === "0%") {
-        editor.style.width = "80%";
+        editor.style.paddingLeft = "20%";
         explorer.style.width = "20%";
         setTimeout(() => {document.querySelectorAll("#fileExplorer>*").forEach((element) => {element.style.display = "flex"})},240);
     } else {
         document.querySelectorAll("#fileExplorer>*").forEach((element) => {element.style.display = "none";})
         explorer.style.width = "0%";
-        editor.style.width = "100%";
+        editor.style.paddingLeft = "0";
     }
 })
 

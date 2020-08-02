@@ -128,6 +128,7 @@ nav a img:hover {
 }
 
 #fileExplorer {
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -165,11 +166,12 @@ nav a img:hover {
 }
 
 #edit {
-    width: 80%;
+    width: 100%;
     height: 100%;
     background: #292d3e;
+    padding-left: 20%;
     padding-top: 45px;
-    transition: width .3s;
+    transition: width .3s, padding-left .3s;
 }
 
 #edit textarea {
