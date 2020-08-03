@@ -30,7 +30,7 @@ navDownload.addEventListener("click",() => {
         const a = document.createElement("a");
         const url = URL.createObjectURL(file);
         a.href = url;
-        a.download = document.querySelector(".selected").innerText;
+        a.download = document.querySelector(".selected").innerText.split("\n")[1];
         document.body.append(a);
         a.click();
         setTimeout(() => {

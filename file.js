@@ -69,7 +69,7 @@ function crtNewFile() {
         } else if (fileName === "") {
             hide(fileCrtForm);
             hide(fileCrtBtn);
-        } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js")) {
+        } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js" || fileName.split(".")[1] === "txt")) {
             alert("Only HTML, CSS, and JavaScript is supported in Artrium Code currently.");
         } else if (files.length > 13) {
             alert("Maximum count of files are 14.");
@@ -94,6 +94,8 @@ function displayFile(file) {
     const div = document.createElement("div");
     if (file.type === "JS") {
         div.innerHTML = `<span>JavaScript</span>${file.name}`;
+    } else if (file.type === "TXT") {
+        div.innerHTML = `<span>Text</span>${file.name}`;
     } else {
         div.innerHTML = `<span>${file.type}</span>${file.name}`;
     }

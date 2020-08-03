@@ -108,12 +108,12 @@ nav #toggle:hover, nav #download:hover {
 
 nav #toggle img, nav #download img {
     width: 30px;
-    filter: invert(1) opacity(.7);
+    filter: invert(1) opacity(1);
     transition: filter .2s;
 }
 
 nav #toggle img:hover, nav #download img:hover {
-    filter: invert(1) opacity(1);
+    filter: invert(1) opacity(.7);
 }
 
 nav>a {
@@ -125,12 +125,12 @@ nav>a {
 
 nav a img {
     width: 26px;
-    filter: opacity(.7);
+    filter: opacity(1);
     transition: filter .2s;
 }
 
 nav a img:hover {
-    filter: opacity(1);
+    filter: opacity(.7);
 }
 
 #fileExplorer {
