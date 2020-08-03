@@ -40,4 +40,4 @@ navDownload.addEventListener("click",() => {
     } else {
         alert("You have to select the file to download first.");
     }
-})
+});

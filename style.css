@@ -154,11 +154,17 @@ nav a img:hover {
     padding: 10px;
 }
 
+#fileExplorer form {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+}
+
 #fileExplorer input {
     background: none;
-    border: 1.5px solid #676E95;
+    border: 1.5px solid #78909c;
     color: white;
-    width: 270px;
+    width: inherit;
     height: 30px;
     padding: 5px;
     font-size: 15px;

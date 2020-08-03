@@ -10,6 +10,11 @@ String.prototype.insert = function(index,string) {
     return this.slice(0,index) + string + this.slice(index);
 }
 
+String.prototype.findAll = function(query) {
+    const pattern = new RegExp(query,"g");
+    return (this.match(pattern) || []).length;
+}
+
 function push(key,history) {
     if (!(key === "Shift" || key === " " || key === "Control")) {
         if (keyHistory[history].length >= 2) {
@@ -29,18 +34,18 @@ function moveCursor(count,cursor = editor.selectionStart) {
 
 function bracketAutocomplete(key) {
     function closeBracket(closer) {
-        function checkMultipleBracket(closer) {
-            if (editor.value[cursor] + editor.value[cursor + 1] === `${closer}${closer}`) {
-                editor.value = editor.value.slice(0,cursor) + editor.value.slice(cursor + 2);
-                moveCursor(0,cursor);
-            }
-        }
+        // function checkMultipleBracket(closer) {
+        //     if (editor.value[cursor] + editor.value[cursor + 1] === `${closer}${closer}`) {
+        //         editor.value = editor.value.slice(0,cursor) + editor.value.slice(cursor + 2);
+        //         moveCursor(0,cursor);
+        //     }
+        // }
         const cursor = editor.selectionStart;
         editor.value = editor.value.insert(cursor,closer);
         moveCursor(0,cursor);
-        brackets.forEach((bracket) => {
-            checkMultipleBracket(bracket);
-        });
+        // brackets.forEach((bracket) => {
+        //     checkMultipleBracket(bracket);
+        // });
     }
     brackets.forEach((bracket) => {
         if (key === bracket) {
@@ -61,10 +66,11 @@ function keyDownEvent(event) {
     const key = event.key;
     keyHistory.full.push(key);
     push(key,"down");
-    if (key === "Tab") {
+    if (event.keycode === 9 || event.which === 9) {
         event.preventDefault();
-        editor.value = editor.value.insert(editor.selectionStart,"\t");
-        moveCursor(-2);
+        const cursor = editor.selectionStart;
+        editor.value = editor.value.substring(0,editor.selectionStart) + "\t" + editor.value.substring(editor.selectionEnd);
+        editor.selectionEnd = cursor + 1;
     }
 }
 
@@ -77,7 +83,7 @@ function keyUpEvent(event) {
         editor.value = editor.value.insert(cursor,"\n");
         cursor = editor.selectionStart;
         editor.value = editor.value.insert(cursor - 2,"\t");
-        moveCursor(-1,cursor);
+        moveCursor(-2);
     }
     
     const openingIndex = editor.value.lastIndexOf("{");
