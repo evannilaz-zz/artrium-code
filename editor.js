@@ -6,14 +6,9 @@ let keyHistory = {
     up: new Array()
 };
 
-String.prototype.insert = function(index,string) {
-    return this.slice(0,index) + string + this.slice(index);
-}
-
-String.prototype.findAll = function(query) {
-    const pattern = new RegExp(query,"g");
-    return (this.match(pattern) || []).length;
-}
+// String.prototype.insert = function(index,string) {
+//     return this.slice(0,index) + string + this.slice(index);
+// }
 
 function push(key,history) {
     if (!(key === "Shift" || key === " " || key === "Control")) {
@@ -32,6 +27,18 @@ function moveCursor(count,cursor = editor.selectionStart) {
     editor.setSelectionRange(cursor + count, cursor + count);
 }
 
+function insert(index,str) {
+    const cursor = editor.selectionStart;
+    editor.value = editor.value.substring(0,index) + str + editor.value.substring(editor.selectionEnd);
+    editor.selectionEnd = cursor + 1;
+}
+
+function insertIndent() {
+    const cursor = editor.selectionStart;
+    editor.value = editor.value.substring(0,editor.selectionStart) + "\t" + editor.value.substring(editor.selectionEnd);
+    editor.selectionEnd = cursor + 1;
+}
+
 function bracketAutocomplete(key) {
     function closeBracket(closer) {
         // function checkMultipleBracket(closer) {
@@ -41,8 +48,8 @@ function bracketAutocomplete(key) {
         //     }
         // }
         const cursor = editor.selectionStart;
-        editor.value = editor.value.insert(cursor,closer);
-        moveCursor(0,cursor);
+        insert(cursor,closer);
+        moveCursor(-1);
         // brackets.forEach((bracket) => {
         //     checkMultipleBracket(bracket);
         // });
@@ -68,9 +75,7 @@ function keyDownEvent(event) {
     push(key,"down");
     if (event.keycode === 9 || event.which === 9) {
         event.preventDefault();
-        const cursor = editor.selectionStart;
-        editor.value = editor.value.substring(0,editor.selectionStart) + "\t" + editor.value.substring(editor.selectionEnd);
-        editor.selectionEnd = cursor + 1;
+        insertIndent();
     }
 }
 
@@ -79,19 +84,16 @@ function keyUpEvent(event) {
     push(key,"up");
     bracketAutocomplete(key);
     if (keyHistory.up[0] === "{" && keyHistory.up[1] === "Enter" && !keyHistory.up.includes("Backspace")) {
-        let cursor = editor.selectionStart;
-        editor.value = editor.value.insert(cursor,"\n");
-        cursor = editor.selectionStart;
-        editor.value = editor.value.insert(cursor - 2,"\t");
-        moveCursor(-2);
+        insert(editor.selectionStart,"\n");
+        moveCursor(-1);
+        insert(editor.selectionStart,"\t");
     }
     
     const openingIndex = editor.value.lastIndexOf("{");
     const closingIndex = editor.value.lastIndexOf("}");
 
     if (openingIndex < closingIndex && openingIndex + 4 < editor.selectionStart && editor.selectionStart < closingIndex && keyHistory.down.includes("Enter") && !keyHistory.up.includes("Backspace")) {
-        editor.value = editor.value.insert(editor.selectionStart,"\t");
-        moveCursor(-2);
+        insertIndent();
     }
 }
 
