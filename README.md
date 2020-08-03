@@ -4,8 +4,6 @@
 ## Acknowledgements
 As you download the file you've edited, your browser may say that 'This kind of file can harm your computer' or else. It is safe to download, your browser is just warning you because it's the file from the Internet. The content of it is just a code you've edited. One more, after 10 seconds, the download will not be available. By the way, you can delete your files by right-clicking on them.
 
-For the best user experience, you may install the recommended font for Artrium Code (SF Mono) [here]().
-
 ## Necessary Features
 - [ ] Brackets/Quotes Autocomplete
 - [X] File Manager (explorer)
