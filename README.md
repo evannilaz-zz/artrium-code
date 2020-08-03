@@ -23,7 +23,8 @@ As you download the file you've edited, your browser may say that 'This kind of 
   * Multiple bracket support not working (except quotes)
   * Automatically tabbed after one character is typed in 2~{n}th line in bracket
   
-## Image Copyrights
-- [Toggle Icon](https://www.google.com/url?sa=i&url=https%3A%2F%2Ficon-icons.com%2Ficon%2Fsidebar-expand-toggle-nav%2F145935&psig=AOvVaw3rGQ9h82mBICFsmaBuxvJh&ust=1596369593334000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIiZlqv6-eoCFQAAAAAdAAAAABAD)
-- [Download Icon](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F5204156%2Fdownload_icon&psig=AOvVaw2p6WaJ9AvJryht1UNYUld0&ust=1596369691016000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjb5Nb6-eoCFQAAAAAdAAAAABAD)
-- [GitHub Logo](https://www.google.com/url?sa=i&url=https%3A%2F%2Fgithub.com%2Flogos&psig=AOvVaw0lyZIXV7hsTEPHxUFoLk_S&ust=1596369720723000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPjAkeX6-eoCFQAAAAAdAAAAABAD)
+## Copyrights
+- [Toggle Icon](https://icon-icons.com/icon/sidebar-expand-toggle-nav/145935)
+- [Download Icon](https://www.iconfinder.com/icons/5204156/download_icon)
+- [GitHub Logo](https://github.com/logos)
+- [SF Mono](http://fontsfree.net/sf-mono-regular-font-download.html)
