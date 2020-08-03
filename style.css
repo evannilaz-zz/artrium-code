@@ -3,6 +3,11 @@
   html { font-family: 'Inter var', sans-serif; }
 }
 
+@font-face {
+    font-family: SF Mono;
+    src: url("font/SFMono-Regular.woff");
+}
+
 * {
     font-family: -apple-system, "Inter", sans-serif !important;
     outline: none;
@@ -175,8 +180,8 @@ nav a img:hover {
 }
 
 #edit textarea {
-    font-size: 15px;
-    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace !important;
+    font-size: 14.5px;
+    font-family: SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace !important;
     padding: 20px;
     margin: 0;
     width: 98%;
