@@ -88,6 +88,16 @@ nav h3 div {
     transition: width .2s;
 }
 
+nav>h3>a>span {
+    filter: opacity(0);
+    transition: filter .2s;
+}
+
+nav>span {
+    filter: opacity(0);
+    transition: filter .2s;
+}
+
 nav #toggle, nav #download {
     display: flex;
     border: none;

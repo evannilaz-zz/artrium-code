@@ -4,10 +4,14 @@ const navDownload = document.querySelector("nav #download");
 
 navHeader.addEventListener("mouseenter",() => {
     navHeader.querySelector("div").style.width = "100%";
+    navHeader.querySelector("a>span").style.filter = "opacity(1)";
+    document.querySelector("nav>span").style.filter = "opacity(1)";
 });
 
 navHeader.addEventListener("mouseleave",() => {
     navHeader.querySelector("div").style.width = "0";
+    navHeader.querySelector("a>span").style.filter = "opacity(0)";
+    document.querySelector("nav>span").style.filter = "opacity(0)";
 });
 
 navToggle.addEventListener("click",() => {
