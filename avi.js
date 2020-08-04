@@ -19,13 +19,13 @@ navToggle.addEventListener("click",() => {
     const explorer = document.querySelector("#fileExplorer");
     const editor = document.querySelector("#edit");
     if (explorer.style.width === "0%") {
-        editor.style.paddingLeft = "20%";
+        editor.style.width = "79%";
         explorer.style.width = "20%";
         setTimeout(() => {document.querySelectorAll("#fileExplorer>*").forEach((element) => {element.style.display = "flex"})},240);
     } else {
         document.querySelectorAll("#fileExplorer>*").forEach((element) => {element.style.display = "none";})
         explorer.style.width = "0%";
-        editor.style.paddingLeft = "2%";
+        editor.style.width = "97.5%";
     }
 })
 
@@ -46,14 +46,3 @@ navDownload.addEventListener("click",() => {
         alert("You have to select the file to download first.");
     }
 });
-
-editor.addEventListener("scroll",() => {
-    if (temp < editor.scrollTop) {
-        document.querySelector("nav").style.transform = "translateY(-100%)";
-        editor.parentElement.style.paddingTop = "20px";
-    } else {
-        document.querySelector("nav").style.transform = "none";
-        editor.parentElement.style.paddingTop = "4%";
-    }
-    temp = event.target.scrollTop;
-})
