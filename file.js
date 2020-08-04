@@ -82,8 +82,8 @@ function crtNewFile() {
             hide(fileCrtBtn);
         } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js" || fileName.split(".")[1] === "txt")) {
             alert("Only HTML, CSS, and JavaScript is supported in Artrium Code currently.");
-        } else if (files.length > 13) {
-            alert("Maximum count of files are 14.");
+        } else if (files.length > 9) {
+            alert("Maximum count of files are 10.");
         } else {
             const fileInfo = {
                 name: fileName,

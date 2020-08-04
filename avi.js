@@ -1,6 +1,7 @@
 const navHeader = document.querySelector("nav h3");
 const navToggle = document.querySelector("nav #toggle");
 const navDownload = document.querySelector("nav #download");
+let temp;
 
 navHeader.addEventListener("mouseenter",() => {
     navHeader.querySelector("div").style.width = "95.5%";
@@ -45,3 +46,14 @@ navDownload.addEventListener("click",() => {
         alert("You have to select the file to download first.");
     }
 });
+
+editor.addEventListener("scroll",() => {
+    if (temp < editor.scrollTop) {
+        document.querySelector("nav").style.transform = "translateY(-100%)";
+        editor.parentElement.style.paddingTop = "20px";
+    } else {
+        document.querySelector("nav").style.transform = "none";
+        editor.parentElement.style.paddingTop = "55px";
+    }
+    temp = event.target.scrollTop;
+})
