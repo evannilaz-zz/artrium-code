@@ -22,10 +22,15 @@ const activateEditor = function() {
     const shortcutId = event.target.id;
     currentFile = shortcutId;
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
-    event.target.classList.add("selected");
     editor.placeholder = "Your Code here...";
     editor.style.pointerEvents = "all";
-    editor.value = files[shortcutId].code;
+    if (shortcutId === "") {
+        event.target.parentElement.classList.add("selected");
+        editor.value = files[event.target.parentElement.id].code;
+    } else {
+        event.target.classList.add("selected");
+        editor.value = files[shortcutId].code;
+    }
 }
 
 function hide(element) {
