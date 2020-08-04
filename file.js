@@ -15,22 +15,27 @@ const saveFile = function() {
 const deactivateEditor = function() {
     editor.value = "No file selected";
     editor.style.pointerEvents = "none";
-    if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
+    if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.remove("unselected")});
 }
 
 const activateEditor = function() {
     const shortcutId = event.target.id;
     currentFile = shortcutId;
-    if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
+    if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.add("unselected");});
     editor.placeholder = "Your Code here...";
     editor.style.pointerEvents = "all";
     if (shortcutId === "") {
+        event.target.parentElement.classList.remove("unselected");
         event.target.parentElement.classList.add("selected");
         editor.value = files[event.target.parentElement.id].code;
     } else {
+        event.target.classList.remove("unselected");
         event.target.classList.add("selected");
         editor.value = files[shortcutId].code;
     }
+    editor.focus();
+    editor.selectionStart = 0;
+    editor.selectionEnd = 0;
 }
 
 function hide(element) {

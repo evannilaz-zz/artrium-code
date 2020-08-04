@@ -229,7 +229,7 @@ h3 {
     border-radius: 5px;
     font-weight: 400;
     cursor: pointer;
-    transition: border .2s;
+    transition: border .2s, filter .2s;
 }
 
 .file span {
@@ -244,4 +244,9 @@ h3 {
 
 .file:hover, .selected {
     border: 1.5px solid white;
+}
+
+.unselected, .unselected:hover {
+    border: 1.5px solid #78909c;
+    filter: opacity(.5);
 }
