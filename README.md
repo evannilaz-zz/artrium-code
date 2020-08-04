@@ -2,7 +2,7 @@
 ### Interactive Editor for Web, for [Samsung SW Contest](https://www.juniorsoftwarecup.com/Contest/About).
 
 ## Acknowledgements
-As you download the file you've edited, your browser may say that 'This kind of file can harm your computer' or else. It is safe to download, your browser is just warning you because it's the file from the Internet. The content of it is just a code you've edited. One more, after 10 seconds, the download will not be available. By the way, you can delete your files by right-clicking on them.
+As you download the file you've edited, your browser may say that 'This kind of file can harm your computer' or else. It is safe to download, your browser is just warning you because it's the file from the Internet. The content of it is just a code you've edited. In addition, you can delete your files by right-clicking on them.
 
 ## Necessary Features
 - [ ] Brackets/Quotes Autocomplete
@@ -19,7 +19,6 @@ As you download the file you've edited, your browser may say that 'This kind of 
 
 ## Known Bugs & Issues
 * Bracket/Quote Autocomplete
-  * Cursor automatically moving to the last index of bracket after tab
   * Multiple bracket support not working (except quotes)
   * Automatically tabbed after one character is typed in 2~{n}th line in bracket
   
