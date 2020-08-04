@@ -95,7 +95,7 @@ nav>h3>a>span {
 
 nav>span {
     filter: opacity(0);
-    transition: filter .2s;
+    transition: filter .2s .1s;
 }
 
 nav #toggle, nav #download {
