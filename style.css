@@ -195,6 +195,7 @@ nav a img:hover {
 }
 
 #edit textarea {
+    resize: none;
     font-size: 14.5px;
     font-family: SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace !important;
     padding: 20px;
