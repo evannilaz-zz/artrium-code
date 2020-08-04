@@ -3,7 +3,7 @@ const editor = document.querySelector("textarea");
 const fileCrtBtn = fileExp.querySelector("button");
 const fileCrtForm = fileExp.querySelector("form");
 let files = new Array();
-let fileShortcuts;
+let fileShortcuts = new Array();
 let currentFile;
 
 const css = document.querySelector("style");
@@ -34,8 +34,6 @@ const activateEditor = function() {
         editor.value = files[shortcutId].code;
     }
     editor.focus();
-    editor.selectionStart = 0;
-    editor.selectionEnd = 0;
 }
 
 function hide(element) {
@@ -51,6 +49,9 @@ function deleteFile() {
     });
     files = filtered;
     files.forEach((file) => {file.no = files.indexOf(file)});
+    for (var i = 0; i < document.querySelectorAll(".file").length; i++) {
+        document.querySelectorAll(".file")[i].id = i;
+    }
     deactivateEditor();
     saveFile();
 }

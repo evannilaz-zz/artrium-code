@@ -200,7 +200,7 @@ nav a img:hover {
     min-height: 100%;
     background: #34495e;
     padding-left: 20%;
-    padding-top: 55px;
+    padding-top: 4%;
     transition: padding-left .3s, padding-top .25s;
 }
 

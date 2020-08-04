@@ -25,7 +25,7 @@ navToggle.addEventListener("click",() => {
     } else {
         document.querySelectorAll("#fileExplorer>*").forEach((element) => {element.style.display = "none";})
         explorer.style.width = "0%";
-        editor.style.paddingLeft = "0";
+        editor.style.paddingLeft = "2%";
     }
 })
 
@@ -53,7 +53,7 @@ editor.addEventListener("scroll",() => {
         editor.parentElement.style.paddingTop = "20px";
     } else {
         document.querySelector("nav").style.transform = "none";
-        editor.parentElement.style.paddingTop = "55px";
+        editor.parentElement.style.paddingTop = "4%";
     }
     temp = event.target.scrollTop;
 })
