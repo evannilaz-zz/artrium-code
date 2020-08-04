@@ -45,6 +45,7 @@ function deleteFile() {
         return file.no !== parseInt(toDelete.id);
     });
     files = filtered;
+    files.forEach((file) => {file.no = files.indexOf(file)});
     deactivateEditor();
     saveFile();
 }
