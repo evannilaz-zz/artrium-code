@@ -19,7 +19,6 @@ As you download the file you've edited, your browser may say that 'This kind of 
 
 ## Known Bugs & Issues
 * Bracket/Quote Autocomplete
-  * Cursor automatically moving to the last index of bracket after tab
   * Multiple bracket support not working (except quotes)
   * Automatically tabbed after one character is typed in 2~{n}th line in bracket
   
