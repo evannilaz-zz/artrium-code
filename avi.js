@@ -19,13 +19,19 @@ navToggle.addEventListener("click",() => {
     const explorer = document.querySelector("#fileExplorer");
     const editor = document.querySelector("#edit");
     if (explorer.style.width === "0%") {
+        editor.style.right = "0";
         editor.style.width = "79%";
         explorer.style.width = "20%";
-        setTimeout(() => {document.querySelectorAll("#fileExplorer>*").forEach((element) => {element.style.display = "flex"})},240);
+        setTimeout(() => {
+            document.querySelectorAll("#fileExplorer>*").forEach((element) => {element.style.display = "flex"});
+            editor.style.borderRadius = "10px 0 0 10px";
+        },240);
     } else {
         document.querySelectorAll("#fileExplorer>*").forEach((element) => {element.style.display = "none";})
         explorer.style.width = "0%";
-        editor.style.width = "97.5%";
+        editor.style.width = "95%";
+        editor.style.borderRadius = "10px";
+        editor.style.right = "2.5%";
     }
 })
 
