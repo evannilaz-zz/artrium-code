@@ -27,3 +27,6 @@ As you download the file you've edited, your browser may say that 'This kind of 
 - [Download Icon](https://www.iconfinder.com/icons/5204156/download_icon)
 - [GitHub Logo](https://github.com/logos)
 - [SF Mono](https://developer.apple.com/fonts)
+
+## Preview
+![Preview Image](preview.png)
