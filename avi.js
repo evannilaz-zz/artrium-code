@@ -4,7 +4,7 @@ const navDownload = document.querySelector("nav #download");
 let temp;
 
 navHeader.addEventListener("mouseenter",() => {
-    navHeader.querySelector("div").style.width = "95.5%";
+    navHeader.querySelector("div").style.width = "95%";
     navHeader.querySelector("a>span").style.filter = "opacity(1)";
     document.querySelector("nav>span").style.filter = "opacity(1)";
 });
