@@ -17,18 +17,8 @@
     box-sizing: border-box;
 }
 
-::selection {
-    background: #f1f2f6;
-    color: gray;
-}
-
-::-moz-selection {
-    background: #f1f2f6;
-    color: gray;
-}
-
 ::-webkit-scrollbar {
-    display: none;
+    display: none !important;
 }
 
 body {

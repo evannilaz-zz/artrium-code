@@ -134,7 +134,6 @@ function displayFile(file) {
     } else {
         div.innerHTML = `<span>${file.type}</span>${file.name}`;
     }
-    // div.innerHTML = `<span><img src="${file.type}.png"></span>${file.name}`;
     div.classList.add("file");
     div.classList.add(file.type);
     div.id = file.no;

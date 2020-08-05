@@ -6,10 +6,6 @@ let keyHistory = {
     up: new Array()
 };
 
-// String.prototype.insert = function(index,string) {
-//     return this.slice(0,index) + string + this.slice(index);
-// }
-
 function push(key,history) {
     if (!(key === "Shift" || key === " " || key === "Control")) {
         if (keyHistory[history].length >= 2) {
@@ -41,18 +37,9 @@ function insertIndent() {
 
 function bracketAutocomplete(key) {
     function closeBracket(closer) {
-        // function checkMultipleBracket(closer) {
-        //     if (editor.value[cursor] + editor.value[cursor + 1] === `${closer}${closer}`) {
-        //         editor.value = editor.value.slice(0,cursor) + editor.value.slice(cursor + 2);
-        //         moveCursor(0,cursor);
-        //     }
-        // }
         const cursor = editor.selectionStart;
         insert(cursor,closer);
         moveCursor(-1);
-        // brackets.forEach((bracket) => {
-        //     checkMultipleBracket(bracket);
-        // });
     }
     brackets.forEach((bracket) => {
         if (key === bracket) {
