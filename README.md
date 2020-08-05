@@ -29,4 +29,4 @@ As you download the file you've edited, your browser may say that 'This kind of 
 - [SF Mono](https://developer.apple.com/fonts)
 
 ## Preview
-![Preview Image](preview.png)
+![Preview Image](assets/preview.png)
