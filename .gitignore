@@ -1,0 +1,9 @@
+# Image Files
+
+*.webp
+*.png
+
+# To Ignore
+
+init.js
+blocked.html
