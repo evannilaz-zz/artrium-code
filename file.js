@@ -70,14 +70,21 @@ function deleteFile() {
 }
 
 function prepNewFile() {
+    const input = fileCrtForm.querySelector("input");
+    function toggleHide() {
+        hide(fileCrtBtn);
+        hide(fileCrtForm);
+        input.removeEventListener("focusout",toggleHide);
+    }
     if (event.target.innerText.includes("+")) {
-        const input = fileCrtForm.querySelector("input");
+        input.removeEventListener("focusout",toggleHide);
         hide(fileCrtBtn);
         hide(fileCrtForm);
         input.focus();
+        input.addEventListener("focusout",toggleHide);
     } else {
         event.preventDefault();
-        const name = event.target.querySelector("input").value;
+        const name = input.value;
         const code = "";
         crtNewFile(name,code);
         hide(fileCrtForm);
@@ -99,9 +106,6 @@ function crtNewFile(fileName,innerCode) {
         if ((fileName.match(/\./g) || []).length > 1 || fileName.includes(" ") || fileName.includes("?") || fileName.includes("*") || fileName.includes("\"") || fileName.includes("'")) {
             alert("Spaces, dots, and special characters other than file extension are not allowed in file's name.");
             event.target.querySelector("input").value = "";
-        } else if (fileName === "") {
-            hide(fileCrtForm);
-            hide(fileCrtBtn);
         } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js" || fileName.split(".")[1] === "txt")) {
             alert("Only HTML, CSS, and JavaScript is supported in Artrium Code currently.");
         } else if (files.length > 9) {
