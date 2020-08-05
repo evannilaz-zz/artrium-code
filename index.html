@@ -15,6 +15,9 @@
                 <div></div>
             </h3>
             <span>Pre-Alpha v0.2</span>
+            <label for="open" title="Open File">
+                <img src="open.webp">
+            </label>
             <button id="download" title="Download file">
                 <img src="download.webp">
             </button>
@@ -32,6 +35,10 @@
         <div id="edit">
             <textarea placeholder="Your Code here..." wrap="soft" autocomplete="false" spellcheck="false"></textarea>
         </div>
+        <input type="file" id="open" style="display: none">
+        <script type="module">
+            import { Octokit } from "https://cdn.pika.dev/@octokit/core";
+        </script>
         <script src="file.js"></script>
         <script src="editor.js"></script>
         <script src="avi.js"></script>

@@ -102,30 +102,39 @@ nav>span {
     transition: filter .2s .1s;
 }
 
-nav #toggle, nav #download {
+nav #toggle, nav #download, nav label {
     display: flex;
     border: none;
     align-items: center;
     margin-left: 0;
     justify-self: flex-end;
+    cursor: pointer;
 }
 
-nav #download {
+nav #download, nav label {
     position: relative;
     left: 15px;
+}
+
+nav label {
+    left: 17px;
     margin-left: auto;
 }
 
-nav #toggle:hover, nav #download:hover {
+nav #toggle:hover, nav #download:hover, nav label:hover {
     border: none;
 }
 
-nav #toggle img, nav #download img {
+nav #toggle img, nav #download img, nav label img {
     width: 30px;
     transition: filter .2s;
 }
 
-nav #toggle img:hover, nav #download img:hover {
+nav label img {
+    width: 23px;
+}
+
+nav #toggle img:hover, nav #download img:hover, nav label img:hover {
     filter: opacity(.7);
 }
 

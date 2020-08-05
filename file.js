@@ -2,11 +2,24 @@ const fileExp = document.querySelector("#fileExplorer");
 const editor = document.querySelector("textarea");
 const fileCrtBtn = fileExp.querySelector("button");
 const fileCrtForm = fileExp.querySelector("form");
+const openFile = document.querySelector("#open");
 let files = new Array();
 let fileShortcuts = new Array();
 let currentFile;
 
 const css = document.querySelector("style");
+
+function getFile() {
+    const file = openFile.files[0];
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onloadend = (event) => {
+        crtNewFile(file.name,event.target.result);
+    }
+    reader.onerror = (event) => {
+        alert("Error Reading File");
+    }
+}
 
 const saveFile = function() {
     localStorage.setItem("files",JSON.stringify(files));
@@ -57,15 +70,23 @@ function deleteFile() {
 }
 
 function prepNewFile() {
-    const input = fileCrtForm.querySelector("input");
-    hide(fileCrtBtn);
-    hide(fileCrtForm);
-    input.focus();
+    if (event.target.innerText.includes("+")) {
+        const input = fileCrtForm.querySelector("input");
+        hide(fileCrtBtn);
+        hide(fileCrtForm);
+        input.focus();
+    } else {
+        event.preventDefault();
+        const name = event.target.querySelector("input").value;
+        const code = "";
+        crtNewFile(name,code);
+        hide(fileCrtForm);
+        hide(fileCrtBtn);
+    }
 }
 
-function crtNewFile() {
+function crtNewFile(fileName,innerCode) {
     event.preventDefault();
-    const fileName = event.target.querySelector("input").value;
     let cancel = false;
     files.forEach((file) => {
         if (file.name === fileName) {
@@ -90,13 +111,11 @@ function crtNewFile() {
                 name: fileName,
                 type: fileName.split(".")[1].toUpperCase(),
                 no: files.length,
-                code: ""
+                code: innerCode
             };
             files.push(fileInfo);
             saveFile();
-            event.target.querySelector("input").value = "";
-            hide(fileCrtForm);
-            hide(fileCrtBtn);
+            fileCrtForm.querySelector("input").value = "";
             displayFile(fileInfo);
         }
     }
@@ -127,7 +146,8 @@ function init() {
         files = loadedFiles;
     }
     fileCrtBtn.addEventListener("click",prepNewFile);
-    fileCrtForm.addEventListener("submit",crtNewFile);
+    fileCrtForm.addEventListener("submit",prepNewFile);
+    openFile.addEventListener("input",getFile);
     setInterval(() => {
         fileShortcuts = document.querySelectorAll(".file");
         fileShortcuts.forEach((shortcut) => {
