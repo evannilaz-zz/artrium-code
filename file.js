@@ -83,7 +83,7 @@ function renameFile() {
         } else if (inputValueType === "txt") {
             indicatedFileType = "Text File";
         } else {
-            indicatedFileType = inputValueType;
+            indicatedFileType = inputValueType.toUpperCase();
         }
         files[parseInt(event.target.parentElement.id)].name = inputValue;
         files[parseInt(event.target.parentElement.id)].type = inputValueType.toUpperCase();
