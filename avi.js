@@ -1,7 +1,6 @@
 const navHeader = document.querySelector("nav h3");
 const navToggle = document.querySelector("nav #toggle");
 const navDownload = document.querySelector("nav #download");
-let temp;
 
 navHeader.addEventListener("mouseenter",() => {
     navHeader.querySelector("div").style.width = "95%";
