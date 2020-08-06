@@ -60,43 +60,37 @@ const activateEditor = function() {
 
 
 function renameFile() {
-    if (temp < 1) {
-        if (event.target.className.includes("file")) {
-            deactivateEditor();
-            editor.blur();
-            let clickedShortcut;
-            if (event.target.id === "") {
-                clickedShortcut = event.target.parentElement;
-            } else {
-                clickedShortcut = event.target;
-            }
-            const innerText = clickedShortcut.innerText.split("\n");
-            clickedShortcut.innerHTML = `<span>${innerText[0]}</span><form style="display: initial"><input type="text"></form>`;
-            clickedShortcut.querySelector("form>input").value = innerText[1];
-            clickedShortcut.querySelector("form>input").focus();
-            temp += 1;
+    if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
+        deactivateEditor();
+        editor.blur();
+        let clickedShortcut;
+        if (event.target.id === "") {
+            clickedShortcut = event.target.parentElement;
         } else {
-            event.preventDefault();
-            const fileType = event.target.parentElement.className.replace("file","").replace(" ","").toLowerCase();
-            if (fileType !== event.target.querySelector("input").value.split(".")[1]) {
-                alert("File type cannot be modified.");
-            } else {
-                const inputValue = event.target.querySelector("input").value;
-                let indicatedFileType;
-                files[parseInt(event.target.parentElement.id)].name = inputValue;
-                saveFile();
-                if (fileType === "js") {
-                    indicatedFileType = "JavaScript";
-                } else if (fileType === "txt") {
-                    indicatedFileType = "Text File";
-                } else {
-                    indicatedFileType = inputValue.split(".")[1];
-                }
-                event.target.querySelector("input").value = "";
-                event.target.parentElement.innerHTML = `<span>${indicatedFileType}</span><form style="display: none"><input type="text"></form>${inputValue}`;
-                temp = 0;
-            }
+            clickedShortcut = event.target;
         }
+        const innerText = clickedShortcut.innerText.split("\n");
+        clickedShortcut.innerHTML = `<span>${innerText[0]}</span><form style="display: initial"><input type="text"></form>`;
+        clickedShortcut.querySelector("form>input").value = innerText[1];
+        clickedShortcut.querySelector("form>input").focus();
+        temp += 1;
+    } else if (event.target.tagName === "FORM") {
+        event.preventDefault();
+        const inputValue = event.target.querySelector("input").value;
+        let indicatedFileType;
+        files[parseInt(event.target.parentElement.id)].name = inputValue;
+        saveFile();
+        const inputValueType = inputValue.split(".")[1];
+        if (inputValueType === "js") {
+            indicatedFileType = "JavaScript";
+        } else if (inputValueType === "txt") {
+            indicatedFileType = "Text File";
+        } else {
+            indicatedFileType = inputValueType;
+        }
+        event.target.parentElement.className = `file ${inputValueType.toUpperCase()}`;
+        event.target.querySelector("input").value = "";
+        event.target.parentElement.innerHTML = `<span>${indicatedFileType}</span><form style="display: none"><input type="text"></form>${inputValue}`;
     }
 }
 
@@ -215,7 +209,6 @@ function init() {
             shortcut.addEventListener("click",activateEditor);
             shortcut.addEventListener("contextmenu",deleteFile);
             shortcut.addEventListener("wheel",renameFile);
-            shortcut.addEventListener("dragstart",drag);
             shortcut.querySelector("form").addEventListener("submit",renameFile);
         });
     });
