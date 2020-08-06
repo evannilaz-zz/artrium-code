@@ -39,20 +39,19 @@ const deactivateEditor = function() {
 
 const activateEditor = function() {
     if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
-        const shortcutId = event.target.id;
-        currentFile = shortcutId;
+        currentFile = event.target.id;
         if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.add("unselected");});
         editor.placeholder = "Your Code here...";
         editor.style.pointerEvents = "all";
         let clickedShortcut;
-        if (shortcutId === "") {
+        if (event.target.tagName === "SPAN") {
             clickedShortcut = event.target.parentElement;
         } else {
             clickedShortcut = event.target;
         }
         clickedShortcut.classList.remove("unselected");
         clickedShortcut.classList.add("selected");
-        editor.value = files[shortcutId].code;
+        editor.value = files[clickedShortcut.id].code;
         editor.focus();
     }
 }
@@ -175,7 +174,7 @@ function crtNewFile(fileName,innerCode) {
         }
     });
     if (cancel === false) {
-        if (!/^[0-9a-zA-Z ... ]+$/.test(fileName)) {
+        if (!/^[0-9a-zA-Z ... ]+$/.test(fileName) || fileName.split(".")[1] === undefined) {
             alert("The file name you've entered is unavailable.");
         } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js" || fileName.split(".")[1] === "txt")) {
             alert("Only HTML, CSS, and JavaScript is supported in Artrium Code currently.");
