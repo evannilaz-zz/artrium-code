@@ -31,39 +31,62 @@ const deactivateEditor = function() {
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.remove("unselected")});
 }
 
-const activateEditor = function(event) {
-    const shortcutId = event.target.id;
-    currentFile = shortcutId;
-    if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.add("unselected");});
-    editor.placeholder = "Your Code here...";
-    editor.style.pointerEvents = "all";
-    let clickedShortcut;
-    if (shortcutId === "") {
-        clickedShortcut = event.target.parentElement;
-    } else {
-        clickedShortcut = event.target;
+const activateEditor = function() {
+    if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
+        const shortcutId = event.target.id;
+        currentFile = shortcutId;
+        if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.add("unselected");});
+        editor.placeholder = "Your Code here...";
+        editor.style.pointerEvents = "all";
+        let clickedShortcut;
+        if (shortcutId === "") {
+            clickedShortcut = event.target.parentElement;
+        } else {
+            clickedShortcut = event.target;
+        }
+        clickedShortcut.classList.remove("unselected");
+        clickedShortcut.classList.add("selected");
+        editor.value = files[shortcutId].code;
+        editor.focus();
     }
-    clickedShortcut.classList.remove("unselected");
-    clickedShortcut.classList.add("selected");
-    editor.value = files[shortcutId].code;
-    editor.focus();
 }
 
+
 function renameFile() {
-    deactivateEditor();
-    editor.blur();
-    const id = event.target.id;
-    let clickedShortcut;
-    if (id === "") { // Clicked File Type
-        clickedShortcut = event.target.parentElement;
-    } else { // Directly clicked Shortcut
-        clickedShortcut = event.target;
+    if (event.target.className.includes("file")) {
+        deactivateEditor();
+        editor.blur();
+        let clickedShortcut;
+        if (event.target.id === "") {
+            clickedShortcut = event.target.parentElement;
+        } else {
+            clickedShortcut = event.target;
+        }
+        const innerText = clickedShortcut.innerText.split("\n");
+        clickedShortcut.innerHTML = `<span>${innerText[0]}</span><form style="display: initial"><input type="text"></form>`;
+        clickedShortcut.querySelector("form>input").value = innerText[1];
+        clickedShortcut.querySelector("form>input").focus();
+    } else {
+        event.preventDefault();
+        const fileType = event.target.parentElement.className.replace("file","").replace(" ","").toLowerCase();
+        if (fileType !== event.target.querySelector("input").value.split(".")[1]) {
+            alert("File type cannot be modified.");
+        } else {
+            const inputValue = event.target.querySelector("input").value;
+            let indicatedFileType;
+            files[parseInt(event.target.parentElement.id)].name = inputValue;
+            saveFile();
+            if (fileType === "js") {
+                indicatedFileType = "JavaScript";
+            } else if (fileType === "txt") {
+                indicatedFileType = "Text File";
+            } else {
+                indicatedFileType = inputValue.split(".")[1];
+            }
+            event.target.querySelector("input").value = "";
+            event.target.parentElement.innerHTML = `<span>${indicatedFileType}</span><form style="display: none"><input type="text"></form>${inputValue}`;
+        }
     }
-    const clickedForm = clickedShortcut.querySelector("form");
-    const temp = clickedShortcut.innerText.split("\n");
-    clickedShortcut.innerHTML = `<span>${temp[0]}</span><form style="display: initial"><input type="text"></form>`;
-    clickedForm.querySelector("input").value = temp[1];
-    clickedForm.querySelector("input").focus();
 }
 
 function hide(element) {
@@ -174,11 +197,13 @@ function init() {
     fileCrtBtn.addEventListener("click",prepNewFile);
     fileCrtForm.addEventListener("submit",prepNewFile);
     openFile.addEventListener("input",getFile);
-    setInterval(() => {
+    fileExp.addEventListener("mousemove",() => {
         fileShortcuts = document.querySelectorAll(".file");
         fileShortcuts.forEach((shortcut) => {
             shortcut.addEventListener("click",activateEditor);
             shortcut.addEventListener("contextmenu",deleteFile);
+            shortcut.addEventListener("wheel",renameFile);
+            shortcut.querySelector("form").addEventListener("submit",renameFile);
         });
     });
 }
