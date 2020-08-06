@@ -4,6 +4,11 @@
 ## Acknowledgements
 As you download the file you've edited, your browser may say that 'This kind of file can harm your computer' or else. It is safe to download, your browser is just warning you because it's the file from the Internet. The content of it is just a code you've edited. In addition, you can delete your files by right-clicking on them.
 
+## How-to
+- Rename your file by scrolling on the file
+- Delete your file by right-clicking on the file
+- Hit `Enter` key to cancel creating file
+
 ## Necessary Features
 - [ ] Brackets/Quotes Autocomplete
 - [X] File Manager (explorer)
