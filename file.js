@@ -6,7 +6,6 @@ const openFile = document.querySelector("#open");
 let files = new Array();
 let fileShortcuts = new Array();
 let currentFile;
-let temp = 0;
 
 const css = document.querySelector("style");
 
@@ -70,6 +69,7 @@ function renameFile() {
             clickedShortcut = event.target;
         }
         const innerText = clickedShortcut.innerText.split("\n");
+        prevFileName = innerText[1];
         clickedShortcut.innerHTML = `<span>${innerText[0]}</span><form style="display: initial"><input type="text"></form>`;
         clickedShortcut.querySelector("form>input").value = innerText[1];
         clickedShortcut.querySelector("form>input").focus();
@@ -78,19 +78,43 @@ function renameFile() {
         const inputValue = event.target.querySelector("input").value;
         const inputValueType = inputValue.split(".")[1];
         let indicatedFileType;
-        if (inputValueType === "js") {
-            indicatedFileType = "JavaScript";
-        } else if (inputValueType === "txt") {
-            indicatedFileType = "Text File";
-        } else {
-            indicatedFileType = inputValueType.toUpperCase();
+        let cancel;
+
+        files.forEach((file) => {
+            if (file.name === inputValue && prevFileName !== inputValue) {
+                cancel = true;
+                alert("The file with the same name already exists.");
+                return;
+            }
+        });
+
+        if (!cancel) {
+            if (!/^[0-9a-zA-Z ... ]+$/.test(inputValue)) {
+                alert("The file name you've entered is unavailable.");
+                return;
+            }
+
+            if (inputValueType === "js") {
+                indicatedFileType = "JavaScript";
+            } else if (inputValueType === "txt") {
+                indicatedFileType = "Text File";
+            } else if (inputValueType === "html" || inputValueType === "css") {
+                indicatedFileType = inputValueType.toUpperCase();
+            } else if (inputValueType === undefined) {
+                alert("You didn't enter any file extension.");
+                return;
+            } else {
+                alert("Only HTML, CSS, and JavaScript is supported in Artrium Code currently.");
+                return;
+            }
+
+            files[parseInt(event.target.parentElement.id)].name = inputValue;
+            files[parseInt(event.target.parentElement.id)].type = inputValueType.toUpperCase();
+            event.target.parentElement.className = `file ${inputValueType.toUpperCase()}`;
+            event.target.querySelector("input").value = "";
+            event.target.parentElement.innerHTML = `<span>${indicatedFileType}</span><form style="display: none"><input type="text"></form>${inputValue}`;
+            saveFile();
         }
-        files[parseInt(event.target.parentElement.id)].name = inputValue;
-        files[parseInt(event.target.parentElement.id)].type = inputValueType.toUpperCase();
-        event.target.parentElement.className = `file ${inputValueType.toUpperCase()}`;
-        event.target.querySelector("input").value = "";
-        event.target.parentElement.innerHTML = `<span>${indicatedFileType}</span><form style="display: none"><input type="text"></form>${inputValue}`;
-        saveFile();
     }
 }
 
@@ -136,6 +160,7 @@ function prepNewFile() {
         hide(fileCrtForm);
         // input.removeEventListener("focusout",toggleHide);
         crtNewFile(name,code);
+        fileCrtForm.querySelector("input").value = "";
     }
 }
 
@@ -150,11 +175,8 @@ function crtNewFile(fileName,innerCode) {
         }
     });
     if (cancel === false) {
-        if ((fileName.match(/\./g) || []).length > 1 || fileName.includes(" ") || fileName.includes("?") || fileName.includes("*") || fileName.includes("\"") || fileName.includes("'")) {
-            alert("Spaces, dots, and special characters other than file extension are not allowed in file's name.");
-            event.target.querySelector("input").value = "";
-        } else if (fileName === "") {
-            return;
+        if (!/^[0-9a-zA-Z ... ]+$/.test(fileName)) {
+            alert("The file name you've entered is unavailable.");
         } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js" || fileName.split(".")[1] === "txt")) {
             alert("Only HTML, CSS, and JavaScript is supported in Artrium Code currently.");
         } else if (files.length > 9) {
@@ -168,7 +190,6 @@ function crtNewFile(fileName,innerCode) {
             };
             files.push(fileInfo);
             saveFile();
-            fileCrtForm.querySelector("input").value = "";
             displayFile(fileInfo);
         }
     }
