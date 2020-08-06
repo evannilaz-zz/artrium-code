@@ -31,22 +31,39 @@ const deactivateEditor = function() {
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.remove("unselected")});
 }
 
-const activateEditor = function() {
+const activateEditor = function(event) {
     const shortcutId = event.target.id;
     currentFile = shortcutId;
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.add("unselected");});
     editor.placeholder = "Your Code here...";
     editor.style.pointerEvents = "all";
+    let clickedShortcut;
     if (shortcutId === "") {
-        event.target.parentElement.classList.remove("unselected");
-        event.target.parentElement.classList.add("selected");
-        editor.value = files[event.target.parentElement.id].code;
+        clickedShortcut = event.target.parentElement;
     } else {
-        event.target.classList.remove("unselected");
-        event.target.classList.add("selected");
-        editor.value = files[shortcutId].code;
+        clickedShortcut = event.target;
     }
+    clickedShortcut.classList.remove("unselected");
+    clickedShortcut.classList.add("selected");
+    editor.value = files[shortcutId].code;
     editor.focus();
+}
+
+function renameFile() {
+    deactivateEditor();
+    editor.blur();
+    const id = event.target.id;
+    let clickedShortcut;
+    if (id === "") { // Clicked File Type
+        clickedShortcut = event.target.parentElement;
+    } else { // Directly clicked Shortcut
+        clickedShortcut = event.target;
+    }
+    const clickedForm = clickedShortcut.querySelector("form");
+    const temp = clickedShortcut.innerText.split("\n");
+    clickedShortcut.innerHTML = `<span>${temp[0]}</span><form style="display: initial"><input type="text"></form>`;
+    clickedForm.querySelector("input").value = temp[1];
+    clickedForm.querySelector("input").focus();
 }
 
 function hide(element) {
@@ -69,6 +86,7 @@ function deleteFile() {
     saveFile();
 }
 
+
 function prepNewFile() {
     const input = fileCrtForm.querySelector("input");
     function toggleHide() {
@@ -77,18 +95,19 @@ function prepNewFile() {
         input.removeEventListener("focusout",toggleHide);
     }
     if (event.target.innerText.includes("+")) {
-        input.removeEventListener("focusout",toggleHide);
+        // input.removeEventListener("focusout",toggleHide);
         hide(fileCrtBtn);
         hide(fileCrtForm);
         input.focus();
-        input.addEventListener("focusout",toggleHide);
+        // input.addEventListener("focusout",toggleHide);
     } else {
         event.preventDefault();
         const name = input.value;
         const code = "";
-        crtNewFile(name,code);
-        hide(fileCrtForm);
         hide(fileCrtBtn);
+        hide(fileCrtForm);
+        // input.removeEventListener("focusout",toggleHide);
+        crtNewFile(name,code);
     }
 }
 
@@ -106,6 +125,8 @@ function crtNewFile(fileName,innerCode) {
         if ((fileName.match(/\./g) || []).length > 1 || fileName.includes(" ") || fileName.includes("?") || fileName.includes("*") || fileName.includes("\"") || fileName.includes("'")) {
             alert("Spaces, dots, and special characters other than file extension are not allowed in file's name.");
             event.target.querySelector("input").value = "";
+        } else if (fileName === "") {
+            return;
         } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js" || fileName.split(".")[1] === "txt")) {
             alert("Only HTML, CSS, and JavaScript is supported in Artrium Code currently.");
         } else if (files.length > 9) {
@@ -127,13 +148,15 @@ function crtNewFile(fileName,innerCode) {
 
 function displayFile(file) {
     const div = document.createElement("div");
+    let fileType;
     if (file.type === "JS") {
-        div.innerHTML = `<span>JavaScript</span>${file.name}`;
+        fileType = "JavaScript";
     } else if (file.type === "TXT") {
-        div.innerHTML = `<span>Text</span>${file.name}`;
+        fileType = "Text File";
     } else {
-        div.innerHTML = `<span>${file.type}</span>${file.name}`;
+        fileType = file.type;
     }
+    div.innerHTML = `<span>${fileType}</span><form><input type="text"></form>${file.name}`;
     div.classList.add("file");
     div.classList.add(file.type);
     div.id = file.no;

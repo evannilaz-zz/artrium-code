@@ -172,18 +172,21 @@ nav a img:hover {
     padding: 10px;
 }
 
-#fileExplorer form {
+#fileExplorer>form {
     display: flex;
     width: 80%;
     justify-content: center;
+}
+
+#fileExplorer>form input {
+    width: inherit;
+    height: 30px;
 }
 
 #fileExplorer input {
     background: none;
     border: 1.5px solid #78909c;
     color: white;
-    width: inherit;
-    height: 30px;
     padding: 5px;
     font-size: 15px;
     border-radius: 5px;
@@ -250,8 +253,15 @@ h3 {
     justify-self: flex-start;
 }
 
-.file span img {
-    width: 20px;
+.file form {
+    display: none;
+    width: 60%;
+    height: 70%;
+}
+
+.file form input {
+    width: 100%;
+    height: 100%;
 }
 
 .file:hover, .selected {
