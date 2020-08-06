@@ -73,14 +73,11 @@ function renameFile() {
         clickedShortcut.innerHTML = `<span>${innerText[0]}</span><form style="display: initial"><input type="text"></form>`;
         clickedShortcut.querySelector("form>input").value = innerText[1];
         clickedShortcut.querySelector("form>input").focus();
-        temp += 1;
     } else if (event.target.tagName === "FORM") {
         event.preventDefault();
         const inputValue = event.target.querySelector("input").value;
-        let indicatedFileType;
-        files[parseInt(event.target.parentElement.id)].name = inputValue;
-        saveFile();
         const inputValueType = inputValue.split(".")[1];
+        let indicatedFileType;
         if (inputValueType === "js") {
             indicatedFileType = "JavaScript";
         } else if (inputValueType === "txt") {
@@ -88,9 +85,12 @@ function renameFile() {
         } else {
             indicatedFileType = inputValueType;
         }
+        files[parseInt(event.target.parentElement.id)].name = inputValue;
+        files[parseInt(event.target.parentElement.id)].type = inputValueType.toUpperCase();
         event.target.parentElement.className = `file ${inputValueType.toUpperCase()}`;
         event.target.querySelector("input").value = "";
         event.target.parentElement.innerHTML = `<span>${indicatedFileType}</span><form style="display: none"><input type="text"></form>${inputValue}`;
+        saveFile();
     }
 }
 
@@ -206,9 +206,9 @@ function init() {
     fileExp.addEventListener("mousemove",() => {
         fileShortcuts = document.querySelectorAll(".file");
         fileShortcuts.forEach((shortcut) => {
+            shortcut.addEventListener("dblclick",renameFile);
             shortcut.addEventListener("click",activateEditor);
             shortcut.addEventListener("contextmenu",deleteFile);
-            shortcut.addEventListener("wheel",renameFile);
             shortcut.querySelector("form").addEventListener("submit",renameFile);
         });
     });
