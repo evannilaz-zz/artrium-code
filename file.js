@@ -62,7 +62,7 @@ function renameFile() {
         deactivateEditor();
         editor.blur();
         let clickedShortcut;
-        if (event.target.id === "") {
+        if (event.target.tagName === "SPAN") {
             clickedShortcut = event.target.parentElement;
         } else {
             clickedShortcut = event.target;
