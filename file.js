@@ -5,7 +5,6 @@ const fileCrtForm = fileExp.querySelector("form");
 const openFile = document.querySelector("#open");
 let files = new Array();
 let fileShortcuts = new Array();
-let currentFile;
 
 const css = document.querySelector("style");
 
@@ -39,7 +38,6 @@ const deactivateEditor = function() {
 
 const activateEditor = function() {
     if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
-        currentFile = event.target.id;
         if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.add("unselected");});
         editor.placeholder = "Your Code here...";
         editor.style.pointerEvents = "all";

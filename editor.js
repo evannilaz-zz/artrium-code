@@ -1,7 +1,6 @@
 let brackets = ["(","{","[","\"","'","`"];
 
 let keyHistory = {
-    full: new Array(),
     down: new Array(),
     up: new Array()
 };
@@ -58,7 +57,6 @@ function bracketAutocomplete(key) {
 
 function keyDownEvent(event) {
     const key = event.key;
-    keyHistory.full.push(key);
     push(key,"down");
     if (event.keycode === 9 || event.which === 9) {
         event.preventDefault();
@@ -89,7 +87,7 @@ function init() {
     editor.addEventListener("keydown",keyDownEvent);
     editor.addEventListener("keyup",keyUpEvent);
     editor.addEventListener("input",() => {
-        files[currentFile].code = event.target.value;
+        files[parseInt(fileExp.querySelector(".selected").id)].code = event.target.value;
         saveFile();
     });
 }
