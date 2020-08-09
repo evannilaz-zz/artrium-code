@@ -3,15 +3,20 @@ const navToggle = document.querySelector("nav #toggle");
 const navDownload = document.querySelector("nav #download");
 
 navHeader.addEventListener("mouseenter",() => {
+    navHeader.querySelector("div").style.position = "static";
     navHeader.querySelector("div").style.width = "95%";
     navHeader.querySelector("a>span").style.filter = "opacity(1)";
     document.querySelector("nav>span").style.filter = "opacity(1)";
 });
 
 navHeader.addEventListener("mouseleave",() => {
-    navHeader.querySelector("div").style.width = "0";
-    navHeader.querySelector("a>span").style.filter = "opacity(0)";
-    document.querySelector("nav>span").style.filter = "opacity(0)";
+    navHeader.querySelector("div").style.width = "7.5%";
+    setTimeout(() => {
+        navHeader.querySelector("div").style.position = "absolute";
+        navHeader.querySelector("div").style.width = "0";
+        navHeader.querySelector("a>span").style.filter = "opacity(0)";
+        document.querySelector("nav>span").style.filter = "opacity(0)";
+    },300);
 });
 
 navToggle.addEventListener("click",() => {
