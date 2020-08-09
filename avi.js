@@ -51,7 +51,7 @@ navDownload.addEventListener("click",() => {
         setTimeout(() => {
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
-        },10000);
+        },1000);
     } else {
         alert("You have to select the file to download first.");
     }
