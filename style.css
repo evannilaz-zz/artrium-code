@@ -75,6 +75,7 @@ nav h3 div {
     margin-right: 91.6%;
     right: 0;
     height: 1.68px;
+    width: 0;
     background: white;
     transition: width .2s;
 }
