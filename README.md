@@ -31,7 +31,7 @@ As you download the file you've edited, your browser may say that 'This kind of 
 - [Toggle Icon](https://icon-icons.com/icon/sidebar-expand-toggle-nav/145935)
 - [Download Icon](https://www.iconfinder.com/icons/5204156/download_icon)
 - [GitHub Logo](https://github.com/logos)
-- [SF Mono](https://developer.apple.com/fonts)
+- [SF Mono](https://developer.apple.com/fonts) (Monospace font)
 
 ## Preview
 ![Preview Image](assets/preview.png)
