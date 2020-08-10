@@ -24,8 +24,8 @@ As you download the file you've edited, your browser may say that 'This kind of 
 
 ## Known Bugs & Issues
 * Bracket/Quote Autocomplete
-  * Multiple bracket support not working (except quotes)
-  * Automatically tabbed after one character is typed in 2~nth line in bracket
+  * ~~Multiple bracket support not working (except quotes)~~ (Disabled Feature)
+  * ~~Automatically tabbed after one character is typed in 2~nth line in bracket~~ (Disabled Feature)
   
 ## Copyrights
 - [Toggle Icon](https://icon-icons.com/icon/sidebar-expand-toggle-nav/145935)
