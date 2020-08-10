@@ -30,6 +30,7 @@ function push(key,history) {
 }
 
 function bracket(key) {
+    const HTMLTagRegexp = /(<([^>]+)>)/;
     opener.forEach((bracket) => {
         if (key === bracket) {
             insert(editor.selectionStart,closer[opener.indexOf(bracket)],0);
@@ -46,6 +47,13 @@ function bracket(key) {
             insert(editor.selectionStart,"\t");
         }
     });
+
+    // if (HTMLTagRegexp.test(editor.value) && fileExp.querySelector(".selected").classList.contains("HTML")) {
+    //     const tagName = HTMLTagRegexp.exec(editor.value)[0].replace(/</,"").replace(/>/,"");
+    //     if (!(tagName.includes("!") || tagName.includes("/"))) {
+    //         insert(editor.selectionStart,`</${tagName}>`,0);
+    //     }
+    // }
 }
 
 function keyDownEvent(event) {
