@@ -220,9 +220,9 @@ nav a img:hover {
     border: none;
     background: none;
     color: #d3e1e8;
-    -moz-tab-size: 3;
-    -o-tab-size: 3;
-    tab-size: 3;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
 }
 
 h3 {

@@ -1,10 +1,7 @@
 const opener = ["(","{","[","\"","`"];
 const closer = [")","}","]","\"","`"];
 
-let keyHistory = {
-    up: [],
-    down: []
-};
+let keyHistory = new Array();
 
 String.prototype.find = function(query) {
     let index = new Array();
@@ -22,10 +19,10 @@ function insert(index,str,moveCursor = 1) {
     saveFile();
 }
 
-function push(key,history) {
+function push(key) {
     if (!(key === "Shift" || key === " " || key === "Control")) {
-        if (keyHistory[history].length >= 5) keyHistory[history].shift();
-        keyHistory[history].push(key);
+        if (keyHistory.length >= 5) keyHistory.shift();
+        keyHistory.push(key);
     }
 }
 
@@ -42,7 +39,7 @@ function bracket(key) {
         }
 
 
-        if (keyHistory.down[3] === bracket && keyHistory.down[4] === "Enter" && editor.value[editor.selectionStart] === closer[opener.indexOf(bracket)]) {
+        if (keyHistory[3] === bracket && keyHistory[4] === "Enter" && editor.value[editor.selectionStart] === closer[opener.indexOf(bracket)]) {
             insert(editor.selectionStart,"\n",0);
             insert(editor.selectionStart,"\t");
         }
@@ -63,7 +60,7 @@ function keyDownEvent(event) {
         event.preventDefault();
         insert(editor.selectionStart,"\t");
     }
-    setTimeout(() => bracket(key),100);
+    setTimeout(bracket,100,key);
 }
 
 function init() {
