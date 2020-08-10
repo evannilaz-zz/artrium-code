@@ -6,6 +6,8 @@ let keyHistory = {
     down: []
 };
 
+let temp = new Array();
+
 String.prototype.find = function(query) {
     let index = new Array();
     for (var i = 0; i < this.length; i++) {
@@ -33,14 +35,15 @@ function bracket(key) {
     opener.forEach((bracket) => {
         if (key === bracket) {
             insert(editor.selectionStart,closer[opener.indexOf(bracket)],0);
-            let temp = new Array();
+            temp = new Array();
             for (var i = 0; i < editor.value.find(bracket).length; i++) {
-                temp.push([editor.value.find(bracket)[i],editor.value.find(closer[opener.indexOf(bracket)])]);
+                temp.push([editor.value.find(bracket)[i],editor.value.find(closer[opener.indexOf(bracket)])[i]]);
             }
             console.log(temp);
         }
 
-        if (keyHistory.down[3] === bracket && keyHistory.down[4] === "Enter") {
+
+        if (keyHistory.down[3] === bracket && keyHistory.down[4] === "Enter" && editor.value[editor.selectionStart] === closer[opener.indexOf(bracket)]) {
             insert(editor.selectionStart,"\n",0);
             insert(editor.selectionStart,"\t");
         }
