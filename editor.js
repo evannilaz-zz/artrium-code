@@ -1,56 +1,49 @@
-let brackets = ["(","{","[","\"","'","`"];
+const opener = ["(","{","[","\"","`"];
+const closer = [")","}","]","\"","`"];
 
 let keyHistory = {
-    down: new Array(),
-    up: new Array()
+    up: [],
+    down: []
 };
+
+String.prototype.find = function(query) {
+    let index = new Array();
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] === query) index.push(i);
+    }
+
+    return index;
+}
+
+function insert(index,str,moveCursor = 1) {
+    const cursor = editor.selectionStart;
+    editor.value = editor.value.substring(0,index) + str + editor.value.substring(editor.selectionEnd);
+    editor.selectionEnd = cursor + moveCursor;
+    saveFile();
+}
 
 function push(key,history) {
     if (!(key === "Shift" || key === " " || key === "Control")) {
-        if (keyHistory[history].length >= 2) {
-            const lastKey = keyHistory[history][1];
-            for (var i = 0; i < 2; i++) {
-                keyHistory[history].pop();
-            }
-            keyHistory[history].push(lastKey);
-        }
+        if (keyHistory[history].length >= 5) keyHistory[history].shift();
         keyHistory[history].push(key);
     }
 }
 
-function moveCursor(count,cursor = editor.selectionStart) {
-    editor.setSelectionRange(cursor + count, cursor + count);
-}
-
-function insert(index,str) {
-    const cursor = editor.selectionStart;
-    editor.value = editor.value.substring(0,index) + str + editor.value.substring(editor.selectionEnd);
-    editor.selectionEnd = cursor + 1;
-}
-
-function insertIndent() {
-    const cursor = editor.selectionStart;
-    editor.value = editor.value.substring(0,editor.selectionStart) + "\t" + editor.value.substring(editor.selectionEnd);
-    editor.selectionEnd = cursor + 1;
-}
-
-function bracketAutocomplete(key) {
-    function closeBracket(closer) {
-        const cursor = editor.selectionStart;
-        insert(cursor,closer);
-        moveCursor(-1);
-    }
-    brackets.forEach((bracket) => {
+function bracket(key) {
+    opener.forEach((bracket) => {
         if (key === bracket) {
-            if (bracket === "{") {
-                closeBracket("}");
-            } else if (bracket === "(") {
-                closeBracket(")");
-            } else if (bracket === "[") {
-                closeBracket("]");
-            } else {
-                closeBracket(bracket);
-            }
+            insert(editor.selectionStart,closer[opener.indexOf(bracket)],0);
+            // temp = new Array();
+            // for (var i = 0; i < editor.value.find(bracket).length; i++) {
+            //     temp.push([editor.value.find(bracket)[i],editor.value.find(closer[opener.indexOf(bracket)])[i]]);
+            // }
+            // console.log(temp);
+        }
+
+
+        if (keyHistory.down[3] === bracket && keyHistory.down[4] === "Enter" && editor.value[editor.selectionStart] === closer[opener.indexOf(bracket)]) {
+            insert(editor.selectionStart,"\n",0);
+            insert(editor.selectionStart,"\t");
         }
     });
 }
@@ -58,35 +51,17 @@ function bracketAutocomplete(key) {
 function keyDownEvent(event) {
     const key = event.key;
     push(key,"down");
-    if (event.keycode === 9 || event.which === 9) {
+    if (key === "Tab") {
         event.preventDefault();
-        insertIndent();
-    }
-}
-
-function keyUpEvent(event) {
-    const key = event.key;
-    push(key,"up");
-    bracketAutocomplete(key);
-    if (keyHistory.up[0] === "{" && keyHistory.up[1] === "Enter" && !keyHistory.up.includes("Backspace")) {
-        insert(editor.selectionStart,"\n");
-        moveCursor(-1);
         insert(editor.selectionStart,"\t");
     }
-    
-    const openingIndex = editor.value.lastIndexOf("{");
-    const closingIndex = editor.value.lastIndexOf("}");
-
-    if (openingIndex < closingIndex && openingIndex + 4 < editor.selectionStart && editor.selectionStart < closingIndex && keyHistory.down.includes("Enter") && !keyHistory.up.includes("Backspace")) {
-        insertIndent();
-    }
+    setTimeout(() => bracket(key),100);
 }
 
 function init() {
     deactivateEditor();
     editor.addEventListener("keydown",keyDownEvent);
-    editor.addEventListener("keyup",keyUpEvent);
-    editor.addEventListener("input",() => {
+    editor.addEventListener("input",(event) => {
         files[parseInt(fileExp.querySelector(".selected").id)].code = event.target.value;
         saveFile();
     });
