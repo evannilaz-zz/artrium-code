@@ -216,7 +216,7 @@ nav a img:hover {
     display: flex;
     justify-items: flex-end;
     width: 100%;
-    height: 4.5%;
+    height: 5%;
     /* border: 1.5px solid white;
     border-right: none;
     border-bottom: none;
@@ -299,8 +299,9 @@ h3 {
 }
 
 .tab {
-    text-align: center;
-    padding-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-right: 10px;
     width: 8%;
     height: 100%;
