@@ -22,7 +22,6 @@ function insert(index,str,moveCursor = 1) {
     const cursor = editor.selectionStart;
     editor.value = editor.value.substring(0,index) + str + editor.value.substring(editor.selectionEnd);
     editor.selectionEnd = cursor + moveCursor;
-    saveFile();
 }
 
 function push(key) {
@@ -79,6 +78,7 @@ function bracket(key) {
 function keyDownEvent(event) {
     const key = event.key;
     document.title = `• Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
+    if (!document.querySelector(".selected").innerText.includes("•")) document.querySelector(".selected").innerHTML += " •";
     push(key,"down");
     if (key === "Tab") {
         event.preventDefault();

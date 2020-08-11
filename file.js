@@ -30,6 +30,17 @@ const saveFile = function() {
     event.preventDefault();
     localStorage.setItem("files",JSON.stringify(files));
     document.title = `Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
+    fileShortcuts.forEach((shortcut) => {
+        let fileType;
+        if (files[parseInt(shortcut.id)].type === "JS") {
+            fileType = "JavaScript";
+        } else if (files[parseInt(shortcut.id)].type === "TXT") {
+            fileType = "Text File";
+        } else {
+            fileType = files[parseInt(shortcut.id)].type;
+        }
+        shortcut.innerHTML = `<span>${fileType}</span><form style="display: none"><input type="text"></form>${files[parseInt(shortcut.id)].name}`;
+    });
 }
 
 const deactivateEditor = function() {
