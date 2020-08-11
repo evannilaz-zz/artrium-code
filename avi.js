@@ -2,6 +2,8 @@ const navHeader = document.querySelector("nav h3");
 const navToggle = document.querySelector("nav #toggle");
 const navDownload = document.querySelector("nav #download");
 
+let saved;
+
 navHeader.addEventListener("mouseenter",() => {
     navHeader.querySelector("div").style.width = "95%";
     navHeader.querySelector("a>span").style.filter = "opacity(1)";
@@ -54,7 +56,16 @@ navDownload.addEventListener("click",() => {
     }
 });
 
+window.addEventListener('beforeunload', (event) => {
+    if (!saved) {
+        event.preventDefault();
+        event.returnValue = '';
+        return '';
+    }
+});
+
 setInterval(() => {
+    const loadedFiles = JSON.parse(localStorage.getItem("files"));
     if (tabIndicator.innerHTML === "") {
         tabIndicator.style.height = "0";
         editor.style.height = "100%";
@@ -62,4 +73,13 @@ setInterval(() => {
         editor.style.height = "95.5%";
         tabIndicator.style.height = "4.5%";
     }
-})
+
+    for (var i = 0; i < files.length; i++) {
+        if (files[i].name !== loadedFiles[i].name || files[i].type !== loadedFiles[i].type || files[i].no !== loadedFiles[i].no || files[i].code !== loadedFiles[i].code) {
+            saved = false;
+            break;
+        } else {
+            saved = true;
+        }
+    }
+},1);

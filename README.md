@@ -8,6 +8,7 @@ As you download the file you've edited, your browser may say that 'This kind of 
 - Rename your file by double-clicking on the file
 - Delete your file by right-clicking on the file
 - Hit `Enter` key to cancel creating file
+- Press `Ctrl + S` to save your file
 
 ## Necessary Features
 - [ ] Brackets/Quotes Autocomplete

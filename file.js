@@ -8,8 +8,6 @@ let files = new Array();
 let fileShortcuts = new Array();
 let tabShortcuts = new Array();
 
-const css = document.querySelector("style");
-
 function getFile() {
     const file = openFile.files[0];
     const reader = new FileReader();
@@ -31,27 +29,28 @@ function drag() {
 const saveFile = function() {
     event.preventDefault();
     localStorage.setItem("files",JSON.stringify(files));
-    if (fileExp.querySelector(".selected")) {
-        document.title = `Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
-    }
 }
 
 function moveToTab() {
     editor.value = files[parseInt(event.target.id)].code;
     tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
     event.target.classList.add("selected");
+    fileExp.querySelectorAll(".file").forEach((shortcut) => {
+        if (shortcut.id === event.target.id) {
+            shortcut.click();
+        }
+    })
 }
 
 const deactivateEditor = function() {
     editor.value = "No file selected";
     editor.style.pointerEvents = "none";
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
-    document.title = "Artrium Code";
 }
 
 const activateEditor = function() {
     if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
-        if (document.querySelector(".selected")) saveFile();
+        if (fileExp.querySelector(".selected")) saveFile();
         if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
         editor.placeholder = "Your Code here...";
         editor.style.pointerEvents = "all";
@@ -71,7 +70,6 @@ const activateEditor = function() {
         newTab.id = clickedShortcut.id;
 
         editor.value = files[clickedShortcut.id].code;
-        document.title = `Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
         editor.focus();
 
         let multipleTab = false;

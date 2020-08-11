@@ -2,6 +2,7 @@ const opener = ["(","{","[","\"","`"];
 const closer = [")","}","]","\"","`"];
 
 let keyHistory = new Array();
+let keyHistory2 = new Array();
 
 let tagName;
 
@@ -77,24 +78,30 @@ function bracket(key) {
 
 function keyDownEvent(event) {
     const key = event.key;
-    document.title = `• Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
-    push(key,"down");
+    push(key);
     if (key === "Tab") {
         event.preventDefault();
         insert(editor.selectionStart,"\t");
     }
 
-    if (keyHistory[3] === "Control" && keyHistory[4] === "s") {
-        files[parseInt(fileExp.querySelector(".selected").id)].code = event.target.value;
+    setTimeout(() => {
+        bracket(key);
+        files[parseInt(fileExp.querySelector(".selected").id)].code = editor.value;
+    },100);
+}
+
+function saveEvent() {
+    keyHistory2.push(event.key);
+    if (keyHistory2[keyHistory2.length - 2] === "Control" && keyHistory2[keyHistory2.length - 1] === "s") {
+        event.preventDefault();
         saveFile();
     }
-
-    setTimeout(bracket,100,key);
 }
 
 function init() {
     deactivateEditor();
     editor.addEventListener("keydown",keyDownEvent);
+    document.querySelectorAll("*").forEach((element) => {element.addEventListener("keydown",saveEvent)});
 }
 
 init();
