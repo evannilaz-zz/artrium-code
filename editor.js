@@ -9,7 +9,11 @@ String.prototype.find = function(query) {
         if (this[i] === query) index.push(i);
     }
 
-    return index;
+    if (index.length > 0) {
+        return index;
+    } else {
+        return null;
+    }
 }
 
 function insert(index,str,moveCursor = 1) {
@@ -27,7 +31,6 @@ function push(key) {
 }
 
 function bracket(key) {
-    const HTMLTagRegexp = /(<([^>]+)>)/;
     opener.forEach((bracket) => {
         if (key === bracket) {
             insert(editor.selectionStart,closer[opener.indexOf(bracket)],0);
@@ -45,12 +48,25 @@ function bracket(key) {
         }
     });
 
-    // if (HTMLTagRegexp.test(editor.value) && fileExp.querySelector(".selected").classList.contains("HTML")) {
-    //     const tagName = HTMLTagRegexp.exec(editor.value)[0].replace(/</,"").replace(/>/,"");
-    //     if (!(tagName.includes("!") || tagName.includes("/"))) {
-    //         insert(editor.selectionStart,`</${tagName}>`,0);
-    //     }
-    // }
+    if (fileExp.querySelector(".selected").classList.contains("HTML")) {
+        let angBracket_L = editor.value.find("<");
+        let angBracket_R = editor.value.find(">");
+
+        if (angBracket_L !== null && angBracket_R !== null) {
+            angBracket_L = angBracket_L.filter((bracket) => {return bracket < editor.selectionStart});
+            angBracket_L = Math.max(...angBracket_L);
+
+            angBracket_R = angBracket_R.filter((bracket) => {return bracket >= editor.selectionStart});
+            angBracket_R = Math.min(...angBracket_R);
+
+            const tag = editor.value.slice(angBracket_L,angBracket_R);
+            if (/<[a-z][\s\S]*>/i.test(tag) && !tag.includes("</") && !tag.includes("!") && !tag.includes("/>")) {
+                const tagName = tag.split(" ")[0].replace("<","").replace(">","");
+                insert(editor.selectionStart,`</${tagName}>`,0);
+            }
+        }
+    }
+    
 }
 
 function keyDownEvent(event) {
