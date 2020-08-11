@@ -163,17 +163,22 @@ function hide(element) {
 function deleteFile() {
     event.preventDefault();
     const toDelete = event.target;
+    const parent = toDelete.parentElement;
     toDelete.parentElement.removeChild(toDelete);
-    const filtered = files.filter((file) => {
-        return file.no !== parseInt(toDelete.id);
-    });
-    files = filtered;
-    files.forEach((file) => {file.no = files.indexOf(file)});
-    for (var i = 0; i < document.querySelectorAll(".file").length; i++) {
-        document.querySelectorAll(".file")[i].id = i;
+    if (parent.id = "fileExplorer") {
+        const filtered = files.filter((file) => {
+            return file.no !== parseInt(toDelete.id);
+        });
+        files = filtered;
+        files.forEach((file) => {file.no = files.indexOf(file)});
+        for (var i = 0; i < document.querySelectorAll(".file").length; i++) {
+            document.querySelectorAll(".file")[i].id = i;
+        }
+        deactivateEditor();
+        saveFile();
+    } else {
+        if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
     }
-    deactivateEditor();
-    saveFile();
 }
 
 
@@ -273,6 +278,7 @@ function init() {
         tabShortcuts = document.querySelectorAll(".tab");
         tabShortcuts.forEach((shortcut) => {
             shortcut.addEventListener("click",moveToTab);
+            shortcut.addEventListener("contextmenu",deleteFile);
         });
     });
 }
