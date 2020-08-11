@@ -163,7 +163,7 @@ function deleteFile() {
     const toDelete = event.target;
     const parent = toDelete.parentElement;
     toDelete.parentElement.removeChild(toDelete);
-    if (parent.id = "fileExplorer") {
+    if (parent.id === "fileExplorer") {
         const filtered = files.filter((file) => {
             return file.no !== parseInt(toDelete.id);
         });
@@ -220,8 +220,6 @@ function crtNewFile(fileName,innerCode) {
             alert("The file name you've entered is unavailable.");
         } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js" || fileName.split(".")[1] === "txt")) {
             alert("Only HTML, CSS, and JavaScript is supported in Artrium Code currently.");
-        } else if (files.length > 9) {
-            alert("Maximum count of files are 10.");
         } else {
             const fileInfo = {
                 name: fileName,
