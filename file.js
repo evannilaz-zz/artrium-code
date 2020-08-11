@@ -27,17 +27,21 @@ function drag() {
 }
 
 const saveFile = function() {
+    event.preventDefault();
     localStorage.setItem("files",JSON.stringify(files));
+    document.title = `Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
 }
 
 const deactivateEditor = function() {
     editor.value = "No file selected";
     editor.style.pointerEvents = "none";
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.remove("unselected")});
+    document.title = "Artrium Code";
 }
 
 const activateEditor = function() {
     if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
+        if (document.querySelector(".selected")) saveFile();
         if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.add("unselected");});
         editor.placeholder = "Your Code here...";
         editor.style.pointerEvents = "all";
@@ -50,6 +54,7 @@ const activateEditor = function() {
         clickedShortcut.classList.remove("unselected");
         clickedShortcut.classList.add("selected");
         editor.value = files[clickedShortcut.id].code;
+        document.title = `Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
         editor.focus();
     }
 }

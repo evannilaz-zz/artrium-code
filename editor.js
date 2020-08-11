@@ -26,7 +26,7 @@ function insert(index,str,moveCursor = 1) {
 }
 
 function push(key) {
-    if (!(key === "Shift" || key === " " || key === "Control")) {
+    if (!(key === "Shift" || key === " " || key.includes("Arrow"))) {
         if (keyHistory.length >= 5) keyHistory.shift();
         keyHistory.push(key);
     }
@@ -78,21 +78,24 @@ function bracket(key) {
 
 function keyDownEvent(event) {
     const key = event.key;
+    document.title = `• Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
     push(key,"down");
     if (key === "Tab") {
         event.preventDefault();
         insert(editor.selectionStart,"\t");
     }
+
+    if (keyHistory[3] === "Control" && keyHistory[4] === "s") {
+        files[parseInt(fileExp.querySelector(".selected").id)].code = event.target.value;
+        saveFile();
+    }
+
     setTimeout(bracket,100,key);
 }
 
 function init() {
     deactivateEditor();
     editor.addEventListener("keydown",keyDownEvent);
-    editor.addEventListener("input",(event) => {
-        files[parseInt(fileExp.querySelector(".selected").id)].code = event.target.value;
-        saveFile();
-    });
 }
 
 init();
