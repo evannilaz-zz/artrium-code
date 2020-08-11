@@ -3,6 +3,8 @@ const closer = [")","}","]","\"","`"];
 
 let keyHistory = new Array();
 
+let tagName;
+
 String.prototype.find = function(query) {
     let index = new Array();
     for (var i = 0; i < this.length; i++) {
@@ -60,10 +62,15 @@ function bracket(key) {
             angBracket_R = Math.min(...angBracket_R);
 
             const tag = editor.value.slice(angBracket_L,angBracket_R);
-            if (/<[a-z][\s\S]*>/i.test(tag) && !tag.includes("</") && !tag.includes("!") && !tag.includes("/>")) {
-                const tagName = tag.split(" ")[0].replace("<","").replace(">","");
+            if (/<[a-z][\s\S]*>/i.test(tag) && !tag.includes(`</${tagName}`) && !tag.includes("!") && !tag.includes("/>")) {
+                tagName = tag.split(" ")[0].replace("<","").replace(">","");
                 insert(editor.selectionStart,`</${tagName}>`,0);
             }
+        }
+
+        if (keyHistory[3] === ">" && keyHistory[4] === "Enter" && editor.value.slice(editor.selectionStart,editor.selectionStart + 2) === "</") {
+            insert(editor.selectionStart,"\n",0);
+            insert(editor.selectionStart,"\t");
         }
     }
     
