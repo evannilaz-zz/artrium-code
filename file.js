@@ -3,8 +3,10 @@ const editor = document.querySelector("textarea");
 const fileCrtBtn = fileExp.querySelector("button");
 const fileCrtForm = fileExp.querySelector("form");
 const openFile = document.querySelector("#open");
+const tabIndicator = document.querySelector("#edit #tabs");
 let files = new Array();
 let fileShortcuts = new Array();
+let tabShortcuts = new Array();
 
 const css = document.querySelector("style");
 
@@ -29,31 +31,28 @@ function drag() {
 const saveFile = function() {
     event.preventDefault();
     localStorage.setItem("files",JSON.stringify(files));
-    document.title = `Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
-    fileShortcuts.forEach((shortcut) => {
-        let fileType;
-        if (files[parseInt(shortcut.id)].type === "JS") {
-            fileType = "JavaScript";
-        } else if (files[parseInt(shortcut.id)].type === "TXT") {
-            fileType = "Text File";
-        } else {
-            fileType = files[parseInt(shortcut.id)].type;
-        }
-        shortcut.innerHTML = `<span>${fileType}</span><form style="display: none"><input type="text"></form>${files[parseInt(shortcut.id)].name}`;
-    });
+    if (fileExp.querySelector(".selected")) {
+        document.title = `Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
+    }
+}
+
+function moveToTab() {
+    editor.value = files[parseInt(event.target.id)].code;
+    tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
+    event.target.classList.add("selected");
 }
 
 const deactivateEditor = function() {
     editor.value = "No file selected";
     editor.style.pointerEvents = "none";
-    if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.remove("unselected")});
+    if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
     document.title = "Artrium Code";
 }
 
 const activateEditor = function() {
     if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
         if (document.querySelector(".selected")) saveFile();
-        if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected"); shortcut.classList.add("unselected");});
+        if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
         editor.placeholder = "Your Code here...";
         editor.style.pointerEvents = "all";
         let clickedShortcut;
@@ -62,11 +61,37 @@ const activateEditor = function() {
         } else {
             clickedShortcut = event.target;
         }
-        clickedShortcut.classList.remove("unselected");
+        
         clickedShortcut.classList.add("selected");
+        
+        const newTab = document.createElement("div");
+        newTab.innerText = files[clickedShortcut.id].name;
+        newTab.classList.add("tab");
+        newTab.classList.add("selected");
+        newTab.id = clickedShortcut.id;
+
         editor.value = files[clickedShortcut.id].code;
         document.title = `Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
         editor.focus();
+
+        let multipleTab = false;
+
+        tabIndicator.querySelectorAll(".tab").forEach((tab) => {
+            if (tab.id === newTab.id) {
+                multipleTab = true;
+            }
+        });
+
+        if (!multipleTab) {
+            tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
+            tabIndicator.appendChild(newTab);
+        } else {
+            tabIndicator.querySelectorAll(".tab").forEach((tab) => {
+                if (tab.id === newTab.id) {
+                    tab.click();
+                }
+            });
+        }
     }
 }
 
@@ -244,6 +269,10 @@ function init() {
             shortcut.addEventListener("click",activateEditor);
             shortcut.addEventListener("contextmenu",deleteFile);
             shortcut.querySelector("form").addEventListener("submit",renameFile);
+        });
+        tabShortcuts = document.querySelectorAll(".tab");
+        tabShortcuts.forEach((shortcut) => {
+            shortcut.addEventListener("click",moveToTab);
         });
     });
 }

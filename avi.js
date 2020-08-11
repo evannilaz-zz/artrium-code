@@ -53,3 +53,13 @@ navDownload.addEventListener("click",() => {
         alert("You have to select the file to download first.");
     }
 });
+
+setInterval(() => {
+    if (tabIndicator.innerHTML === "") {
+        tabIndicator.style.height = "0";
+        editor.style.height = "100%";
+    } else {
+        editor.style.height = "95.5%";
+        tabIndicator.style.height = "4.5%";
+    }
+})

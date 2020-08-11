@@ -78,7 +78,6 @@ function bracket(key) {
 function keyDownEvent(event) {
     const key = event.key;
     document.title = `• Artrium Code - ${files[parseInt(fileExp.querySelector(".selected").id)].name}`;
-    if (!document.querySelector(".selected").innerText.includes("•")) document.querySelector(".selected").innerHTML += " •";
     push(key,"down");
     if (key === "Tab") {
         event.preventDefault();
