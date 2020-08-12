@@ -205,6 +205,7 @@ nav a img:hover {
     right: 0;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     width: 79%;
     height: 85%;
@@ -226,13 +227,33 @@ nav a img:hover {
     margin-left: 10px;
 }
 
+#edit #parent {
+    display: flex;
+    width: 100%;
+    height: 95%;
+    padding-top: 15px;
+}
+
+#edit #lineNumber {
+    font-size: 14.5px;
+    padding: 0 2px 2px 2px;
+    min-width: 1.8%;
+    max-width: 2.2%;
+    height: 100%;
+    overflow: scroll;
+    font-family: SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace !important;
+    color: gray;
+    pointer-events: none;
+}
+
 #edit textarea {
     resize: none;
-    padding: 15px 20px 20px 20px;
+    padding: 0 20px 20px 20px;
     font-size: 14.5px;
     font-family: SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace !important;
-    width: 100%;
-    height: 95.5%;
+    max-width: 98.2%;
+    min-width: 97.8%;
+    height: 100%;
     border: none;
     background: none;
     color: #d3e1e8;

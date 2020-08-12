@@ -4,9 +4,23 @@ const fileCrtBtn = fileExp.querySelector("button");
 const fileCrtForm = fileExp.querySelector("form");
 const openFile = document.querySelector("#open");
 const tabIndicator = document.querySelector("#edit #tabs");
+const lineNumberIndicator = document.querySelector("#edit #lineNumber");
 let files = new Array();
 let fileShortcuts = new Array();
 let tabShortcuts = new Array();
+
+String.prototype.find = function(query) {
+    let index = new Array();
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] === query) index.push(i);
+    }
+
+    if (index.length > 0) {
+        return index;
+    } else {
+        return null;
+    }
+}
 
 function getFile() {
     const file = openFile.files[0];
@@ -69,8 +83,17 @@ const activateEditor = function() {
         newTab.classList.add("selected");
         newTab.id = clickedShortcut.id;
 
+        if (files[clickedShortcut.id].code.find("\n")) {
+            for (var i = 0; i < files[clickedShortcut.id].code.find("\n").length; i++) {
+                lineNumberIndicator.innerHTML += (i + 1).toString() + "\t";
+            }
+        }
+
         editor.value = files[clickedShortcut.id].code;
         editor.focus();
+        editor.selectionStart = 0;
+        editor.selectionEnd = 0;
+        editor.scrollTop = 0;
 
         let multipleTab = false;
 

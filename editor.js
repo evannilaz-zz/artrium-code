@@ -6,19 +6,6 @@ let keyHistory2 = new Array();
 
 let tagName;
 
-String.prototype.find = function(query) {
-    let index = new Array();
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] === query) index.push(i);
-    }
-
-    if (index.length > 0) {
-        return index;
-    } else {
-        return null;
-    }
-}
-
 function insert(index,str,moveCursor = 1) {
     const cursor = editor.selectionStart;
     editor.value = editor.value.substring(0,index) + str + editor.value.substring(editor.selectionEnd);
@@ -76,6 +63,10 @@ function bracket(key) {
     
 }
 
+function editorScroll() {
+    lineNumberIndicator.scrollTop = editor.scrollTop;
+}
+
 function keyDownEvent(event) {
     const key = event.key;
     push(key);
@@ -101,6 +92,7 @@ function saveEvent() {
 function init() {
     deactivateEditor();
     editor.addEventListener("keydown",keyDownEvent);
+    editor.addEventListener("scroll",editorScroll);
     document.querySelectorAll("*").forEach((element) => {element.addEventListener("keydown",saveEvent)});
 }
 

@@ -4,6 +4,23 @@ const navDownload = document.querySelector("nav #download");
 
 let saved;
 
+Array.prototype.equals = function (array) {
+    if (!array) return false;
+ 
+    if (this.length != array.length) return false;
+
+    for (var i = 0, l = this.length; i < l; i++) {
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            if (!this[i].equals(array[i])) return false;       
+        }
+
+        else if (this[i] != array[i]) return false;
+    }       
+    return true;
+}
+
+Object.defineProperty(Array.prototype, "equals", {enumerable: false});
+
 navHeader.addEventListener("mouseenter",() => {
     navHeader.querySelector("div").style.width = "95%";
     navHeader.querySelector("a>span").style.filter = "opacity(1)";
@@ -56,30 +73,39 @@ navDownload.addEventListener("click",() => {
     }
 });
 
-window.addEventListener('beforeunload', (event) => {
-    if (!saved) {
-        event.preventDefault();
-        event.returnValue = '';
-        return '';
+// window.addEventListener('beforeunload', (event) => {
+//     if (!saved) {
+//         event.preventDefault();
+//         event.returnValue = '';
+//         return '';
+//     }
+// });
+
+editor.addEventListener("input",() => {
+    if (editor.value.find("\n")) {
+        const lastLineNumber = lineNumberIndicator.innerHTML.split("\t").length;
+        lineNumberIndicator.innerHTML += (lastLineNumber + 1).toString() + "\t";
     }
-});
+})
 
 setInterval(() => {
     const loadedFiles = JSON.parse(localStorage.getItem("files"));
     if (tabIndicator.innerHTML === "") {
         tabIndicator.style.height = "0";
-        editor.style.height = "100%";
+        document.querySelector("#edit #parent").style.height = "100%";
+        lineNumberIndicator.style.display = "none";
+        editor.style.width = "100%";
+        deactivateEditor();
     } else {
-        editor.style.height = "95.5%";
-        tabIndicator.style.height = "4.5%";
+        editor.style.width = "98%";
+        lineNumberIndicator.style.display = "block";
+        document.querySelector("#edit #parent").style.height = "95%";
+        tabIndicator.style.height = "5%";
     }
 
     for (var i = 0; i < files.length; i++) {
         if (files[i].name !== loadedFiles[i].name || files[i].type !== loadedFiles[i].type || files[i].no !== loadedFiles[i].no || files[i].code !== loadedFiles[i].code) {
             saved = false;
-            break;
-        } else {
-            saved = true;
         }
     }
 },1);

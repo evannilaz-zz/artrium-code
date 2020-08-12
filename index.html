@@ -34,9 +34,11 @@
             <form class="hidden"><input type="text" autocomplete="false" spellcheck="false" placeholder="Enter File Name"></form>
         </div>
         <div id="edit">
-            <!-- <div contenteditable="true"></div> -->
             <div id="tabs"></div>
-            <textarea placeholder="Your Code here..." wrap="off" autocomplete="false" spellcheck="false"></textarea>
+            <div id="parent">
+                <div id="lineNumber"></div>
+                <textarea placeholder="Your Code here..." wrap="off" autocomplete="false" spellcheck="false"></textarea>
+            </div>
         </div>
         <input type="file" id="open" style="display: none">
         <script src="file.js"></script>
