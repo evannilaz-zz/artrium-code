@@ -56,20 +56,20 @@ navDownload.addEventListener("click",() => {
     }
 });
 
-window.addEventListener('beforeunload', (event) => {
-    if (!saved) {
-        event.preventDefault();
-        event.returnValue = '';
-        return '';
-    }
-});
+// window.addEventListener('beforeunload', (event) => {
+//     if (!saved) {
+//         event.preventDefault();
+//         event.returnValue = '';
+//         return '';
+//     }
+// });
 
-editor.addEventListener("input",() => {
-    if (editor.value.find("\n")) {
-        const lastLineNumber = lineNumberIndicator.innerHTML.split("\t").length;
-        lineNumberIndicator.innerHTML += (lastLineNumber + 1).toString() + "\t";
-    }
-})
+// editor.addEventListener("input",() => {
+//     if (editor.value.find("\n")) {
+//         const lastLineNumber = lineNumberIndicator.innerHTML.split("\t").length;
+//         lineNumberIndicator.innerHTML += (lastLineNumber + 1).toString() + "\t";
+//     }
+// })
 
 setInterval(() => {
     const loadedFiles = JSON.parse(localStorage.getItem("files"));
@@ -92,3 +92,5 @@ setInterval(() => {
         }
     }
 },1);
+
+setTimeout(deactivateEditor,5000)

@@ -60,6 +60,7 @@ const deactivateEditor = function() {
     editor.value = "No file selected";
     editor.style.pointerEvents = "none";
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
+    editor.blur();
 }
 
 const activateEditor = function() {
@@ -83,11 +84,13 @@ const activateEditor = function() {
         newTab.classList.add("selected");
         newTab.id = clickedShortcut.id;
 
-        if (files[clickedShortcut.id].code.find("\n")) {
-            for (var i = 0; i < files[clickedShortcut.id].code.find("\n").length; i++) {
-                lineNumberIndicator.innerHTML += (i + 1).toString() + "\t";
-            }
-        }
+        // if (files[clickedShortcut.id].code.find("\n")) {
+        //     for (var i = 0; i < files[clickedShortcut.id].code.find("\n").length; i++) {
+        //         lineNumberIndicator.innerHTML += (i + 1).toString() + "\t";
+        //     }
+        // }
+
+        // lineNumberIndicator.innerHTML += (parseInt(lineNumberIndicator.innerHTML.split("\t")[lineNumberIndicator.innerHTML.split("\t").length - 1]) + 1);
 
         editor.value = files[clickedShortcut.id].code;
         editor.focus();
@@ -183,10 +186,12 @@ function hide(element) {
 
 function deleteFile() {
     event.preventDefault();
-    const toDelete = event.target;
-    const parent = toDelete.parentElement;
-    toDelete.parentElement.removeChild(toDelete);
-    if (parent.id === "fileExplorer") {
+    let toDelete = event.target;
+    if (toDelete.parentElement.id === "fileExplorer" || toDelete.parentElement.parentElement.id === "fileExplorer") {
+        if (toDelete.parentElement.parentElement.id === "fileExplorer") {
+            toDelete = event.target.parentElement;
+        }
+        toDelete.parentElement.removeChild(toDelete);
         const filtered = files.filter((file) => {
             return file.no !== parseInt(toDelete.id);
         });
@@ -195,10 +200,19 @@ function deleteFile() {
         for (var i = 0; i < document.querySelectorAll(".file").length; i++) {
             document.querySelectorAll(".file")[i].id = i;
         }
+        tabIndicator.querySelectorAll(".tab").forEach((tab) => {
+            if (tab.id === toDelete.id) {
+                tab.parentElement.removeChild(tab);
+                if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
+                else deactivateEditor();
+            }
+        });
         deactivateEditor();
         saveFile();
     } else {
+        toDelete.parentElement.removeChild(toDelete);
         if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
+        else deactivateEditor();
     }
 }
 
