@@ -23,11 +23,6 @@ function bracket(key) {
     opener.forEach((bracket) => {
         if (key === bracket) {
             insert(editor.selectionStart,closer[opener.indexOf(bracket)],0);
-            // temp = new Array();
-            // for (var i = 0; i < editor.value.find(bracket).length; i++) {
-            //     temp.push([editor.value.find(bracket)[i],editor.value.find(closer[opener.indexOf(bracket)])[i]]);
-            // }
-            // console.log(temp);
         }
 
 

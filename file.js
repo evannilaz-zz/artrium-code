@@ -205,24 +205,16 @@ function deleteFile() {
 
 function prepNewFile() {
     const input = fileCrtForm.querySelector("input");
-    function toggleHide() {
-        hide(fileCrtBtn);
-        hide(fileCrtForm);
-        input.removeEventListener("focusout",toggleHide);
-    }
     if (event.target.innerText.includes("+")) {
-        // input.removeEventListener("focusout",toggleHide);
         hide(fileCrtBtn);
         hide(fileCrtForm);
         input.focus();
-        // input.addEventListener("focusout",toggleHide);
     } else {
         event.preventDefault();
         const name = input.value;
         const code = "";
         hide(fileCrtBtn);
         hide(fileCrtForm);
-        // input.removeEventListener("focusout",toggleHide);
         crtNewFile(name,code);
         fileCrtForm.querySelector("input").value = "";
     }

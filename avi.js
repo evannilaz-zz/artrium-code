@@ -4,23 +4,6 @@ const navDownload = document.querySelector("nav #download");
 
 let saved;
 
-Array.prototype.equals = function (array) {
-    if (!array) return false;
- 
-    if (this.length != array.length) return false;
-
-    for (var i = 0, l = this.length; i < l; i++) {
-        if (this[i] instanceof Array && array[i] instanceof Array) {
-            if (!this[i].equals(array[i])) return false;       
-        }
-
-        else if (this[i] != array[i]) return false;
-    }       
-    return true;
-}
-
-Object.defineProperty(Array.prototype, "equals", {enumerable: false});
-
 navHeader.addEventListener("mouseenter",() => {
     navHeader.querySelector("div").style.width = "95%";
     navHeader.querySelector("a>span").style.filter = "opacity(1)";
@@ -73,13 +56,13 @@ navDownload.addEventListener("click",() => {
     }
 });
 
-// window.addEventListener('beforeunload', (event) => {
-//     if (!saved) {
-//         event.preventDefault();
-//         event.returnValue = '';
-//         return '';
-//     }
-// });
+window.addEventListener('beforeunload', (event) => {
+    if (!saved) {
+        event.preventDefault();
+        event.returnValue = '';
+        return '';
+    }
+});
 
 editor.addEventListener("input",() => {
     if (editor.value.find("\n")) {
