@@ -57,9 +57,9 @@ navDownload.addEventListener("click",() => {
 });
 
 // editor.addEventListener("input",() => {
-//     const currentLineNumber = lineNumberIndicator.innerHTML.split("\n").length;
+//     const currentLineNumber = lineNumberIndicator.textContent.split("\r\n").length;
 //     if (editor.value.find("\n") && lastLineNumber !== currentLineNumber) {
-//         lineNumberIndicator.innerHTML += (currentLineNumber + 1).toString() + "\t";
+//         lineNumberIndicator.textContent += (currentLineNumber).toString() + "\r\n";
 //     }
 //     lastLineNumber = currentLineNumber;
 // })

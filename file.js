@@ -89,10 +89,10 @@ const activateEditor = function() {
         newTab.id = clickedShortcut.id;
 
         // if (files[clickedShortcut.id].code.find("\n") < 1) {
-        //     lineNumberIndicator.innerText += "1\t";
+        //     lineNumberIndicator.textContent += "1\r\n";
         // } else if (files[clickedShortcut.id].code.find("\n")) {
         //     for (var i = 0; i < files[clickedShortcut.id].code.find("\n").length; i++) {
-        //         lineNumberIndicator.innerText += (i + 1).toString() + "\t";
+        //         lineNumberIndicator.textContent += (i + 1).toString() + "\r\n";
         //     }
         // }
 
