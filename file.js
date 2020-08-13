@@ -104,8 +104,7 @@ const activateEditor = function() {
 
         editor.value = files[clickedShortcut.id].code;
         editor.focus();
-        editor.selectionStart = 0;
-        editor.selectionEnd = 0;
+        editor.setSelectionRange(0,0);
         editor.scrollTop = 0;
 
         let multipleTab = false;
