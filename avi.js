@@ -2,7 +2,7 @@ const navHeader = document.querySelector("nav h3");
 const navToggle = document.querySelector("nav #toggle");
 const navDownload = document.querySelector("nav #download");
 
-let saved;
+let lastLineNumber;
 
 navHeader.addEventListener("mouseenter",() => {
     navHeader.querySelector("div").style.width = "95%";
@@ -56,23 +56,15 @@ navDownload.addEventListener("click",() => {
     }
 });
 
-// window.addEventListener('beforeunload', (event) => {
-//     if (!saved) {
-//         event.preventDefault();
-//         event.returnValue = '';
-//         return '';
-//     }
-// });
-
 // editor.addEventListener("input",() => {
-//     if (editor.value.find("\n")) {
-//         const lastLineNumber = lineNumberIndicator.innerHTML.split("\t").length;
-//         lineNumberIndicator.innerHTML += (lastLineNumber + 1).toString() + "\t";
+//     const currentLineNumber = lineNumberIndicator.innerHTML.split("\n").length;
+//     if (editor.value.find("\n") && lastLineNumber !== currentLineNumber) {
+//         lineNumberIndicator.innerHTML += (currentLineNumber + 1).toString() + "\t";
 //     }
+//     lastLineNumber = currentLineNumber;
 // })
 
 setInterval(() => {
-    const loadedFiles = JSON.parse(localStorage.getItem("files"));
     if (tabIndicator.innerHTML === "") {
         tabIndicator.style.height = "0";
         document.querySelector("#edit #parent").style.height = "100%";
@@ -85,12 +77,4 @@ setInterval(() => {
         document.querySelector("#edit #parent").style.height = "95%";
         tabIndicator.style.height = "5%";
     }
-
-    for (var i = 0; i < files.length; i++) {
-        if (files[i].name !== loadedFiles[i].name || files[i].type !== loadedFiles[i].type || files[i].no !== loadedFiles[i].no || files[i].code !== loadedFiles[i].code) {
-            saved = false;
-        }
-    }
 },1);
-
-setTimeout(deactivateEditor,5000)

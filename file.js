@@ -46,7 +46,11 @@ const saveFile = function() {
 }
 
 function moveToTab() {
-    editor.value = files[parseInt(event.target.id)].code;
+    files.forEach((file) => {
+        if (file.no === parseInt(event.target.id)) {
+            editor.value = files[file.no].code;
+        }
+    });
     tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
     event.target.classList.add("selected");
     fileExp.querySelectorAll(".file").forEach((shortcut) => {
@@ -84,13 +88,13 @@ const activateEditor = function() {
         newTab.classList.add("selected");
         newTab.id = clickedShortcut.id;
 
-        // if (files[clickedShortcut.id].code.find("\n")) {
+        // if (files[clickedShortcut.id].code.find("\n") < 1) {
+        //     lineNumberIndicator.innerText += "1\t";
+        // } else if (files[clickedShortcut.id].code.find("\n")) {
         //     for (var i = 0; i < files[clickedShortcut.id].code.find("\n").length; i++) {
-        //         lineNumberIndicator.innerHTML += (i + 1).toString() + "\t";
+        //         lineNumberIndicator.innerText += (i + 1).toString() + "\t";
         //     }
         // }
-
-        // lineNumberIndicator.innerHTML += (parseInt(lineNumberIndicator.innerHTML.split("\t")[lineNumberIndicator.innerHTML.split("\t").length - 1]) + 1);
 
         editor.value = files[clickedShortcut.id].code;
         editor.focus();
@@ -192,14 +196,9 @@ function deleteFile() {
             toDelete = event.target.parentElement;
         }
         toDelete.parentElement.removeChild(toDelete);
-        const filtered = files.filter((file) => {
+        files = files.filter((file) => {
             return file.no !== parseInt(toDelete.id);
         });
-        files = filtered;
-        files.forEach((file) => {file.no = files.indexOf(file)});
-        for (var i = 0; i < document.querySelectorAll(".file").length; i++) {
-            document.querySelectorAll(".file")[i].id = i;
-        }
         tabIndicator.querySelectorAll(".tab").forEach((tab) => {
             if (tab.id === toDelete.id) {
                 tab.parentElement.removeChild(tab);
@@ -207,7 +206,6 @@ function deleteFile() {
                 else deactivateEditor();
             }
         });
-        deactivateEditor();
         saveFile();
     } else {
         toDelete.parentElement.removeChild(toDelete);
@@ -285,6 +283,7 @@ function init() {
     const loadedFiles = JSON.parse(localStorage.getItem("files"));
     if (loadedFiles !== null) {
         loadedFiles.forEach((loadedFile) => {
+            loadedFile.no = loadedFiles.indexOf(loadedFile);
             displayFile(loadedFile);
         });
         files = loadedFiles;
