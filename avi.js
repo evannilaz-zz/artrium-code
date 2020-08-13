@@ -56,6 +56,12 @@ navDownload.addEventListener("click",() => {
     }
 });
 
+window.addEventListener('beforeunload', (event) => {
+    event.preventDefault();
+    event.returnValue = '';
+    return '';
+});
+
 // editor.addEventListener("input",() => {
 //     const currentLineNumber = lineNumberIndicator.textContent.split("\r\n").length;
 //     if (editor.value.find("\n") && lastLineNumber !== currentLineNumber) {
