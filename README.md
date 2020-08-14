@@ -1,5 +1,4 @@
 # Artrium Code
-### Interactive Editor for Web, for [Samsung SW Contest](https://www.juniorsoftwarecup.com/Contest/About).
 
 ## Acknowledgements
 As you download the file you've edited, your browser may say that 'This kind of file can harm your computer' or else. It is safe to download, your browser is just warning you because it's JavaScript file from the Internet, which can attack your computer. The content of it is just a code you've edited.
@@ -19,11 +18,6 @@ Note: Debugged on Google Chrome & ***Remember to save your file***.
 - [ ] Debugging via SSH or API
 - [ ] Customizable CSS (theme)
 - [ ] Software/Web-app both available
-
-## Necessary Tech/Knowledge
-- Python ([Tkinter](https://docs.python.org/3/library/tkinter.html)/[PyQt5](https://pypi.org/project/PyQt5))
-- JavaScript ([Electron](https://www.electronjs.org)/[NodeJS](https://nodejs.org))
-- C/C++ ([GTK+ 2.0](https://developer.gnome.org/gtk-tutorial/stable/))
 
 ## Known Bugs & Issues
 * Bracket/Quote Autocomplete
