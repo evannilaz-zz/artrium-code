@@ -90,6 +90,8 @@ setInterval(() => {
         for (var i = 0; i < files.length; i++) {
             if (files[i].name !== loadedFiles[i].name || files[i].type !== loadedFiles[i].type || files[i].no !== loadedFiles[i].no || files[i].code !== loadedFiles[i].code) {
                 saved = false;
+            } else {
+                saved = true;
             }
         }
     } else {
