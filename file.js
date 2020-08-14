@@ -7,7 +7,6 @@ const tabIndicator = document.querySelector("#edit #tabs");
 const lineNumberIndicator = document.querySelector("#edit #lineNumber");
 let files = new Array();
 let fileShortcuts = new Array();
-let tabShortcuts = new Array();
 
 String.prototype.find = function(query) {
     let index = new Array();
@@ -53,17 +52,13 @@ const saveFile = function() {
 
 function moveToTab() {
     files.forEach((file) => {
-        if (file.no === parseInt(event.target.id)) {
+        if (file.name === event.innerText) {
             editor.value = files[file.no].code;
         }
     });
     tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
     event.target.classList.add("selected");
-    fileExp.querySelectorAll(".file").forEach((shortcut) => {
-        if (shortcut.id === event.target.id) {
-            shortcut.click();
-        }
-    })
+    fileExp.querySelectorAll(".file").forEach((shortcut) => {if (shortcut.innerText.split("\n")[1] === event.target.innerText) shortcut.click()})
 }
 
 const deactivateEditor = function() {
@@ -92,7 +87,6 @@ const activateEditor = function() {
         newTab.innerText = files[clickedShortcut.id].name;
         newTab.classList.add("tab");
         newTab.classList.add("selected");
-        newTab.id = clickedShortcut.id;
 
         // if (files[clickedShortcut.id].code.find("\n") < 1) {
         //     lineNumberIndicator.textContent += "1\r\n";
@@ -108,22 +102,16 @@ const activateEditor = function() {
         editor.scrollTop = 0;
 
         let multipleTab = false;
-
         tabIndicator.querySelectorAll(".tab").forEach((tab) => {
-            if (tab.id === newTab.id) {
+            if (tab.innerText === newTab.innerText) {
                 multipleTab = true;
+                if (tab.innerText === newTab.innerText) tab.click();
             }
         });
 
         if (!multipleTab) {
             tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
             tabIndicator.appendChild(newTab);
-        } else {
-            tabIndicator.querySelectorAll(".tab").forEach((tab) => {
-                if (tab.id === newTab.id) {
-                    tab.click();
-                }
-            });
         }
     }
 }
@@ -174,6 +162,7 @@ function renameFile() {
                 event.target.parentElement.className = `file ${inputValueType.toUpperCase()}`;
                 event.target.querySelector("input").value = "";
                 event.target.parentElement.innerHTML = `<span>${indicatedFileType}</span><form style="display: none"><input type="text"></form>${inputValue}`;
+                tabIndicator.querySelectorAll(".tab").forEach((tab) => {if (tab.innerText === prevFileName) tab.innerText = inputValue});
                 saveFile();
             }
         }
@@ -191,12 +180,17 @@ function deleteFile() {
         if (toDelete.parentElement.parentElement.id === "fileExplorer") {
             toDelete = event.target.parentElement;
         }
+        let fileName = toDelete.innerText.split("\n")[1];
         toDelete.parentElement.removeChild(toDelete);
         files = files.filter((file) => {
             return file.no !== parseInt(toDelete.id);
         });
+        files.forEach((file) => {file.no = files.indexOf(file)});
+        for (var i = 0; i < document.querySelectorAll(".file").length; i++) {
+            document.querySelectorAll(".file")[i].id = i;
+        }
         tabIndicator.querySelectorAll(".tab").forEach((tab) => {
-            if (tab.id === toDelete.id) {
+            if (tab.innerText === fileName) {
                 tab.parentElement.removeChild(tab);
                 if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
                 else deactivateEditor();
@@ -275,7 +269,6 @@ function init() {
     const loadedFiles = JSON.parse(localStorage.getItem("files"));
     if (loadedFiles !== null) {
         loadedFiles.forEach((loadedFile) => {
-            loadedFile.no = loadedFiles.indexOf(loadedFile);
             displayFile(loadedFile);
         });
         files = loadedFiles;
@@ -291,8 +284,7 @@ function init() {
             shortcut.addEventListener("contextmenu",deleteFile);
             shortcut.querySelector("form").addEventListener("submit",renameFile);
         });
-        tabShortcuts = document.querySelectorAll(".tab");
-        tabShortcuts.forEach((shortcut) => {
+        document.querySelectorAll(".tab").forEach((shortcut) => {
             shortcut.addEventListener("click",moveToTab);
             shortcut.addEventListener("contextmenu",deleteFile);
         });
