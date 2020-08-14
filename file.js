@@ -52,7 +52,7 @@ const saveFile = function() {
 
 function moveToTab() {
     files.forEach((file) => {
-        if (file.name === event.innerText) {
+        if (file.name === event.target.innerText) {
             editor.value = files[file.no].code;
         }
     });
