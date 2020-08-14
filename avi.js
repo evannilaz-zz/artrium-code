@@ -55,7 +55,7 @@ navDownload.addEventListener("click",() => {
 });
 
 window.addEventListener('beforeunload', (event) => {
-    if (!(location.href.includes("127.0.0.1") || location.href.includes("localhost")) && !saved) {
+    if (!(location.href.includes("127.0.0.1") || location.href.includes("localhost") || saved)) {
         event.preventDefault();
         event.returnValue = '';
         return '';
