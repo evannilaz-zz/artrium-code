@@ -229,10 +229,9 @@ function prepNewFile() {
         event.preventDefault();
         const name = input.value;
         const code = "";
-        hide(fileCrtBtn);
-        hide(fileCrtForm);
         crtNewFile(name,code);
         input.value = "";
+        input.blur();
     }
 }
 
@@ -263,15 +262,7 @@ function crtNewFile(fileName,innerCode) {
 
 function displayFile(file) {
     const div = document.createElement("div");
-    let fileType;
-    if (file.type === "JS") {
-        fileType = "JavaScript";
-    } else if (file.type === "TXT") {
-        fileType = "Text File";
-    } else {
-        fileType = file.type;
-    }
-    div.innerHTML = `<span>${fileType}</span><form><input type="text"></form>${file.name}`;
+    div.innerHTML = `<span><img src="assets/${file.type}.png"></span><form><input type="text"></form>${file.name}`;
     div.draggable = "true";
     div.classList.add("file");
     div.classList.add(file.type);
