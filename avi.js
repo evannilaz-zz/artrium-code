@@ -4,6 +4,8 @@ const navDownload = document.querySelector("nav #download");
 
 let lastLineNumber;
 
+let saved;
+
 navHeader.addEventListener("mouseenter",() => {
     navHeader.querySelector("div").style.width = "95%";
     navHeader.querySelector("a>span").style.filter = "opacity(1)";
@@ -53,7 +55,7 @@ navDownload.addEventListener("click",() => {
 });
 
 window.addEventListener('beforeunload', (event) => {
-    if (!(location.href.includes("127.0.0.1") || location.href.includes("localhost"))) {
+    if (!(location.href.includes("127.0.0.1") || location.href.includes("localhost")) && !saved) {
         event.preventDefault();
         event.returnValue = '';
         return '';
@@ -80,5 +82,17 @@ setInterval(() => {
         lineNumberIndicator.style.display = "block";
         document.querySelector("#edit #parent").style.height = "95%";
         tabIndicator.style.height = "5%";
+    }
+
+    const loadedFiles = JSON.parse(localStorage.getItem("files"));
+
+    if (files.length === loadedFiles.length) {
+        for (var i = 0; i < files.length; i++) {
+            if (files[i].name !== loadedFiles[i].name || files[i].type !== loadedFiles[i].type || files[i].no !== loadedFiles[i].no || files[i].code !== loadedFiles[i].code) {
+                saved = false;
+            }
+        }
+    } else {
+        saved = false;
     }
 },1);
