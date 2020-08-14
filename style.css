@@ -262,7 +262,7 @@ nav a img:hover {
 }
 
 #edit #logoPage img {
-    filter: invert(.5) opacity(.5);
+    filter: invert(.5) opacity(.4);
     width: 300px;
 }
 

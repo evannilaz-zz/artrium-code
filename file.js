@@ -47,11 +47,10 @@ function filterFileName(fileName) {
 }
 
 const saveFile = function() {
-    event.preventDefault();
     localStorage.setItem("files",JSON.stringify(files));
 }
 
-function moveToTab() {
+function moveToTab(event) {
     files.forEach((file) => {
         if (file.name === event.target.innerText) {
             editor.value = files[file.no].code;
@@ -84,7 +83,7 @@ const deactivateEditor = function() {
     editor.blur();
 }
 
-const activateEditor = function() {
+const activateEditor = function(event) {
     if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
         if (fileExp.querySelector(".selected")) saveFile();
         if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
@@ -133,11 +132,13 @@ const activateEditor = function() {
 }
 
 
-function renameFile() {
-    if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
+function renameFile(event) {
+    if (event.target.tagName === "DIV" || event.target.tagName === "SPAN" || event.target.tagName === "IMG") {
         let clickedShortcut;
         if (event.target.tagName === "SPAN") {
             clickedShortcut = event.target.parentElement;
+        } else if (event.target.tagName === "IMG") {
+            clickedShortcut = event.target.parentElement.parentElement;
         } else {
             clickedShortcut = event.target;
         }
@@ -187,7 +188,7 @@ function hide(element) {
     element.classList.toggle("hidden");
 }
 
-function deleteFile() {
+function deleteFile(event) {
     event.preventDefault();
     let toDelete = event.target;
     if (toDelete.parentElement.id === "fileExplorer" || toDelete.parentElement.parentElement.id === "fileExplorer") {
@@ -219,7 +220,7 @@ function deleteFile() {
 }
 
 
-function prepNewFile() {
+function prepNewFile(event) {
     const input = fileCrtForm.querySelector("input");
     if (event.target.innerText.includes("+")) {
         hide(fileCrtBtn);
@@ -236,7 +237,6 @@ function prepNewFile() {
 }
 
 function crtNewFile(fileName,innerCode) {
-    event.preventDefault();
     let cancel = false;
     files.forEach((file) => {
         if (file.name === fileName) {
