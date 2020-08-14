@@ -3,7 +3,7 @@
 <div align=center>
 
 ### Fourth Work of Artrium Project
-<img title="logo" src="assets/artrium.png" style="width: 100px">
+<img title="logo" src="assets/artrium.png" style="width: 50px">
 
 </div>
 
