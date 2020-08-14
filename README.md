@@ -1,11 +1,6 @@
 # Artrium Code
 
-<div align=center>
-
-### Fourth Work of Artrium Project
-<img title="logo" src="assets/artrium.png" style="width: 50px">
-
-</div>
+### The Fourth Work of Artrium Project
 
 ## Acknowledgements
 As you download the file you've edited, your browser may say that 'This kind of file can harm your computer' or else. It is safe to download, your browser is just warning you because it's JavaScript file from the Internet, which can attack your computer. The content of it is just a code you've edited.
