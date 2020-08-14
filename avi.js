@@ -32,10 +32,6 @@ navToggle.addEventListener("click",() => {
         editor.style.borderRadius = "10px";
         editor.style.right = "2.5%";
     }
-
-    if (editor.querySelector("textarea").style.pointerEvents !== "none") {
-        editor.querySelector("textarea").focus();
-    }
 })
 
 navDownload.addEventListener("click",() => {

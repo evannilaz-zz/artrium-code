@@ -10,8 +10,7 @@ Note: Debugged on Google Chrome & ***Remember to save your file***.
 ## How-to
 - Rename your file by double-clicking on the file
 - Delete your file by right-clicking on the file
-- Hit `Enter` key to cancel creating file
-- Press `Ctrl + S` to save your file
+- Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save your file
 
 ## Necessary Features
 - [ ] Brackets/Quotes Autocomplete

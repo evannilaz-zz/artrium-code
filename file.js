@@ -232,7 +232,7 @@ function prepNewFile() {
         hide(fileCrtBtn);
         hide(fileCrtForm);
         crtNewFile(name,code);
-        fileCrtForm.querySelector("input").value = "";
+        input.value = "";
     }
 }
 
@@ -289,6 +289,10 @@ function init() {
     }
     fileCrtBtn.addEventListener("click",prepNewFile);
     fileCrtForm.addEventListener("submit",prepNewFile);
+    fileCrtForm.querySelector("input").addEventListener("blur",() => {
+        hide(fileCrtBtn);
+        hide(fileCrtForm);
+    });
     openFile.addEventListener("input",getFile);
     fileExp.addEventListener("mousemove",() => {
         fileShortcuts = document.querySelectorAll(".file");
