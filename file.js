@@ -5,6 +5,7 @@ const fileCrtForm = fileExp.querySelector("form");
 const openFile = document.querySelector("#open");
 const tabIndicator = document.querySelector("#edit #tabs");
 const lineNumberIndicator = document.querySelector("#edit #lineNumber");
+const logoPage = document.querySelector("#edit #logoPage");
 let files = new Array();
 let fileShortcuts = new Array();
 
@@ -61,9 +62,24 @@ function moveToTab() {
     fileExp.querySelectorAll(".file").forEach((shortcut) => {if (shortcut.innerText.split("\n")[1] === event.target.innerText) shortcut.click()})
 }
 
+function showLogoPage() {
+    if (logoPage.style.display !== "none") {
+        editor.style.pointerEvents = "none";
+        tabIndicator.style.display = "none";
+        editor.style.display = "none";
+        document.querySelector("#parent").style.display = "none";
+    } else {
+        editor.style.pointerEvents = "all";
+        tabIndicator.style.display = "flex";
+        editor.style.display = "initial";
+        document.querySelector("#parent").style.display = "flex";
+    }
+}
+
 const deactivateEditor = function() {
-    editor.value = "No file selected";
-    editor.style.pointerEvents = "none";
+    logoPage.style.display = "initial";
+    editor.value = "";
+    showLogoPage();
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
     editor.blur();
 }
@@ -72,8 +88,8 @@ const activateEditor = function() {
     if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
         if (fileExp.querySelector(".selected")) saveFile();
         if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
-        editor.placeholder = "Your Code here...";
-        editor.style.pointerEvents = "all";
+        logoPage.style.display = "none";
+        showLogoPage();
         let clickedShortcut;
         if (event.target.tagName === "SPAN") {
             clickedShortcut = event.target.parentElement;
@@ -95,7 +111,7 @@ const activateEditor = function() {
         //         lineNumberIndicator.textContent += (i + 1).toString() + "\r\n";
         //     }
         // }
-
+        logoPage.style.display = "none";
         editor.value = files[clickedShortcut.id].code;
         editor.focus();
         editor.setSelectionRange(0,0);
@@ -119,8 +135,6 @@ const activateEditor = function() {
 
 function renameFile() {
     if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
-        deactivateEditor();
-        editor.blur();
         let clickedShortcut;
         if (event.target.tagName === "SPAN") {
             clickedShortcut = event.target.parentElement;

@@ -261,6 +261,17 @@ nav a img:hover {
     tab-size: 4;
 }
 
+#edit #logoPage img {
+    filter: invert(.5) opacity(.5);
+    width: 300px;
+}
+
+#edit #logoPage div {
+    font-size: 20px;
+    font-weight: 500;
+    color: gray;
+}
+
 h3 {
     margin: 0;
     font-weight: 600;
