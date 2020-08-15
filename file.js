@@ -133,25 +133,16 @@ const activateEditor = function(event) {
 
 
 function renameFile(event) {
-    if (event.target.tagName === "DIV" || event.target.tagName === "SPAN" || event.target.tagName === "IMG") {
-        let clickedShortcut;
-        if (event.target.tagName === "SPAN") {
-            clickedShortcut = event.target.parentElement;
-        } else if (event.target.tagName === "IMG") {
-            clickedShortcut = event.target.parentElement.parentElement;
-        } else {
-            clickedShortcut = event.target;
-        }
-        const innerText = clickedShortcut.innerText.split("\n");
-        prevFileName = innerText[1];
-        clickedShortcut.innerHTML = `<span>${innerText[0]}</span><form style="display: initial"><input type="text"></form>`;
-        clickedShortcut.querySelector("form>input").value = innerText[1];
+    if (event.target.tagName === "DIV") {
+        let clickedShortcut = event.target;
+        prevFileName = clickedShortcut.innerText
+        clickedShortcut.innerHTML = clickedShortcut.innerHTML.slice(0,clickedShortcut.innerHTML.lastIndexOf(">") + 1);
+        clickedShortcut.querySelector("form").style.display = "initial";
+        clickedShortcut.querySelector("form>input").value = prevFileName;
         clickedShortcut.querySelector("form>input").focus();
     } else if (event.target.tagName === "FORM") {
         event.preventDefault();
         const inputValue = event.target.querySelector("input").value;
-        const inputValueType = inputValue.split(".")[1];
-        let indicatedFileType;
         let cancel;
 
         files.forEach((file) => {
@@ -164,19 +155,10 @@ function renameFile(event) {
 
         if (!cancel) {
             if (filterFileName(inputValue)) {
-                if (inputValueType === "js") {
-                    indicatedFileType = "JavaScript";
-                } else if (inputValueType === "txt") {
-                    indicatedFileType = "Text File";
-                } else {
-                    indicatedFileType = inputValueType.toUpperCase();
-                }
-    
                 files[parseInt(event.target.parentElement.id)].name = inputValue;
-                files[parseInt(event.target.parentElement.id)].type = inputValueType.toUpperCase();
-                event.target.parentElement.className = `file ${inputValueType.toUpperCase()}`;
-                event.target.querySelector("input").value = "";
-                event.target.parentElement.innerHTML = `<span>${indicatedFileType}</span><form style="display: none"><input type="text"></form>${inputValue}`;
+                files[parseInt(event.target.parentElement.id)].type = inputValue.split(".")[1].toUpperCase();
+                event.target.parentElement.className = `file ${inputValue.split(".")[1].toUpperCase()}`;
+                event.target.parentElement.innerHTML = `<span><img src="assets/${inputValue.split(".")[1].toUpperCase()}.webp"></span><form action="#" method="POST"><input type="text"></form>${inputValue}`;
                 tabIndicator.querySelectorAll(".tab").forEach((tab) => {if (tab.innerText === prevFileName) tab.innerText = inputValue});
                 saveFile();
             }
@@ -262,10 +244,9 @@ function crtNewFile(fileName,innerCode) {
 
 function displayFile(file) {
     const div = document.createElement("div");
-    div.innerHTML = `<span><img src="assets/${file.type}.webp"></span><form><input type="text"></form>${file.name}`;
+    div.innerHTML = `<span><img src="assets/${file.type}.webp"></span><form action="#" method="POST"><input type="text"></form>${file.name}`;
     div.draggable = "true";
     div.classList.add("file");
-    div.classList.add(file.type);
     div.id = file.no;
     fileExp.appendChild(div);
 }
