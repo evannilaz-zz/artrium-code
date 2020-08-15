@@ -80,7 +80,7 @@ function saveEvent(event) {
     keyHistory2.push(event.key);
     if (keyHistory2[keyHistory2.length - 2] === "Control" && keyHistory2[keyHistory2.length - 1] === "s") {
         event.preventDefault();
-        saveFile();
+        saveFile(true);
     }
 }
 

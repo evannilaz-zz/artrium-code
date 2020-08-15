@@ -46,7 +46,8 @@ function filterFileName(fileName) {
     }
 }
 
-const saveFile = function() {
+const saveFile = function(notify = false) {
+    if (notify) alert("File successfully saved.");
     localStorage.setItem("files",JSON.stringify(files));
 }
 
@@ -158,7 +159,7 @@ function renameFile(event) {
                 files[parseInt(event.target.parentElement.id)].name = inputValue;
                 files[parseInt(event.target.parentElement.id)].type = inputValue.split(".")[1].toUpperCase();
                 event.target.parentElement.className = `file ${inputValue.split(".")[1].toUpperCase()}`;
-                event.target.parentElement.innerHTML = `<span><img src="assets/${inputValue.split(".")[1].toUpperCase()}.webp"></span><form action="#" method="POST"><input type="text"></form>${inputValue}`;
+                event.target.parentElement.innerHTML = `<span><img src="assets/${inputValue.split(".")[1].toUpperCase()}.webp"></span><form><input type="text"></form>${inputValue}`;
                 tabIndicator.querySelectorAll(".tab").forEach((tab) => {if (tab.innerText === prevFileName) tab.innerText = inputValue});
                 saveFile();
             }
@@ -177,7 +178,7 @@ function deleteFile(event) {
         if (toDelete.parentElement.parentElement.id === "fileExplorer") {
             toDelete = event.target.parentElement;
         }
-        let fileName = toDelete.innerText.split("\n")[1];
+        let fileName = toDelete.innerText;
         toDelete.parentElement.removeChild(toDelete);
         files = files.filter((file) => {
             return file.no !== parseInt(toDelete.id);
@@ -244,7 +245,7 @@ function crtNewFile(fileName,innerCode) {
 
 function displayFile(file) {
     const div = document.createElement("div");
-    div.innerHTML = `<span><img src="assets/${file.type}.webp"></span><form action="#" method="POST"><input type="text"></form>${file.name}`;
+    div.innerHTML = `<span><img src="assets/${file.type}.webp"></span><form><input type="text"></form>${file.name}`;
     div.draggable = "true";
     div.classList.add("file");
     div.id = file.no;
