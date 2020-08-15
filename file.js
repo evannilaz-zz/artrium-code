@@ -77,7 +77,7 @@ function showLogoPage() {
 }
 
 const deactivateEditor = function() {
-    logoPage.style.display = "initial";
+    logoPage.style.display = "flex";
     editor.value = "";
     showLogoPage();
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
@@ -85,14 +85,14 @@ const deactivateEditor = function() {
 }
 
 const activateEditor = function(event) {
-    if (event.target.tagName === "DIV" || event.target.tagName === "SPAN") {
+    if (event.target.tagName === "DIV" || event.target.tagName === "IMG") {
         if (fileExp.querySelector(".selected")) saveFile();
         if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
         logoPage.style.display = "none";
         showLogoPage();
         let clickedShortcut;
-        if (event.target.tagName === "SPAN") {
-            clickedShortcut = event.target.parentElement;
+        if (event.target.tagName === "IMG") {
+            clickedShortcut = event.target.parentElement.parentElement;
         } else {
             clickedShortcut = event.target;
         }
@@ -174,10 +174,7 @@ function hide(element) {
 function deleteFile(event) {
     event.preventDefault();
     let toDelete = event.target;
-    if (toDelete.parentElement.id === "fileExplorer" || toDelete.parentElement.parentElement.id === "fileExplorer") {
-        if (toDelete.parentElement.parentElement.id === "fileExplorer") {
-            toDelete = event.target.parentElement;
-        }
+    if (toDelete.parentElement.id === "fileExplorer") {
         let fileName = toDelete.innerText;
         toDelete.parentElement.removeChild(toDelete);
         files = files.filter((file) => {
@@ -195,7 +192,7 @@ function deleteFile(event) {
             }
         });
         saveFile();
-    } else {
+    } else if (toDelete.className.includes("tab")) {
         toDelete.parentElement.removeChild(toDelete);
         if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
         else deactivateEditor();
