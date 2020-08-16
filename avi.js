@@ -1,9 +1,7 @@
 const navHeader = document.querySelector("nav h3");
 const navToggle = document.querySelector("nav #toggle");
 const navDownload = document.querySelector("nav #download");
-
-let lastLineNumber;
-
+let temp = 0;
 let saved;
 
 navHeader.addEventListener("mouseenter",() => {
@@ -62,13 +60,11 @@ window.addEventListener('beforeunload', (event) => {
     }
 });
 
-// editor.addEventListener("input",() => {
-//     const currentLineNumber = lineNumberIndicator.textContent.split("\r\n").length;
-//     if (editor.value.find("\n") && lastLineNumber !== currentLineNumber) {
-//         lineNumberIndicator.textContent += (currentLineNumber).toString() + "\r\n";
-//     }
-//     lastLineNumber = currentLineNumber;
-// })
+editor.addEventListener("input",() => {
+    if (editor.value.find("\n").length + 2 !== lineNumberIndicator.innerHTML.split("\n").length) {
+        lineNumberIndicator.innerHTML += (lineNumberIndicator.innerHTML.split("\n").length).toString() + "\r\n";
+    }
+});
 
 setInterval(() => {
     if (tabIndicator.innerHTML === "") {

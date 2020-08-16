@@ -108,7 +108,7 @@ const activateEditor = function(event) {
             }
         }
 
-        lineNumberIndicator.innerHTML += lineNumberIndicator.innerHTML.split("\n").length;
+        lineNumberIndicator.innerHTML += lineNumberIndicator.innerHTML.split("\n").length + "\r\n";
 
         logoPage.style.display = "none";
         editor.value = files[clickedShortcut.id].code;
