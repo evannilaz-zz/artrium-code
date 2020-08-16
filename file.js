@@ -38,8 +38,8 @@ function filterFileName(fileName) {
     if (!/^[0-9a-zA-Z ... ]+$/.test(fileName) || fileName.split(".")[1] === undefined) {
         alert("The file name you've entered is unavailable.");
         return false;
-    } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js" || fileName.split(".")[1] === "txt")) {
-        alert("Only HTML, CSS, and JavaScript is supported in Artrium Code currently.");
+    } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js" || fileName.split(".")[1] === "txt" || fileName.split(".")[1] === "json")) {
+        alert("Only HTML, CSS, JavaScript, Text File, and JSON is supported in Artrium Code currently.");
         return false;
     } else {
         return true;
