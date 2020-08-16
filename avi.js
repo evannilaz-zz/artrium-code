@@ -61,8 +61,13 @@ window.addEventListener('beforeunload', (event) => {
 });
 
 editor.addEventListener("input",() => {
+    const lineNumber = document.createElement("div");
     if (editor.value.find("\n").length + 2 !== lineNumberIndicator.innerHTML.split("\n").length) {
-        lineNumberIndicator.innerHTML += (lineNumberIndicator.innerHTML.split("\n").length).toString() + "\r\n";
+        for (var i = 0; i < editor.value.find("\n").length; i++) {
+            lineNumber.innerHTML += (i + 1) + "\r\n";
+        }
+        lineNumber.innerHTML += lineNumber.innerHTML.split("\n").length + "\r\n";
+        lineNumberIndicator.innerHTML = lineNumber.innerHTML;
     }
 });
 

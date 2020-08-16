@@ -52,11 +52,23 @@ const saveFile = function(notify = false) {
 }
 
 function moveToTab(event) {
+    let clickedTab;
     files.forEach((file) => {
         if (file.name === event.target.innerText) {
+            clickedTab = files[file.no];
             editor.value = files[file.no].code;
         }
     });
+
+    lineNumberIndicator.innerHTML = "";
+
+    if (clickedTab.code.find("\n")) {
+        for (var i = 0; i < clickedTab.code.find("\n").length; i++) {
+            lineNumberIndicator.innerHTML += (i + 1) + "\r\n";
+        }
+    }
+
+    lineNumberIndicator.innerHTML += lineNumberIndicator.innerHTML.split("\n").length + "\r\n";
     tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
     event.target.classList.add("selected");
     fileExp.querySelectorAll(".file").forEach((shortcut) => {if (shortcut.innerText.split("\n")[1] === event.target.innerText) shortcut.click()})
@@ -106,7 +118,7 @@ const activateEditor = function(event) {
 
         if (files[clickedShortcut.id].code.find("\n")) {
             for (var i = 0; i < files[clickedShortcut.id].code.find("\n").length; i++) {
-                lineNumberIndicator.innerHTML += (i + 1).toString() + "\r\n";
+                lineNumberIndicator.innerHTML += (i + 1) + "\r\n";
             }
         }
 
