@@ -8,7 +8,6 @@ const lineNumberIndicator = document.querySelector("#edit #lineNumber");
 const logoPage = document.querySelector("#edit #logoPage");
 let files = new Array();
 let fileShortcuts = new Array();
-let draggedObjectId;
 
 String.prototype.find = function(query) {
     let index = new Array();
@@ -249,7 +248,6 @@ function displayFile(file) {
 }
 
 function drag(event) {
-    draggedObjectId = event.target.id;
     event.dataTransfer.setData("text/plain",JSON.stringify([event.target.outerHTML,event.target.id]));
     event.target.classList.add("dragged");
 }
