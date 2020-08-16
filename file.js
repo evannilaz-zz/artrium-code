@@ -102,13 +102,14 @@ const activateEditor = function(event) {
         newTab.classList.add("tab");
         newTab.classList.add("selected");
 
-        // if (files[clickedShortcut.id].code.find("\n") < 1) {
-        //     lineNumberIndicator.textContent += "1\r\n";
-        // } else if (files[clickedShortcut.id].code.find("\n")) {
-        //     for (var i = 0; i < files[clickedShortcut.id].code.find("\n").length; i++) {
-        //         lineNumberIndicator.textContent += (i + 1).toString() + "\r\n";
-        //     }
-        // }
+        if (files[clickedShortcut.id].code.find("\n")) {
+            for (var i = 0; i < files[clickedShortcut.id].code.find("\n").length; i++) {
+                lineNumberIndicator.innerHTML += (i + 1).toString() + "\r\n";
+            }
+        }
+
+        lineNumberIndicator.innerHTML += lineNumberIndicator.innerHTML.split("\n").length;
+
         logoPage.style.display = "none";
         editor.value = files[clickedShortcut.id].code;
         editor.focus();

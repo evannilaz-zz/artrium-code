@@ -234,7 +234,7 @@ nav a img:hover {
 }
 
 #edit #lineNumber {
-    display: none !important;
+    filter: opacity(.5);
     text-align: right;
     font-size: 14.5px;
     padding: 15px 4px 20px 4px;
