@@ -340,6 +340,10 @@ h3 {
     border: 1.5px solid white;
 }
 
+.file.dragged {
+    border: 1.5px dashed white;
+}
+
 .tab {
     display: flex;
     align-items: center;

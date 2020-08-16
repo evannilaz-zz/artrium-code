@@ -8,6 +8,7 @@ const lineNumberIndicator = document.querySelector("#edit #lineNumber");
 const logoPage = document.querySelector("#edit #logoPage");
 let files = new Array();
 let fileShortcuts = new Array();
+let draggedObjectId;
 
 String.prototype.find = function(query) {
     let index = new Array();
@@ -90,11 +91,9 @@ const activateEditor = function(event) {
         if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
         logoPage.style.display = "none";
         showLogoPage();
-        let clickedShortcut;
+        let clickedShortcut = event.target;
         if (event.target.tagName === "IMG") {
             clickedShortcut = event.target.parentElement.parentElement;
-        } else {
-            clickedShortcut = event.target;
         }
         
         clickedShortcut.classList.add("selected");
@@ -249,6 +248,41 @@ function displayFile(file) {
     fileExp.appendChild(div);
 }
 
+function drag(event) {
+    draggedObjectId = event.target.id;
+    event.dataTransfer.setData("text/plain",JSON.stringify([event.target.outerHTML,event.target.id]));
+    event.target.classList.add("dragged");
+}
+
+function drop(event) {
+    event.preventDefault();
+    fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("dragged")});
+    const data = JSON.parse(event.dataTransfer.getData("text/plain"));
+    const droppedElement = event.target.outerHTML;
+    const droppedElementId = event.target.id;
+    const droppedFile = files[parseInt(droppedElementId)];
+    const draggedFile = files[parseInt(data[1])];
+    document.getElementById(data[1]).outerHTML = droppedElement;
+    event.target.outerHTML = data[0];
+    for (var i = 0; i < document.querySelectorAll(".file").length; i++) {
+        document.querySelectorAll(".file")[i].id = i;
+    }
+    files.forEach((file) => {
+        if (file.no === parseInt(droppedElementId)) {
+            files[parseInt(droppedElementId)] = draggedFile;
+            file.no = parseInt(data[1]);
+        } else if (file.no === parseInt(data[1])) {
+            files[parseInt(data[1])] = droppedFile;
+            file.no = parseInt(droppedElementId);
+        }
+    });
+    saveFile();
+}
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
 function init() {
     const loadedFiles = JSON.parse(localStorage.getItem("files"));
     if (loadedFiles !== null) {
@@ -271,6 +305,9 @@ function init() {
             shortcut.addEventListener("click",activateEditor);
             shortcut.addEventListener("contextmenu",deleteFile);
             shortcut.querySelector("form").addEventListener("submit",renameFile);
+            shortcut.addEventListener("dragstart",drag);
+            shortcut.addEventListener("drop",drop);
+            shortcut.addEventListener("dragover",allowDrop);
         });
         document.querySelectorAll(".tab").forEach((shortcut) => {
             shortcut.addEventListener("click",moveToTab);
