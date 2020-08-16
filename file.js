@@ -102,6 +102,8 @@ const activateEditor = function(event) {
         newTab.classList.add("tab");
         newTab.classList.add("selected");
 
+        lineNumberIndicator.innerHTML = "";
+
         if (files[clickedShortcut.id].code.find("\n")) {
             for (var i = 0; i < files[clickedShortcut.id].code.find("\n").length; i++) {
                 lineNumberIndicator.innerHTML += (i + 1).toString() + "\r\n";
