@@ -115,6 +115,7 @@ const activateEditor = function(event) {
         newTab.innerText = files[clickedShortcut.id].name;
         newTab.classList.add("tab");
         newTab.classList.add("selected");
+        newTab.style.width = "0";
 
         lineNumberIndicator.innerHTML = "";
 
@@ -143,6 +144,7 @@ const activateEditor = function(event) {
         if (!multipleTab) {
             tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
             tabIndicator.appendChild(newTab);
+            setTimeout(() => {newTab.style.width = "8%"});
         }
     }
 }
@@ -198,7 +200,8 @@ function deleteFile(event) {
     let toDelete = event.target;
     if (toDelete.parentElement.id === "fileExplorer") {
         let fileName = toDelete.innerText;
-        toDelete.parentElement.removeChild(toDelete);
+        toDelete.style.filter = "opacity(0)";
+        setTimeout(() => {toDelete.parentElement.removeChild(toDelete);},200);
         files = files.filter((file) => {
             return file.no !== parseInt(toDelete.id);
         });
@@ -215,7 +218,8 @@ function deleteFile(event) {
         });
         saveFile();
     } else if (toDelete.className.includes("tab")) {
-        toDelete.parentElement.removeChild(toDelete);
+        toDelete.style.width = "0";
+        setTimeout(() => {toDelete.parentElement.removeChild(toDelete);},150);
         if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
         else deactivateEditor();
     }
