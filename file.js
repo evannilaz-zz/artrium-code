@@ -72,6 +72,8 @@ function moveToTab(event) {
     tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
     event.target.classList.add("selected");
     fileExp.querySelectorAll(".file").forEach((shortcut) => {if (shortcut.innerText.split("\n")[1] === event.target.innerText) shortcut.click()})
+    editor.focus();
+    editor.setSelectionRange(0,0);
 }
 
 function showLogoPage() {
