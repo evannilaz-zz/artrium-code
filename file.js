@@ -151,11 +151,18 @@ const activateEditor = function(event) {
 function renameFile(event) {
     if (event.target.tagName === "DIV") {
         let clickedShortcut = event.target;
-        prevFileName = clickedShortcut.innerText
+        prevFileName = clickedShortcut.innerText;
         clickedShortcut.innerHTML = clickedShortcut.innerHTML.slice(0,clickedShortcut.innerHTML.lastIndexOf(">") + 1);
         clickedShortcut.querySelector("form").style.display = "initial";
         clickedShortcut.querySelector("form>input").value = prevFileName;
         clickedShortcut.querySelector("form>input").focus();
+        tabIndicator.querySelectorAll(".tab").forEach((tab) => {
+            if (tab.innerText === prevFileName) {
+                tab.parentElement.removeChild(tab);
+                if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
+                else deactivateEditor();
+            }
+        });
     } else if (event.target.tagName === "FORM") {
         event.preventDefault();
         const inputValue = event.target.querySelector("input").value;
