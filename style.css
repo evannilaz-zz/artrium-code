@@ -18,11 +18,11 @@
 }
 
 ::-webkit-scrollbar {
-    display: none;
+    display: none !important;
 }
 
 #edit textarea::-webkit-scrollbar {
-    display: initial;
+    display: initial !important;
     width: 5px;
 }
 
