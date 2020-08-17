@@ -62,7 +62,9 @@ window.addEventListener('beforeunload', (event) => {
 
 editor.addEventListener("input",() => {
     const lineNumber = document.createElement("div");
-    if (editor.value.find("\n").length + 2 !== lineNumberIndicator.innerHTML.split("\n").length) {
+    if (!editor.value.find("\n")) {
+        lineNumberIndicator.innerHTML = "1\r\n";
+    } else if (editor.value.find("\n").length + 2 !== lineNumberIndicator.innerHTML.split("\n").length) {
         for (var i = 0; i < editor.value.find("\n").length; i++) {
             lineNumber.innerHTML += (i + 1) + "\r\n";
         }
