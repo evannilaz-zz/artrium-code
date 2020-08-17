@@ -22,6 +22,8 @@ navToggle.addEventListener("click",() => {
     const explorer = document.querySelector("#fileExplorer");
     const editor = document.querySelector("#edit");
     if (editor.style.width === "95%") {
+        editor.querySelector("#lineNumber").style.width = "2.55%";
+        editor.querySelector("textarea").style.width = "97.45%";
         editor.style.right = "0";
         editor.style.width = "79%";
         explorer.style.transform = "none";
@@ -31,6 +33,8 @@ navToggle.addEventListener("click",() => {
         editor.style.width = "95%";
         editor.style.borderRadius = "10px";
         editor.style.right = "2.5%";
+        editor.querySelector("#lineNumber").style.width = "2%";
+        editor.querySelector("textarea").style.width = "98%";
     }
 })
 
