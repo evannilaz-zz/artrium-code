@@ -88,6 +88,7 @@ nav {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     transition: transform .25s;
+    animation: appear-nav .5s;
 }
 
 nav h3 {
@@ -186,6 +187,7 @@ nav a img:hover {
     border-bottom-right-radius: 10px;
     transition: transform .3s;
     overflow-y: scroll;
+    animation: appear-fileExplorer .5s;
 }
 
 #fileExplorer>button, #fileExplorer>div, #fileExplorer>form {
@@ -236,6 +238,7 @@ nav a img:hover {
     background: #34495e;
     transition: width .3s, right .3s;
     overflow: hidden;
+    animation: appear-editor .5s;
 }
 
 #edit #tabs {
@@ -325,6 +328,7 @@ h3 {
     font-weight: 400;
     cursor: pointer;
     transition: border .2s, filter .2s;
+    animation: appear-files .3s;
 }
 
 .file span {
@@ -385,4 +389,24 @@ h3 {
 
 .tab.selected {
     border-bottom: 2.5px solid turquoise;
+}
+
+@keyframes appear-editor {
+    from {transform: translateX(60%);}
+    to {transform: none;}
+}
+
+@keyframes appear-fileExplorer {
+    from {transform: translateX(-100%);}
+    to {transform: none;}
+}
+
+@keyframes appear-nav {
+    from {transform: translateY(-100%);}
+    to {transform: none;}
+}
+
+@keyframes appear-files {
+    from {filter: opacity(.5);}
+    to {filter: none;}
 }
