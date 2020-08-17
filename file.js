@@ -211,7 +211,8 @@ function deleteFile(event) {
         }
         tabIndicator.querySelectorAll(".tab").forEach((tab) => {
             if (tab.innerText === fileName) {
-                tab.parentElement.removeChild(tab);
+                tab.style.width = "0";
+                setTimeout(() => {tab.parentElement.removeChild(tab)},150);
                 if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
                 else deactivateEditor();
             }
