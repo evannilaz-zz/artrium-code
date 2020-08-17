@@ -9,7 +9,7 @@
 }
 
 * {
-    font-family: -apple-system, "Inter", sans-serif !important;
+    font-family: -apple-system, Inter, sans-serif !important;
     outline: none;
     user-select: none;
     -webkit-user-select: none;
@@ -18,7 +18,25 @@
 }
 
 ::-webkit-scrollbar {
-    display: none !important;
+    display: none;
+}
+
+#edit textarea::-webkit-scrollbar {
+    display: initial;
+    width: 5px;
+}
+
+#edit textarea::-webkit-scrollbar-track {
+    background: none;
+}
+
+#edit textarea::-webkit-scrollbar-thumb {
+    background: #576574;
+    border-radius: 5px;
+}
+
+#edit textarea::-webkit-scrollbar-thumb:hover {
+    background: #dfe4ea;
 }
 
 body {
