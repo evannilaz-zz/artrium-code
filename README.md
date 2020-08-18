@@ -11,6 +11,7 @@ Note: Debugged on Google Chrome/Windows 10.
 - Rename your file by double-clicking on the file
 - Delete your file by right-clicking on the file
 - Press <kbd>ctrl</kbd>/<kbd>cmd</kbd> + <kbd>s</kbd> to save your file
+- Press <kbd>alt</kbd>/<kbd>option</kbd> + <kbd>number</kbd> to open `n`th file
 
 ## Necessary Features
 - [ ] Brackets/Quotes Autocomplete
