@@ -22,9 +22,9 @@ Note: Debugged on Google Chrome/Windows 10.
 - [ ] Software/Web-app both available
 
 ## Known Bugs & Issues
-* Bracket/Quote Autocomplete
-  * ~~Multiple bracket support not working (except quotes)~~ (Disabled Feature)
-  * ~~Automatically tabbed after one character is typed in 2~nth line in bracket~~ (Disabled Feature)
+- Bracket/Quote Autocomplete
+  - ~~Multiple bracket support not working (except quotes)~~ (Disabled Feature)
+  - ~~Automatically tabbed after one character is typed in 2~nth line in bracket~~ (Disabled Feature)
   
 ## Copyrights
 - [Inter](https://rsms.me/inter) (Base font)
