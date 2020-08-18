@@ -79,13 +79,15 @@ function moveToTab(event) {
 function showLogoPage() {
     if (logoPage.style.display !== "none") {
         document.querySelector("#edit").style.background = "#354a5f";
-        editor.style.pointerEvents = "none";
+        document.querySelector("#edit").style.pointerEvents = "none";
+        document.querySelector("#edit").style.justifyContent = "center";
         tabIndicator.style.display = "none";
         editor.style.display = "none";
         document.querySelector("#parent").style.display = "none";
     } else {
         document.querySelector("#edit").style.background = "none";
-        editor.style.pointerEvents = "all";
+        document.querySelector("#edit").style.pointerEvents = "all";
+        document.querySelector("#edit").style.justifyContent = "flex-start";
         tabIndicator.style.display = "flex";
         editor.style.display = "initial";
         document.querySelector("#parent").style.display = "flex";
@@ -114,7 +116,6 @@ const activateEditor = function(event) {
         clickedShortcut.classList.add("selected");
         
         const newTab = document.createElement("div");
-        newTab.innerText = files[clickedShortcut.id].name;
         newTab.classList.add("tab");
         newTab.classList.add("selected");
         newTab.style.width = "0";
@@ -147,6 +148,7 @@ const activateEditor = function(event) {
             tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
             tabIndicator.appendChild(newTab);
             setTimeout(() => {newTab.style.width = "9.5%"});
+            setTimeout(() => {newTab.innerText = files[clickedShortcut.id].name;},180);
         }
     }
 }
@@ -208,23 +210,31 @@ function deleteFile(event) {
             return file.no !== parseInt(toDelete.id);
         });
         files.forEach((file) => {file.no = files.indexOf(file)});
-        for (var i = 0; i < document.querySelectorAll(".file").length; i++) {
-            document.querySelectorAll(".file")[i].id = i;
-        }
+        setTimeout(() => {
+            for (var i = 0; i < document.querySelectorAll(".file").length; i++) {
+                document.querySelectorAll(".file")[i].id = i;
+            }
+        },200);
         tabIndicator.querySelectorAll(".tab").forEach((tab) => {
             if (tab.innerText === fileName) {
-                tab.style.width = "0";
-                setTimeout(() => {tab.parentElement.removeChild(tab)},150);
-                if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
-                else deactivateEditor();
+                tab.innerText = "";
+                setTimeout(() => {tab.style.width = "0"});
+                setTimeout(() => {
+                    tab.parentElement.removeChild(tab)
+                    if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
+                    else deactivateEditor();
+                },150);
             }
         });
         saveFile();
     } else if (toDelete.className.includes("tab")) {
-        toDelete.style.width = "0";
-        setTimeout(() => {toDelete.parentElement.removeChild(toDelete);},150);
-        if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
-        else deactivateEditor();
+        toDelete.innerText = "";
+        setTimeout(() => {toDelete.style.width = "0"});
+        setTimeout(() => {
+            toDelete.parentElement.removeChild(toDelete);
+            if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
+            else deactivateEditor();
+        },150);
     }
 }
 
