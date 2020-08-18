@@ -61,14 +61,13 @@ function moveToTab(event) {
     });
 
     lineNumberIndicator.innerHTML = "";
-
     if (clickedTab.code.find("\n")) {
         for (var i = 0; i < clickedTab.code.find("\n").length; i++) {
             lineNumberIndicator.innerHTML += (i + 1) + "\r\n";
         }
     }
-
     lineNumberIndicator.innerHTML += lineNumberIndicator.innerHTML.split("\n").length + "\r\n";
+    
     tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
     event.target.classList.add("selected");
     fileExp.querySelectorAll(".file").forEach((shortcut) => {if (shortcut.innerText === event.target.innerText) shortcut.click()})
@@ -138,9 +137,9 @@ const activateEditor = function(event) {
 
         let multipleTab = false;
         tabIndicator.querySelectorAll(".tab").forEach((tab) => {
-            if (tab.innerText === newTab.innerText) {
+            if (tab.innerText === files[clickedShortcut.id].name) {
                 multipleTab = true;
-                if (tab.innerText === newTab.innerText) tab.click();
+                tab.click();
             }
         });
 
