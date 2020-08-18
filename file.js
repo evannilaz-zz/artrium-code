@@ -71,18 +71,20 @@ function moveToTab(event) {
     lineNumberIndicator.innerHTML += lineNumberIndicator.innerHTML.split("\n").length + "\r\n";
     tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
     event.target.classList.add("selected");
-    fileExp.querySelectorAll(".file").forEach((shortcut) => {if (shortcut.innerText.split("\n")[1] === event.target.innerText) shortcut.click()})
+    fileExp.querySelectorAll(".file").forEach((shortcut) => {if (shortcut.innerText === event.target.innerText) shortcut.click()})
     editor.focus();
     editor.setSelectionRange(0,0);
 }
 
 function showLogoPage() {
     if (logoPage.style.display !== "none") {
+        document.querySelector("#edit").style.background = "#354a5f";
         editor.style.pointerEvents = "none";
         tabIndicator.style.display = "none";
         editor.style.display = "none";
         document.querySelector("#parent").style.display = "none";
     } else {
+        document.querySelector("#edit").style.background = "none";
         editor.style.pointerEvents = "all";
         tabIndicator.style.display = "flex";
         editor.style.display = "initial";
@@ -144,7 +146,7 @@ const activateEditor = function(event) {
         if (!multipleTab) {
             tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
             tabIndicator.appendChild(newTab);
-            setTimeout(() => {newTab.style.width = "8%"});
+            setTimeout(() => {newTab.style.width = "9.5%"});
         }
     }
 }

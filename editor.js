@@ -76,7 +76,7 @@ function keyDownEvent(event) {
     },100);
 }
 
-function saveEvent(event) {
+function shortcutKey(event) {
     keyHistory2.push(event.key);
     if (keyHistory2[keyHistory2.length - 2] === "Control" && keyHistory2[keyHistory2.length - 1] === "s") {
         event.preventDefault();
@@ -91,7 +91,7 @@ function init() {
     deactivateEditor();
     editor.addEventListener("keydown",keyDownEvent);
     editor.addEventListener("scroll",editorScroll);
-    document.querySelectorAll("*").forEach((element) => {element.addEventListener("keydown",saveEvent)});
+    document.querySelectorAll("*").forEach((element) => {element.addEventListener("keydown",shortcutKey)});
 }
 
 init();
