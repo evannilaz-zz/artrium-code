@@ -46,6 +46,14 @@ function filterFileName(fileName) {
     }
 }
 
+function shortenFileName(fileName, option) {
+    if (fileName.length > 11 && option === "file") {
+        return fileName.split(".")[0].slice(0,9) + "..." + fileName.split(".")[1];
+    } else {
+        return fileName;
+    }
+}
+
 const saveFile = function(notify = false) {
     if (notify) alert("File successfully saved.");
     localStorage.setItem("files",JSON.stringify(files));

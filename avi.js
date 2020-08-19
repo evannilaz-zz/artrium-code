@@ -27,11 +27,11 @@ navToggle.addEventListener("click",() => {
         editor.style.right = "0";
         editor.style.width = "79%";
         explorer.style.transform = "none";
-        setTimeout(() => {editor.querySelector("#parent").style.borderRadius = "10px 0 0 10px"},240);
+        setTimeout(() => {editor.style.borderRadius = "10px 0 0 10px"},240);
     } else {
         explorer.style.transform = "translateX(-100%)";
         editor.style.width = "95%";
-        editor.querySelector("#parent").style.borderRadius = "10px";
+        editor.style.borderRadius = "10px";
         editor.style.right = "2.5%";
         editor.querySelector("#lineNumber").style.width = "2%";
         editor.querySelector("textarea").style.width = "98%";

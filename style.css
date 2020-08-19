@@ -370,11 +370,10 @@ h3 {
     margin-right: 10px;
     border-radius: 7px;
     background: rgba(47,53,66,.1);
-    border: 2px solid rgba(47,53,66);
+    border: 1.9px solid rgba(47,53,66);
     text-shadow: 0 0 5px rgba(0,0,0,.3);
     width: 9.5%;
     height: 100%;
-    cursor: pointer;
     box-shadow: 2px 2px solid rgba(0,0,0,.3);
     transition: width .15s, border .2s, background .2s;
 }
@@ -385,7 +384,7 @@ h3 {
 
 .tab.selected {
     background: rgba(47,53,66,.8);
-    border: 2px solid rgba(47,53,66);
+    border: 1.9px solid rgba(47,53,66);
 }
 
 @keyframes appear-editor {
