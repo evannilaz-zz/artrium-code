@@ -57,10 +57,12 @@ navDownload.addEventListener("click",() => {
 });
 
 window.addEventListener('beforeunload', (event) => {
-    if (!(location.href.includes("127.0.0.1") || location.href.includes("localhost") || location.href.includes("C:/") || saved)) {
-        event.preventDefault();
-        event.returnValue = '';
-        return '';
+    if (!(location.href.includes("127.0.0.1") || location.href.includes("localhost") || location.href.includes("C:/"))) {
+        if (!saved) {
+            event.preventDefault();
+            event.returnValue = '';
+            return '';
+        }
     }
 });
 

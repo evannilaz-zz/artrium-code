@@ -77,22 +77,30 @@ function keyDownEvent(event) {
 }
 
 function shortcutKey(event) {
-    keyHistory2.push(event.key);
-    if (keyHistory2[keyHistory2.length - 2] === "Control" && keyHistory2[keyHistory2.length - 1] === "s") {
-        event.preventDefault();
-        saveFile(true);
-    } else if (keyHistory2[keyHistory2.length - 2] === "Command" && keyHistory2[keyHistory2.length - 1] === "s") {
-        event.preventDefault();
-        saveFile(true);
-    } /* else if (keyHistory2[keyHistory2.length - 2] === "Control" && keyHistory2[keyHistory2.length - 1] === ",") {
-        location.href += "settings";
-    } else if (keyHistory2[keyHistory2.length - 2] === "Command" && keyHistory2[keyHistory2.length - 1] === ",") {
-        location.href += "settings";
-    } */ else if (keyHistory2[keyHistory2.length - 2] === "Alt" && /^[1-9]$/.test(keyHistory2[keyHistory2.length - 1]) && document.getElementById(parseInt(keyHistory2[keyHistory2.length - 1]) - 1)) {
-        document.getElementById(parseInt(keyHistory2[keyHistory2.length - 1]) - 1).click();
-    } else if (keyHistory2[keyHistory2.length - 2] === "Option" && /^[1-9]$/.test(keyHistory2[keyHistory2.length - 1]) && document.getElementById(parseInt(keyHistory2[keyHistory2.length - 1]) - 1)) {
-        document.getElementById(parseInt(keyHistory2[keyHistory2.length - 1]) - 1).click();
+    const lastKey = keyHistory2[keyHistory2.length - 1];
+    if (event.key === "s") {
+        if (lastKey === "Control" || lastKey === "Command") {
+            event.preventDefault();
+            saveFile(true);
+        }
+    } /* else if (keyHistory2[keyHistory2.length - 2] === "Control" && event.key === ",") {
+        if (lastKey === "Control" || lastKey === "Command") location.href += "settings";
+    } */ else if (/^[1-9]$/.test(event.key) && document.getElementById(parseInt(event.key) - 1)) {
+        if (lastkey === "Alt" || lastKey === "Option") document.getElementById(parseInt(event.key) - 1).click();
+    } else if (event.key === "F2" && tabIndicator.querySelector(".tab")) {
+        for (var i = 0; i < document.querySelectorAll(".tab").length; i++) {
+            if (document.querySelectorAll(".tab")[i].classList.contains("selected")) {
+                if (document.querySelectorAll(".tab")[i + 1]) {
+                    document.querySelectorAll(".tab")[i + 1].click();
+                    break;
+                } else {
+                    document.querySelector(".tab").click();
+                    break;
+                }
+            }
+        }
     }
+    keyHistory2.push(event.key);
 }
 
 function init() {

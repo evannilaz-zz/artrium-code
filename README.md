@@ -12,6 +12,7 @@ Note: Debugged on Google Chrome/Windows 10.
 - Delete your file by right-clicking on the file
 - Press <kbd>ctrl</kbd>/<kbd>cmd</kbd> + <kbd>s</kbd> to save your file
 - Press <kbd>alt</kbd>/<kbd>option</kbd> + <kbd>number</kbd> to open `n`th file
+- Press <kbd>F2</kbd> to switch to next tab
 
 ## Necessary Features
 - [ ] Brackets/Quotes Autocomplete
