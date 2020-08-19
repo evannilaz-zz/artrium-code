@@ -78,25 +78,34 @@ function keyDownEvent(event) {
 
 function shortcutKey(event) {
     const lastKey = keyHistory2[keyHistory2.length - 1];
-    if (event.key === "s") {
-        if (lastKey === "Control" || lastKey === "Command") {
-            event.preventDefault();
-            saveFile(true);
-        }
+    if ((lastKey === "Control" || lastKey === "Command") &&  event.key === "s") {
+        event.preventDefault();
+        saveFile(true);
     } /* else if (keyHistory2[keyHistory2.length - 2] === "Control" && event.key === ",") {
         if (lastKey === "Control" || lastKey === "Command") location.href += "settings";
-    } */ else if (/^[1-9]$/.test(event.key) && document.getElementById(parseInt(event.key) - 1)) {
-        if (lastkey === "Alt" || lastKey === "Option") document.getElementById(parseInt(event.key) - 1).click();
-    } else if (event.key === "F2" && tabIndicator.querySelector(".tab")) {
-        for (var i = 0; i < document.querySelectorAll(".tab").length; i++) {
-            if (document.querySelectorAll(".tab")[i].classList.contains("selected")) {
-                if (document.querySelectorAll(".tab")[i + 1]) {
-                    document.querySelectorAll(".tab")[i + 1].click();
-                    break;
+    } */ else if ((lastKey === "Alt" || lastKey === "Option") && /^[1-9]$/.test(event.key) && document.getElementById(parseInt(event.key) - 1)) {
+        document.getElementById(parseInt(event.key) - 1).click();
+    } else if ((lastKey === "Alt" || lastKey === "Option") && (event.key === "w" || event.key === "n") && tabIndicator.querySelector(".tab")) {
+        const toDelete = document.querySelector(".tab.selected");
+        let tabIndex = new Array();
+        document.querySelectorAll(".tab").forEach((tab) => tabIndex.push(tab));
+        tabIndex = tabIndex.indexOf(document.querySelector(".tab.selected"));
+        if (event.key === "w") {
+            toDelete.innerText = "";
+            setTimeout(() => {toDelete.style.width = "0"});
+            setTimeout(() => {
+                toDelete.parentElement.removeChild(toDelete);
+                if (document.querySelectorAll(".tab")[tabIndex - 1]) {
+                    document.querySelectorAll(".tab")[tabIndex - 1].click();
                 } else {
                     document.querySelector(".tab").click();
-                    break;
                 }
+            },150);
+        } else if (event.key === "n") {
+            if (document.querySelectorAll(".tab")[tabIndex + 1]) {
+                document.querySelectorAll(".tab")[tabIndex + 1].click();
+            } else {
+                document.querySelector(".tab").click();
             }
         }
     }

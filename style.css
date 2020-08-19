@@ -364,17 +364,17 @@ h3 {
 }
 
 .tab {
+    display: flex;
+    align-items: center;
     margin-right: 10px;
     border-radius: 7px;
-    padding: .7% 0 0 10px;
+    padding-left: 10px;
     background: rgba(47,53,66,.1);
     border: 1.9px solid rgba(47,53,66);
     text-shadow: 0 0 5px rgba(0,0,0,.3);
     width: 9.5%;
     height: 100%;
     box-shadow: 2px 2px solid rgba(0,0,0,.3);
-    text-overflow: ellipsis;
-    overflow: hidden;
     transition: width .15s, border .2s, background .2s;
 }
 

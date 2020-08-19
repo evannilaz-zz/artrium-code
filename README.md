@@ -9,10 +9,13 @@ Note: Debugged on Google Chrome/Windows 10.
 
 ## How-to
 - Rename your file by double-clicking on the file
-- Delete your file by right-clicking on the file
-- Press <kbd>ctrl</kbd>/<kbd>cmd</kbd> + <kbd>s</kbd> to save your file
-- Press <kbd>alt</kbd>/<kbd>option</kbd> + <kbd>number</kbd> to open `n`th file
-- Press <kbd>F2</kbd> to switch to next tab
+- Delete your file/tab by right-clicking on the file
+
+## Shortcut Keys
+- <kbd>Control</kbd>/<kbd>Command</kdb> + <kbd>S</kbd>: Save file
+- <kbd>Alt</kbd>/<kbd>Option</kbd> + <kbd>Number</kbd>: Open nth file
+- <kbd>Alt</kbd>/<kbd>Option</kbd> + <kbd>W</kbd>: Delete tab
+- <kbd>Alt</kbd>/<kbd>Option</kbd> + <kbd>N</kbd>: Switch to next tab
 
 ## Necessary Features
 - [ ] Brackets/Quotes Autocomplete
