@@ -12,10 +12,12 @@ Note: Debugged on Google Chrome/Windows 10.
 - Delete your file/tab by right-clicking on the file
 
 ## Shortcut Keys
-- <kbd>Control</kbd>/<kbd>⌘</kbd> + <kbd>S</kbd>: Save file
-- <kbd>Alt</kbd>/<kbd>⌥</kbd> + <kbd>Number</kbd>: Open nth file
-- <kbd>Alt</kbd>/<kbd>⌥</kbd> + <kbd>W</kbd>: Delete tab
-- <kbd>Alt</kbd>/<kbd>⌥</kbd> + <kbd>N</kbd>: Switch to next tab
+- **⌘ + S**: Save file
+- **⌥ + Number**: Open nth file
+- **⌥ + W**: Delete tab
+- **⌥ + N**: Switch to next tab
+
+Note for Windows: ⌘ (Control), ⌥ (Alt)
 
 ## Necessary Features
 - [ ] Brackets/Quotes Autocomplete
