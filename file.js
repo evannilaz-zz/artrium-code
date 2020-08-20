@@ -300,21 +300,23 @@ function drop(event) {
     const droppedElementId = event.target.id;
     const droppedFile = files[parseInt(droppedElementId)];
     const draggedFile = files[parseInt(data[1])];
-    document.getElementById(data[1]).outerHTML = droppedElement;
-    event.target.outerHTML = data[0];
-    for (var i = 0; i < document.querySelectorAll(".file").length; i++) {
-        document.querySelectorAll(".file")[i].id = i;
-    }
-    files.forEach((file) => {
-        if (file.no === parseInt(droppedElementId)) {
-            files[parseInt(droppedElementId)] = draggedFile;
-            file.no = parseInt(data[1]);
-        } else if (file.no === parseInt(data[1])) {
-            files[parseInt(data[1])] = droppedFile;
-            file.no = parseInt(droppedElementId);
+    if (data[1] != droppedElementId) {
+        document.getElementById(data[1]).outerHTML = droppedElement;
+        event.target.outerHTML = data[0];
+        for (var i = 0; i < document.querySelectorAll(".file").length; i++) {
+            document.querySelectorAll(".file")[i].id = i;
         }
-    });
-    saveFile();
+        files.forEach((file) => {
+            if (file.no === parseInt(droppedElementId)) {
+                files[parseInt(droppedElementId)] = draggedFile;
+                file.no = parseInt(data[1]);
+            } else if (file.no === parseInt(data[1])) {
+                files[parseInt(data[1])] = droppedFile;
+                file.no = parseInt(droppedElementId);
+            }
+        });
+        saveFile();
+    }
 }
 
 function allowDrop(event) {
