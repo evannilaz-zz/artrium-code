@@ -1,2 +1,4 @@
 settings/*.*
 settings
+codemirror/*.*
+codemirror

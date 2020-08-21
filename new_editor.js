@@ -1,0 +1,1 @@
+const cm = CodeMirror.fromTextArea(editor);
