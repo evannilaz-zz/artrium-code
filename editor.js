@@ -18,7 +18,8 @@ const languageLists = {
     py: "python",
     sh: "shell",
     ps1: "powershell",
-    rb: "ruby"
+    rb: "ruby",
+    md: "markdown"
 }
 
 function configure(event) {

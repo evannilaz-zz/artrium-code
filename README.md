@@ -27,17 +27,11 @@ Note for Windows: ⌘ (Control), ⌥ (Alt)
 - [ ] Customizable CSS (theme)
 - [ ] Software/Web-app both available
 
-## Editor Library
-Editor library by [CodeMirror](https://codemirror.net).
-  
 ## Copyrights
+- [CodeMirror](https://codemirror.net) (Code editor library)
+- [File Icons](https://github.com/dmhendricks/file-icon-vectors)
 - [Inter](https://rsms.me/inter) (Base font)
 - [Toggle Icon](https://icon-icons.com/icon/sidebar-expand-toggle-nav/145935)
 - [Download Icon](https://www.iconfinder.com/icons/5204156/download_icon)
 - [GitHub Logo](https://github.com/logos)
 - [SF Mono](https://developer.apple.com/fonts) (Monospace font)
-- [HTML Logo](https://commons.wikimedia.org/wiki/File:HTML5_logo_and_wordmark.svg)
-- [CSS Logo](https://commons.wikimedia.org/wiki/File:CSS3_logo_and_wordmark.svg)
-- [JavaScript Logo](https://commons.wikimedia.org/wiki/File:Unofficial_JavaScript_logo_2.svg)
-- [JSON Logo](https://en.wikipedia.org/wiki/JSON#/media/File:JSON_vector_logo.svg)
-- [Text File Logo](https://www.pinterest.ph/pin/814588651336180780/)
