@@ -22,8 +22,7 @@ navToggle.addEventListener("click",() => {
     const explorer = document.querySelector("#fileExplorer");
     const editor = document.querySelector("#edit");
     if (editor.style.width === "95%") {
-        editor.querySelector("#lineNumber").style.width = "2.55%";
-        editor.querySelector("textarea").style.width = "97.45%";
+        editor.style.width = "97.45%";
         editor.style.right = "0";
         editor.style.width = "79%";
         explorer.style.transform = "none";
@@ -33,14 +32,13 @@ navToggle.addEventListener("click",() => {
         editor.style.width = "95%";
         editor.style.borderRadius = "10px";
         editor.style.right = "2.5%";
-        editor.querySelector("#lineNumber").style.width = "2%";
-        editor.querySelector("textarea").style.width = "98%";
+        cm.style.width = "98%";
     }
 })
 
-navDownload.addEventListener("click",() => {
+navDownload.addEventListener("click", () => {
     if (fileExp.querySelector(".selected")) {
-        const file = new Blob([editor.value]);
+        const file = new Blob([cm_editor.getValue()]);
         const a = document.createElement("a");
         const url = URL.createObjectURL(file);
         a.href = url;
@@ -66,44 +64,31 @@ window.addEventListener('beforeunload', (event) => {
     }
 });
 
-editor.addEventListener("input",() => {
-    const lineNumber = document.createElement("div");
-    if (!editor.value.find("\n")) {
-        lineNumberIndicator.innerHTML = "1\r\n";
-    } else if (editor.value.find("\n").length + 2 !== lineNumberIndicator.innerHTML.split("\n").length) {
-        for (var i = 0; i < editor.value.find("\n").length; i++) {
-            lineNumber.innerHTML += (i + 1) + "\r\n";
-        }
-        lineNumber.innerHTML += lineNumber.innerHTML.split("\n").length + "\r\n";
-        lineNumberIndicator.innerHTML = lineNumber.innerHTML;
-    }
-});
+// setInterval(() => {
+//     if (tabIndicator.innerHTML === "") {
+//         tabIndicator.style.height = "0";
+//         document.querySelector("#edit #parent").style.height = "100%";
+//         lineNumberIndicator.style.display = "none";
+//         editor.style.width = "100%";
+//         deactivateEditor();
+//     } else {
+//         editor.style.width = "98%";
+//         lineNumberIndicator.style.display = "block";
+//         document.querySelector("#edit #parent").style.height = "95%";
+//         tabIndicator.style.height = "5%";
+//     }
 
-setInterval(() => {
-    if (tabIndicator.innerHTML === "") {
-        tabIndicator.style.height = "0";
-        document.querySelector("#edit #parent").style.height = "100%";
-        lineNumberIndicator.style.display = "none";
-        editor.style.width = "100%";
-        deactivateEditor();
-    } else {
-        editor.style.width = "98%";
-        lineNumberIndicator.style.display = "block";
-        document.querySelector("#edit #parent").style.height = "95%";
-        tabIndicator.style.height = "5%";
-    }
+//     const loadedFiles = JSON.parse(localStorage.getItem("files"));
 
-    const loadedFiles = JSON.parse(localStorage.getItem("files"));
-
-    if (files.length === loadedFiles.length) {
-        for (var i = 0; i < files.length; i++) {
-            if (files[i].name !== loadedFiles[i].name || files[i].type !== loadedFiles[i].type || files[i].no !== loadedFiles[i].no || files[i].code !== loadedFiles[i].code) {
-                saved = false;
-            } else {
-                saved = true;
-            }
-        }
-    } else {
-        saved = false;
-    }
-});
+//     if (files.length === loadedFiles.length) {
+//         for (var i = 0; i < files.length; i++) {
+//             if (files[i].name !== loadedFiles[i].name || files[i].type !== loadedFiles[i].type || files[i].no !== loadedFiles[i].no || files[i].code !== loadedFiles[i].code) {
+//                 saved = false;
+//             } else {
+//                 saved = true;
+//             }
+//         }
+//     } else {
+//         saved = false;
+//     }
+// });

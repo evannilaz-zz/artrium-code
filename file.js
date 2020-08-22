@@ -1,13 +1,12 @@
 const fileExp = document.querySelector("#fileExplorer");
-const editor = document.querySelector("textarea");
 const fileCrtBtn = fileExp.querySelector("button");
 const fileCrtForm = fileExp.querySelector("form");
 const openFile = document.querySelector("#open");
 const tabIndicator = document.querySelector("#edit #tabs");
-const lineNumberIndicator = document.querySelector("#edit #lineNumber");
 const logoPage = document.querySelector("#edit #logoPage");
 let files = new Array();
 let fileShortcuts = new Array();
+let cm = document.querySelector(".CodeMirror");
 
 String.prototype.find = function(query) {
     let index = new Array();
@@ -56,49 +55,31 @@ function moveToTab(event) {
     files.forEach((file) => {
         if (file.name === event.target.innerText) {
             clickedTab = files[file.no];
-            editor.value = files[file.no].code;
         }
     });
 
-    lineNumberIndicator.innerHTML = "";
-    if (clickedTab.code.find("\n")) {
-        for (var i = 0; i < clickedTab.code.find("\n").length; i++) {
-            lineNumberIndicator.innerHTML += (i + 1) + "\r\n";
-        }
-    }
-    lineNumberIndicator.innerHTML += lineNumberIndicator.innerHTML.split("\n").length + "\r\n";
-    
     tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
     event.target.classList.add("selected");
-    fileExp.querySelectorAll(".file").forEach((shortcut) => {if (shortcut.innerText === event.target.innerText) shortcut.click()})
-    editor.focus();
-    editor.setSelectionRange(0,0);
+    fileExp.querySelectorAll(".file").forEach((shortcut) => {if (shortcut.innerText === event.target.innerText) shortcut.click()});
 }
 
 function showLogoPage() {
     if (logoPage.style.display !== "none") {
-        document.querySelector("#edit").style.background = "#354a5f";
-        document.querySelector("#edit").style.pointerEvents = "none";
+        document.querySelector("#edit").style.background = "#263238";
         document.querySelector("#edit").style.justifyContent = "center";
         tabIndicator.style.display = "none";
-        editor.style.display = "none";
-        document.querySelector("#parent").style.display = "none";
+        cm.classList.add("hidden");
     } else {
         document.querySelector("#edit").style.background = "none";
-        document.querySelector("#edit").style.pointerEvents = "all";
         document.querySelector("#edit").style.justifyContent = "flex-start";
         tabIndicator.style.display = "flex";
-        editor.style.display = "initial";
-        document.querySelector("#parent").style.display = "flex";
+        cm.classList.remove("hidden");
     }
 }
 
 const deactivateEditor = function() {
-    logoPage.style.display = "flex";
-    editor.value = "";
     showLogoPage();
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
-    editor.blur();
 }
 
 const activateEditor = function(event) {
@@ -119,21 +100,7 @@ const activateEditor = function(event) {
         newTab.classList.add("selected");
         newTab.style.width = "0";
 
-        lineNumberIndicator.innerHTML = "";
-
-        if (files[clickedShortcut.id].code.find("\n")) {
-            for (var i = 0; i < files[clickedShortcut.id].code.find("\n").length; i++) {
-                lineNumberIndicator.innerHTML += (i + 1) + "\r\n";
-            }
-        }
-
-        lineNumberIndicator.innerHTML += lineNumberIndicator.innerHTML.split("\n").length + "\r\n";
-
         logoPage.style.display = "none";
-        editor.value = files[clickedShortcut.id].code;
-        editor.focus();
-        editor.setSelectionRange(0,0);
-        editor.scrollTop = 0;
 
         let multipleTab = false;
         tabIndicator.querySelectorAll(".tab").forEach((tab) => {
@@ -195,7 +162,7 @@ function renameFile(event) {
 }
 
 function hide(element) {
-    element.classList.toggle("hidden");
+    if (element) element.classList.toggle("hidden");
 }
 
 function deleteFile(event) {
@@ -283,6 +250,7 @@ function displayFile(file) {
     div.innerHTML = `<span><img src="assets/${file.type}.webp"></span><form><input type="text"></form>${file.name}`;
     div.draggable = "true";
     div.classList.add("file");
+    div.classList.add(file.type);
     div.id = file.no;
     fileExp.appendChild(div);
 }
@@ -324,6 +292,8 @@ function allowDrop(event) {
 }
 
 function init() {
+    deactivateEditor();
+    cm.querySelector("textarea").addEventListener("input",saveChanges);
     const loadedFiles = JSON.parse(localStorage.getItem("files"));
     if (loadedFiles !== null) {
         loadedFiles.forEach((loadedFile) => {

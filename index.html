@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+        <link rel="stylesheet" href="codemirror/theme/material.css">
         <link rel="shortcut icon" href="favicon.ico">
         <link rel="icon" href="favicon.ico">
         <meta name="author" content="Lucas Han">
@@ -36,10 +37,7 @@
         </div>
         <div id="edit">
             <div id="tabs"></div>
-            <div id="parent">
-                <div id="lineNumber"></div>
-                <textarea placeholder="Your Code here..." wrap="off" autocomplete="false" spellcheck="false"></textarea>
-            </div>
+            <textarea class="hidden"></textarea>
             <div id="logoPage">
                 <img src="assets/artrium.png">
                 <div>No File Selected</div>
@@ -47,10 +45,17 @@
         </div>
         <input type="file" id="open" accept=".js,.html,.txt,.css,.json" style="display: none">
         <script src="codemirror/lib/codemirror.js"></script>
+        <script src="codemirror/mode/xml/xml.js"></script>
+        <script src="codemirror/mode/css/css.js"></script>
+        <script src="codemirror/mode/markdown/markdown.js"></script>
         <script src="codemirror/mode/javascript/javascript.js"></script>
-        <script src="file.js"></script>
+        <script src="codemirror/addon/edit/closebrackets.js"></script>
+        <script src="codemirror/addon/edit/closetag.js"></script>
+        <script src="codemirror/addon/edit/continuelist.js"></script>
+        <script src="codemirror/addon/edit/trailingspace.js"></script>
         <script src="editor.js"></script>
-        <!-- <script src="new_editor.js"></script> -->
+        <script src="file.js"></script>
+        <script src="shortcut.js"></script>
         <script src="avi.js"></script>
         <script src="init.js"></script>
     </body>
