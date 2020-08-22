@@ -63,13 +63,15 @@ function moveToTab(event) {
     fileExp.querySelectorAll(".file").forEach((shortcut) => {if (shortcut.innerText === event.target.innerText) shortcut.click()});
 }
 
-function showLogoPage() {
-    if (logoPage.style.display !== "none") {
+function showLogoPage(hide) {
+    if (hide) {
+        logoPage.style.display = "flex";
         document.querySelector("#edit").style.background = "#263238";
         document.querySelector("#edit").style.justifyContent = "center";
         tabIndicator.style.display = "none";
         cm.classList.add("hidden");
     } else {
+        logoPage.style.display = "none";
         document.querySelector("#edit").style.background = "none";
         document.querySelector("#edit").style.justifyContent = "flex-start";
         tabIndicator.style.display = "flex";
@@ -78,7 +80,7 @@ function showLogoPage() {
 }
 
 const deactivateEditor = function() {
-    showLogoPage();
+    showLogoPage(true);
     if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
 }
 
@@ -86,8 +88,7 @@ const activateEditor = function(event) {
     if (event.target.tagName === "DIV" || event.target.tagName === "IMG") {
         if (fileExp.querySelector(".selected")) saveFile();
         if (fileShortcuts) fileShortcuts.forEach((shortcut) => {shortcut.classList.remove("selected")});
-        logoPage.style.display = "none";
-        showLogoPage();
+        showLogoPage(false);
         let clickedShortcut = event.target;
         if (event.target.tagName === "IMG") {
             clickedShortcut = event.target.parentElement.parentElement;
@@ -99,8 +100,6 @@ const activateEditor = function(event) {
         newTab.classList.add("tab");
         newTab.classList.add("selected");
         newTab.style.width = "0";
-
-        logoPage.style.display = "none";
 
         let multipleTab = false;
         tabIndicator.querySelectorAll(".tab").forEach((tab) => {

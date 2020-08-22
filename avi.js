@@ -1,7 +1,7 @@
 const navHeader = document.querySelector("nav h3");
 const navToggle = document.querySelector("nav #toggle");
 const navDownload = document.querySelector("nav #download");
-let temp = 0;
+let temp;
 let saved;
 
 navHeader.addEventListener("mouseenter",() => {
@@ -64,31 +64,18 @@ window.addEventListener('beforeunload', (event) => {
     }
 });
 
-// setInterval(() => {
-//     if (tabIndicator.innerHTML === "") {
-//         tabIndicator.style.height = "0";
-//         document.querySelector("#edit #parent").style.height = "100%";
-//         lineNumberIndicator.style.display = "none";
-//         editor.style.width = "100%";
-//         deactivateEditor();
-//     } else {
-//         editor.style.width = "98%";
-//         lineNumberIndicator.style.display = "block";
-//         document.querySelector("#edit #parent").style.height = "95%";
-//         tabIndicator.style.height = "5%";
-//     }
+setInterval(() => {
+    const loadedFiles = JSON.parse(localStorage.getItem("files"));
 
-//     const loadedFiles = JSON.parse(localStorage.getItem("files"));
-
-//     if (files.length === loadedFiles.length) {
-//         for (var i = 0; i < files.length; i++) {
-//             if (files[i].name !== loadedFiles[i].name || files[i].type !== loadedFiles[i].type || files[i].no !== loadedFiles[i].no || files[i].code !== loadedFiles[i].code) {
-//                 saved = false;
-//             } else {
-//                 saved = true;
-//             }
-//         }
-//     } else {
-//         saved = false;
-//     }
-// });
+    if (files.length === loadedFiles.length) {
+        for (var i = 0; i < files.length; i++) {
+            if (files[i].name !== loadedFiles[i].name || files[i].type !== loadedFiles[i].type || files[i].no !== loadedFiles[i].no || files[i].code !== loadedFiles[i].code) {
+                saved = false;
+            } else {
+                saved = true;
+            }
+        }
+    } else {
+        saved = false;
+    }
+});

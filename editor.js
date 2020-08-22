@@ -6,7 +6,8 @@ let cm_editor = CodeMirror.fromTextArea(document.querySelector("textarea"),{
     indentUnit: 3,
     autofocus: true,
     dragDrop: false,
-    htmlMode: true
+    htmlMode: true,
+    smartIndent: true
 });
 
 function configure(event) {
