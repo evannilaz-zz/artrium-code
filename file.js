@@ -37,9 +37,6 @@ function filterFileName(fileName) {
     if (!/^[0-9a-zA-Z ... ]+$/.test(fileName) || fileName.split(".")[1] === undefined) {
         alert("The file name you've entered is unavailable.");
         return false;
-    } else if (!(fileName.split(".")[1] === "html" || fileName.split(".")[1] === "css" || fileName.split(".")[1] === "js" || fileName.split(".")[1] === "txt" || fileName.split(".")[1] === "json")) {
-        alert("Only HTML, CSS, JavaScript, Text File, and JSON is supported in Artrium Code currently.");
-        return false;
     } else {
         return true;
     }
@@ -150,9 +147,9 @@ function renameFile(event) {
         if (!cancel) {
             if (filterFileName(inputValue)) {
                 files[parseInt(event.target.parentElement.id)].name = inputValue;
-                files[parseInt(event.target.parentElement.id)].type = inputValue.split(".")[1].toUpperCase();
-                event.target.parentElement.className = `file ${inputValue.split(".")[1].toUpperCase()}`;
-                event.target.parentElement.innerHTML = `<span><img src="assets/${inputValue.split(".")[1].toUpperCase()}.webp"></span><form><input type="text"></form>${inputValue}`;
+                files[parseInt(event.target.parentElement.id)].type = inputValue.split(".")[1];
+                event.target.parentElement.className = `file ${inputValue.split(".")[1]}`;
+                event.target.parentElement.innerHTML = `<span><img src="https://raw.githubusercontent.com/dmhendricks/file-icon-vectors/master/dist/icons/high-contrast/${inputValue.split(".")[1]}.svg"></span><form><input type="text"></form>${inputValue}`;
                 tabIndicator.querySelectorAll(".tab").forEach((tab) => {if (tab.innerText === prevFileName) tab.innerText = inputValue});
                 saveFile();
             }
@@ -233,7 +230,7 @@ function crtNewFile(fileName,innerCode) {
         if (filterFileName(fileName)) {
             const fileInfo = {
                 name: fileName,
-                type: fileName.split(".")[1].toUpperCase(),
+                type: fileName.split(".")[1],
                 no: files.length,
                 code: innerCode
             };
@@ -246,7 +243,7 @@ function crtNewFile(fileName,innerCode) {
 
 function displayFile(file) {
     const div = document.createElement("div");
-    div.innerHTML = `<span><img src="assets/${file.type}.webp"></span><form><input type="text"></form>${file.name}`;
+    div.innerHTML = `<span><img src="https://raw.githubusercontent.com/dmhendricks/file-icon-vectors/master/dist/icons/high-contrast/${file.type}.svg"></span><form><input type="text"></form>${file.name}`;
     div.draggable = "true";
     div.classList.add("file");
     div.classList.add(file.type);

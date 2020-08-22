@@ -10,17 +10,31 @@ let cm_editor = CodeMirror.fromTextArea(document.querySelector("textarea"),{
     smartIndent: true
 });
 
+const languageLists = {
+    js: "javascript",
+    json: "javascript",
+    html: "xml",
+    rst: "rust",
+    py: "python",
+    sh: "shell",
+    ps1: "powershell",
+    rb: "ruby"
+}
+
 function configure(event) {
-    let configMode;
-    if (event.target.classList.contains("HTML")) {
-        configMode = "xml";
-    } else if (event.target.classList.contains("JS") || event.target.classList.contains("JSON")) {
-        configMode = "javascript";
-    } else {
-        configMode = event.target.classList.value.replace("file","").replace("selected","").replace(" ","").toLowerCase();
-    }
+    const lang = languageLists[event.target.classList[1]];
+    let temp = false;
+
+    document.head.querySelectorAll("script").forEach((scriptTag) => {
+        if (!scriptTag.src.includes(lang) && !temp) {
+            const newScript = document.createElement("script");
+            newScript.src = `https://codemirror.net/mode/${lang}/${lang}.js`;
+            document.head.appendChild(newScript);
+            temp = true;
+        }
+    });
     
-    cm_editor.setOption("mode",configMode);
+    setTimeout(() => {cm_editor.setOption("mode",lang)},100);
     cm_editor.setValue(files[event.target.id].code);
 }
 
