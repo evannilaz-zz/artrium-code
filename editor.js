@@ -22,8 +22,9 @@ const languageLists = {
 }
 
 function configure(event) {
-    const lang = languageLists[event.target.classList[1]];
+    let lang = languageLists[event.target.classList[1]];
     let temp = false;
+    if (!lang) lang = event.target.classList[1];
 
     document.head.querySelectorAll("script").forEach((scriptTag) => {
         if (!scriptTag.src.includes(lang) && !temp) {
