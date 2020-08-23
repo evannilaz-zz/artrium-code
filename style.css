@@ -1,3 +1,6 @@
+@import url('https://codemirror.net/lib/codemirror.css');
+@import url('https://codemirror.net/theme/material.css');
+@import url('https://codemirror.net/addon/hint/show-hint.css');
 @import url('https://rsms.me/inter/inter.css');
 @supports (font-variation-settings: normal) {
   html { font-family: 'Inter var', sans-serif; }
@@ -14,26 +17,6 @@
 
 ::-webkit-scrollbar {
     display: none !important;
-}
-
-#edit textarea::-webkit-scrollbar {
-    display: initial !important;
-    background: none;
-    width: 5px;
-    height: 5px;
-}
-
-#edit textarea::-webkit-scrollbar-track {
-    background: none;
-}
-
-#edit textarea::-webkit-scrollbar-thumb {
-    background: #576574;
-    border-radius: 5px;
-}
-
-#edit textarea::-webkit-scrollbar-thumb:hover {
-    background: #dfe4ea;
 }
 
 body {
@@ -272,7 +255,7 @@ span.cm-keyword {
     font-style: italic !important;
 }
 
-span.cm-conditional {
+span.cm-conditional, span.cm-bracket {
     color: #89ddff !important;
 }
 

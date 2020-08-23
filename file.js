@@ -110,7 +110,7 @@ const activateEditor = function(event) {
             tabIndicator.appendChild(newTab);
             setTimeout(() => {newTab.style.width = "9.5%"});
             setTimeout(() => {newTab.innerText = files[clickedShortcut.id].name;},180);
-            cm_editor.focus();
+            // cm_editor.focus();
         }
     }
 }
