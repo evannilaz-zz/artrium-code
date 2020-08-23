@@ -23,10 +23,9 @@ Note for Windows: ⌘ (Control), ⌥ (Alt)
 ## Necessary Features
 - [X] Brackets/Quotes Autocomplete
 - [X] File Manager (explorer)
+- [ ] Linter
+- [ ] Theme Selector
 - [ ] Miniplayer for Education Platform (e.g. Inflearn, Coursera)
-- [ ] Debugging via SSH or API
-- [ ] Customizable CSS (theme)
-- [ ] Software/Web-app both available
 
 ## Copyrights
 - [CodeMirror](https://codemirror.net) (Code editor library)
