@@ -41,7 +41,7 @@ function configure(event) {
         }
     });
     
-    setTimeout(() => {cm_editor.setOption("mode",lang)},100);
+    setTimeout(() => {cm_editor.setOption("mode",lang)},500);
     cm_editor.setValue(files[event.target.id].code);
 }
 
