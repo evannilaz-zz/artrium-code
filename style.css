@@ -3,11 +3,6 @@
   html { font-family: 'Inter var', sans-serif; }
 }
 
-@font-face {
-    font-family: SF Mono;
-    src: url("assets/SFMono-Regular.woff2");
-}
-
 * {
     font-family: -apple-system, Inter, sans-serif;
     outline: none;
@@ -246,22 +241,39 @@ nav a img:hover {
 
 .CodeMirror {
     cursor: text;
-    padding: 15px;
+    padding: 15px 15px 15px 0;
     height: 95% !important;
     border-radius: 10px 0 0 10px;
 }
 
 .CodeMirror * {
-    font-family: SFMono-Regular, SF Mono, Consolas, Ubuntu Mono, Liberation Mono, Menlo, monospace !important;
+    font-family: SFMono-Regular, Consolas, Ubuntu Mono, Liberation Mono, Menlo, monospace !important;
     font-size: 14.5px;
+    color: #89ddff;
 }
 
 .CodeMirror-linenumbers {
     padding-right: 5px !important;
 }
 
+span.cm-variable, span.cm-variable-2 {
+    color: #c8d6e5 !important;
+}
+
+span.cm-property {
+    color: #c7ecee !important;
+}
+
+span.cm-number {
+    color: #f78660 !important;
+}
+
 span.cm-keyword {
     font-style: italic !important;
+}
+
+span.cm-conditional {
+    color: #89ddff !important;
 }
 
 #edit #logoPage {

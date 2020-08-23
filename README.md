@@ -13,6 +13,7 @@ Note: Debugged on Google Chrome/Windows 10.
 
 ## Shortcut Keys
 - **⌘ + S**: Save file
+- **⌘ + Space**: Enable Autocomplete
 - **⌥ + Number**: Open nth file
 - **⌥ + W**: Delete tab
 - **⌥ + N**: Switch to next tab
@@ -20,7 +21,7 @@ Note: Debugged on Google Chrome/Windows 10.
 Note for Windows: ⌘ (Control), ⌥ (Alt)
 
 ## Necessary Features
-- [ ] Brackets/Quotes Autocomplete
+- [X] Brackets/Quotes Autocomplete
 - [X] File Manager (explorer)
 - [ ] Miniplayer for Education Platform (e.g. Inflearn, Coursera)
 - [ ] Debugging via SSH or API

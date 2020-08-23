@@ -6,7 +6,6 @@ const tabIndicator = document.querySelector("#edit #tabs");
 const logoPage = document.querySelector("#edit #logoPage");
 let files = new Array();
 let fileShortcuts = new Array();
-let cm = document.querySelector(".CodeMirror");
 
 String.prototype.find = function(query) {
     let index = new Array();
@@ -111,6 +110,7 @@ const activateEditor = function(event) {
             tabIndicator.appendChild(newTab);
             setTimeout(() => {newTab.style.width = "9.5%"});
             setTimeout(() => {newTab.innerText = files[clickedShortcut.id].name;},180);
+            cm_editor.focus();
         }
     }
 }
@@ -289,7 +289,6 @@ function allowDrop(event) {
 
 function init() {
     deactivateEditor();
-    cm.querySelector("textarea").addEventListener("input",saveChanges);
     const loadedFiles = JSON.parse(localStorage.getItem("files"));
     if (loadedFiles !== null) {
         loadedFiles.forEach((loadedFile) => {

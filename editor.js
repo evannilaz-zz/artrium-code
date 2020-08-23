@@ -7,7 +7,10 @@ let cm_editor = CodeMirror.fromTextArea(document.querySelector("textarea"),{
     autofocus: true,
     dragDrop: false,
     htmlMode: true,
-    smartIndent: true
+    // lint: true,
+    // gutters: ["CodeMirror-lint-markers"],
+    extraKeys: {"Ctrl-Space": "autocomplete"},
+    styleActiveLine: true
 });
 
 const languageLists = {
@@ -20,7 +23,9 @@ const languageLists = {
     ps1: "powershell",
     rb: "ruby",
     md: "markdown"
-}
+};
+
+let cm = document.querySelector(".CodeMirror");
 
 function configure(event) {
     let lang = languageLists[event.target.classList[1]];
@@ -44,8 +49,26 @@ function saveChanges(event) {
     files[document.querySelector(".file.selected").id].code = cm_editor.getValue();
 }
 
+function syntaxHighlight() {
+    document.querySelectorAll("span.cm-keyword").forEach((keyword) => {
+        if (keyword.innerHTML !== "var" && keyword.innerHTML !== "const" && keyword.innerHTML !== "let" && keyword.innerHTML !== "function" && !keyword.classList.contains("cm-conditional")) {
+            keyword.classList.add("cm-conditional");
+        }
+    });
+    document.querySelectorAll("span.cm-variable").forEach((variable) => {
+        document.querySelectorAll("span.cm-def").forEach((func) => {
+            if (func.innerHTML === variable.innerHTML) {
+                variable.classList.add("cm-def");
+                variable.classList.remove("cm-variable");
+            }
+        });
+    });
+}
+
 function init() {
     setInterval(() => {fileShortcuts.forEach((shortcut) => {shortcut.addEventListener("click",configure)})});
+    setInterval(syntaxHighlight,10);
+    cm.querySelector("textarea").addEventListener("input",saveChanges);
 }
 
 init();
