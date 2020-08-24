@@ -20,20 +20,14 @@ navHeader.addEventListener("mouseleave",() => {
 
 navToggle.addEventListener("click",() => {
     const explorer = document.querySelector("#fileExplorer");
-    const editor = document.querySelector("#edit");
-    if (editor.style.width === "95%") {
-        editor.style.width = "97.45%";
-        editor.style.right = "0";
-        editor.style.width = "79%";
+    const editor = document.querySelector("#full-edit");
+    if (editor.style.width === "98%") {
+        editor.style.width = "78%";
         explorer.style.transform = "none";
-        setTimeout(() => {cm.style.borderRadius = "10px 0 0 10px"},240);
     } else {
-        explorer.style.transform = "translateX(-100%)";
-        editor.style.width = "95%";
-        editor.style.borderRadius = "10px";
-        editor.style.right = "2.5%";
+        explorer.style.transform = "translateX(-110%)";
+        editor.style.width = "98%";
         cm.style.width = "98%";
-        cm.style.borderRadius = "10px";
     }
 })
 
@@ -66,6 +60,7 @@ window.addEventListener('beforeunload', (event) => {
 });
 
 setInterval(() => {
+    // document.querySelector("#console").style.top = (55 + parseInt(window.getComputedStyle(document.querySelector("#edit")).getPropertyValue("height").replace("px","")) - 15).toString() + "px";
     const loadedFiles = JSON.parse(localStorage.getItem("files"));
 
     if (files.length === loadedFiles.length) {

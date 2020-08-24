@@ -28,7 +28,7 @@
                 <a href="https://code.artrium.app">Artrium Code<span>:</span></a>
                 <div></div>
             </h3>
-            <span>Alpha v0.3</span>
+            <span>Beta v0.4</span>
             <button id="download" title="Download file">
                 <img src="assets/download.webp">
             </button>
@@ -46,17 +46,25 @@
             <button>+ Create New File</button>
             <form class="hidden"><input type="text" autocomplete="false" spellcheck="false" placeholder="Enter File Name"></form>
         </div>
-        <div id="edit">
-            <div id="tabs"></div>
-            <textarea class="hidden"></textarea>
-            <div id="logoPage">
-                <img src="assets/artrium.png">
-                <div>No File Selected</div>
+        <div id="full-edit">
+            <div id="edit">
+                <div id="tabs"></div>
+                <textarea class="hidden"></textarea>
+                <div id="logoPage">
+                    <img src="assets/artrium.png">
+                    <div>No File Selected</div>
+                </div>
+            </div>
+            <div id="console">
+                <div id="mode"><div>Error</div><div>Terminal</div></div>
+                <div id="error" class="hidden">No Errors have occured yet.</div>
+                <div id="terminal" class="hidden"></div>
             </div>
         </div>
         <input type="file" id="open" accept=".js,.html,.txt,.css,.json" style="display: none">
         <script src="editor.js"></script>
         <script src="file.js"></script>
+        <script src="console.js"></script>
         <script src="shortcut.js"></script>
         <script src="avi.js"></script>
         <script src="init.js"></script>

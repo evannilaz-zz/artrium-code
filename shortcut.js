@@ -5,9 +5,7 @@ function shortcutKey(event) {
     if ((lastKey === "Control" || lastKey === "Command") &&  event.key === "s") {
         event.preventDefault();
         saveFile(true);
-    } /* else if (keyHistory[keyHistory.length - 2] === "Control" && event.key === ",") {
-        if (lastKey === "Control" || lastKey === "Command") location.href += "settings";
-    } */ else if ((lastKey === "Alt" || lastKey === "Option") && /^[1-9]$/.test(event.key) && document.getElementById(parseInt(event.key) - 1)) {
+    } else if ((lastKey === "Alt" || lastKey === "Option") && /^[1-9]$/.test(event.key) && document.getElementById(parseInt(event.key) - 1)) {
         document.getElementById(parseInt(event.key) - 1).click();
     } else if ((lastKey === "Alt" || lastKey === "Option") && (event.key === "w" || event.key === "n") && tabIndicator.querySelector(".tab")) {
         const toDelete = document.querySelector(".tab.selected");
@@ -32,7 +30,21 @@ function shortcutKey(event) {
                 document.querySelector(".tab").click();
             }
         }
-    }
+    } else if (event.key === "F5" && lastKey === "Shift" && document.querySelector(".file.selected").classList.contains("js")) {
+        runCode();
+    } /* else if (event.key === "`" && (lastKey === "Control" || lastKey === "Command")) {
+        event.preventDefault();
+        const terminal = document.querySelector("#console");
+        const editor = document.querySelector("#edit");
+        if (editor.style.height !== "inherit") {
+            terminal.style.transform = "translateY(130%)";
+            const height = window.getComputedStyle(fileExp).getPropertyValue("height");
+            document.querySelector("#edit").style.height = window.getComputedStyle(fileExp).getPropertyValue("height");
+        } else {
+            terminal.style.transform = "none";
+            editor.style.height = "66%";
+        }
+    } */
     keyHistory.push(event.key);
 }
 

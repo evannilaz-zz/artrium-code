@@ -8,7 +8,6 @@ let cm_editor = CodeMirror.fromTextArea(document.querySelector("textarea"),{
     dragDrop: false,
     htmlMode: true,
     extraKeys: {"Ctrl-Space": "autocomplete", "Ctrl-/": "toggleComment"},
-    // styleActiveLine: true
 });
 
 const languageLists = {
