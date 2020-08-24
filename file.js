@@ -96,7 +96,7 @@ const activateEditor = function(event) {
         const newTab = document.createElement("div");
         newTab.classList.add("tab");
         newTab.classList.add("selected");
-        newTab.innerHTML = `<div></div><input type="button" value="✖">`;
+        newTab.innerHTML = `<div></div><input type="button" value="✕">`;
         newTab.style.width = "0";
 
         let multipleTab = false;
