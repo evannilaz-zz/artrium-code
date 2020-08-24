@@ -4,6 +4,7 @@ const fileCrtForm = fileExp.querySelector("form");
 const openFile = document.querySelector("#open");
 const tabIndicator = document.querySelector("#edit #tabs");
 const logoPage = document.querySelector("#edit #logoPage");
+const contextmenu = document.querySelector("#contextmenu");
 let files = new Array();
 let fileShortcuts = new Array();
 
@@ -117,8 +118,8 @@ const activateEditor = function(event) {
 
 
 function renameFile(event) {
-    if (event.target.tagName === "DIV") {
-        let clickedShortcut = event.target;
+    if (contexted.tagName === "DIV") {
+        let clickedShortcut = contexted;
         prevFileName = clickedShortcut.innerText;
         clickedShortcut.innerHTML = clickedShortcut.innerHTML.slice(0,clickedShortcut.innerHTML.lastIndexOf(">") + 1);
         clickedShortcut.querySelector("form").style.display = "initial";
@@ -131,6 +132,7 @@ function renameFile(event) {
                 else deactivateEditor();
             }
         });
+        contextmenu.classList.add("hidden");
     } else if (event.target.tagName === "FORM") {
         event.preventDefault();
         const inputValue = event.target.querySelector("input").value;
@@ -163,13 +165,21 @@ function hide(element) {
 
 function deleteFile(event) {
     event.preventDefault();
-    let toDelete = event.target;
-    if (toDelete.parentElement.id === "fileExplorer") {
-        let fileName = toDelete.innerText;
-        toDelete.style.filter = "opacity(0)";
-        setTimeout(() => {toDelete.parentElement.removeChild(toDelete);},200);
+    const toDelete = event.target;
+    if (toDelete.className.includes("tab")) {
+        toDelete.innerText = "";
+        setTimeout(() => {toDelete.style.width = "0"});
+        setTimeout(() => {
+            toDelete.parentElement.removeChild(toDelete);
+            if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
+            else deactivateEditor();
+        },150);
+    } else if (contexted.parentElement.id === "fileExplorer") {
+        let fileName = contexted.innerText;
+        contexted.style.filter = "opacity(0)";
+        setTimeout(() => {contexted.parentElement.removeChild(contexted);},200);
         files = files.filter((file) => {
-            return file.no !== parseInt(toDelete.id);
+            return file.no !== parseInt(contexted.id);
         });
         files.forEach((file) => {file.no = files.indexOf(file)});
         setTimeout(() => {
@@ -188,18 +198,18 @@ function deleteFile(event) {
                 },150);
             }
         });
+        setTimeout(() => {contextmenu.classList.add("hidden")},200);
         saveFile();
-    } else if (toDelete.className.includes("tab")) {
-        toDelete.innerText = "";
-        setTimeout(() => {toDelete.style.width = "0"});
-        setTimeout(() => {
-            toDelete.parentElement.removeChild(toDelete);
-            if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
-            else deactivateEditor();
-        },150);
     }
 }
 
+function showContextmenu(event) {
+    event.preventDefault();
+    contextmenu.classList.remove("hidden");
+    contextmenu.style.top = event.pageY + "px";
+    contextmenu.style.left = event.pageX + "px";
+    contexted = event.target;
+}
 
 function prepNewFile(event) {
     const input = fileCrtForm.querySelector("input");
@@ -306,10 +316,9 @@ function init() {
     fileExp.addEventListener("mousemove",() => {
         fileShortcuts = document.querySelectorAll(".file");
         fileShortcuts.forEach((shortcut) => {
-            shortcut.addEventListener("dblclick",renameFile);
             shortcut.addEventListener("click",activateEditor);
-            shortcut.addEventListener("contextmenu",deleteFile);
-            shortcut.querySelector("form").addEventListener("submit",renameFile);
+            shortcut.addEventListener("contextmenu",showContextmenu);
+            // shortcut.querySelector("form").addEventListener("submit",(e) => {e.preventDefault()});
             shortcut.addEventListener("dragstart",drag);
             shortcut.addEventListener("drop",drop);
             shortcut.addEventListener("dragover",allowDrop);
@@ -319,6 +328,8 @@ function init() {
             shortcut.addEventListener("contextmenu",deleteFile);
         });
     });
+    document.querySelector("#delete").addEventListener("click",deleteFile);
+    document.querySelector("#rename").addEventListener("click",() => {alert("Sorry. Renaming file is not available for a moment.\nWe'll fix this as soon as we can.")});
 }
 
 init();

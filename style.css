@@ -35,7 +35,7 @@ a {
     color: white;
 }
 
-button {
+#fileExplorer>button, nav>button {
     background: none;
     border: 1.5px solid #78909c;
     color: white;
@@ -47,7 +47,7 @@ button {
     transition: border .2s
 }
 
-button:hover {
+#fileExplorer>button:hover, nav>button:hover {
     border: 1.5px solid white;
 }
 
@@ -436,6 +436,45 @@ h3 {
 .tab.selected {
     background: rgba(47,53,66,.8);
     border: 1.9px solid rgba(47,53,66);
+}
+
+#contextmenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    border-radius: 8px;
+    width: 150px;
+    height: 85px;
+    background: rgba(30,30,30,.7);
+    z-index: 3;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+    transition: height .2s;
+}
+
+#contextmenu input {
+    width: 0;
+    height: 0;
+    border: none;
+}
+
+#contextmenu button {
+    border: none;
+    text-align: left;
+    width: 93%;
+    height: 40%;
+    border-radius: 5px;
+    font-size: 15px;
+    background: rgba(50,50,50,.7);
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0,0,0,.2);
+    cursor: pointer;
+    transition: background .2s;
+}
+
+#contextmenu button:hover {
+    background: rgba(80,80,80.8);
 }
 
 @keyframes appear-editor {

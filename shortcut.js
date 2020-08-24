@@ -49,7 +49,10 @@ function shortcutKey(event) {
 }
 
 function init() {
-    document.querySelectorAll("*").forEach((element) => {element.addEventListener("keydown",shortcutKey)});
+    document.querySelectorAll("*").forEach((element) => {
+        element.addEventListener("keydown",shortcutKey);
+        element.addEventListener("mousedown",(event) => {if (event.target.id !== "contextmenu" && event.target.parentElement.id !== "contextmenu") document.querySelector("#contextmenu").classList.add("hidden")})
+    });
 }
 
 init();

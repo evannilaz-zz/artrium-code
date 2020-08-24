@@ -7,4 +7,14 @@ function checkMobile() {
     }
 }
 
+function bringOfflineResource() {
+    document.head.querySelectorAll("script").forEach((scriptTag) => {
+        scriptTag.src = scriptTag.src.replace("https://codemirror.net","codemirror");
+    });
+}
+
 checkMobile();
+
+if (location.href.includes("127.0.0.1") || location.href.includes("localhost") || location.href.includes("C:/")) {
+    bringOfflineResource();
+}
