@@ -467,9 +467,9 @@ h3 {
     border-radius: 8px;
     width: 150px;
     height: 85px;
-    background: rgba(30,30,30,.7);
+    background: rgba(36,37,38,.7);
     z-index: 9;
-    box-shadow: 0 0 5px rgba(0,0,0,.3);
+    box-shadow: 0 0 5px rgba(255,255,255,.1);
     transition: height .2s;
 }
 
@@ -486,7 +486,7 @@ h3 {
     height: 40%;
     border-radius: 5px;
     font-size: 15px;
-    background: rgba(50,50,50,.7);
+    background: rgba(58,59,60,.7);
     color: white;
     text-shadow: 1px 1px 5px rgba(0,0,0,.2);
     cursor: pointer;
@@ -494,7 +494,7 @@ h3 {
 }
 
 #contextmenu button:hover {
-    background: rgba(80,80,80.8);
+    background: rgba(78,79,80,.7);
 }
 
 @keyframes appear-editor {
