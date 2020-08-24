@@ -327,6 +327,14 @@ function init() {
         });
         document.querySelectorAll(".tab").forEach((shortcut) => {
             shortcut.addEventListener("click",moveToTab);
+            shortcut.addEventListener("mouseenter",(event) => {
+                currentTab = event.target;
+                if (currentTab.parentElement.classList.contains("tab")) currentTab = event.target.parentElement;
+                currentTab.querySelector("input").style.filter = "opacity(1)";
+            });
+            shortcut.addEventListener("mouseleave",(event) => {
+                currentTab.querySelector("input").style.filter = "opacity(0)";
+            });
             shortcut.querySelector("input").addEventListener("click",deleteFile);
         });
     });

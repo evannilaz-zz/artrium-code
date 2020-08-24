@@ -441,7 +441,8 @@ h3 {
     background: none;
     border: none;
     cursor: pointer;
-    transition: transform .2s;
+    filter: opacity(0);
+    transition: transform .2s, filter .2s;
 }
 
 .tab input[type=button]:active {
