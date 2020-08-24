@@ -419,7 +419,7 @@ h3 {
     align-items: center;
     margin-right: 10px;
     border-radius: 7px;
-    padding-left: 10px;
+    padding: 0 5px 0 10px;
     background: rgba(47,53,66,.1);
     border: 1.9px solid rgba(47,53,66);
     text-shadow: 0 0 5px rgba(0,0,0,.3);
@@ -427,6 +427,25 @@ h3 {
     height: 100%;
     box-shadow: 2px 2px solid rgba(0,0,0,.3);
     transition: width .15s, border .2s, background .2s;
+}
+
+.tab div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tab input[type=button] {
+    margin-left: auto;
+    justify-self: flex-end;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.tab input[type=button]:active {
+    transform: scale(.9);
 }
 
 .tab:hover {
@@ -448,7 +467,7 @@ h3 {
     width: 150px;
     height: 85px;
     background: rgba(30,30,30,.7);
-    z-index: 3;
+    z-index: 9;
     box-shadow: 0 0 5px rgba(0,0,0,.3);
     transition: height .2s;
 }

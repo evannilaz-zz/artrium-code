@@ -96,11 +96,12 @@ const activateEditor = function(event) {
         const newTab = document.createElement("div");
         newTab.classList.add("tab");
         newTab.classList.add("selected");
+        newTab.innerHTML = `<div></div><input type="button" value="✖">`;
         newTab.style.width = "0";
 
         let multipleTab = false;
         tabIndicator.querySelectorAll(".tab").forEach((tab) => {
-            if (tab.innerText === files[clickedShortcut.id].name) {
+            if (tab.querySelector("div").innerText === files[clickedShortcut.id].name) {
                 multipleTab = true;
                 tab.click();
             }
@@ -110,7 +111,7 @@ const activateEditor = function(event) {
             tabIndicator.querySelectorAll(".tab").forEach((tab) => {tab.classList.remove("selected")});
             tabIndicator.appendChild(newTab);
             setTimeout(() => {newTab.style.width = "9.5%"});
-            setTimeout(() => {newTab.innerText = files[clickedShortcut.id].name;},180);
+            setTimeout(() => {newTab.querySelector("div").innerText = files[clickedShortcut.id].name;},180);
             // cm_editor.focus();
         }
     }
@@ -165,8 +166,9 @@ function hide(element) {
 
 function deleteFile(event) {
     event.preventDefault();
-    const toDelete = event.target;
-    if (toDelete.className.includes("tab")) {
+    let toDelete = event.target;
+    if (toDelete.parentElement.className.includes("tab")) {
+        toDelete = event.target.parentElement;
         toDelete.innerText = "";
         setTimeout(() => {toDelete.style.width = "0"});
         setTimeout(() => {
@@ -325,7 +327,7 @@ function init() {
         });
         document.querySelectorAll(".tab").forEach((shortcut) => {
             shortcut.addEventListener("click",moveToTab);
-            shortcut.addEventListener("contextmenu",deleteFile);
+            shortcut.querySelector("input").addEventListener("click",deleteFile);
         });
     });
     document.querySelector("#delete").addEventListener("click",deleteFile);
