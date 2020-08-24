@@ -1,4 +1,5 @@
 const terminal = document.querySelector("#console");
+let full = false;
 
 function setMode(event) {
     if (terminal.querySelector(".selected")) terminal.querySelector(".selected").classList.remove("selected");
@@ -31,6 +32,22 @@ function runCode() {
     }
     `;
     eval(code);
+}
+
+const hideConsole = function() {
+    const terminal = document.querySelector("#console");
+    const editor = document.querySelector("#edit");
+    if (!full) {
+        terminal.style.transform = "translateY(130%)";
+        terminal.style.display = "none";
+        editor.style.height = "100%";
+        full = true;
+    } else {
+        editor.style.height = "66%";
+        terminal.style.display = "block";
+        terminal.style.transform = "none"
+        full = false;
+    }
 }
 
 function init() {

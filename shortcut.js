@@ -32,19 +32,10 @@ function shortcutKey(event) {
         }
     } else if (event.key === "F5" && lastKey === "Shift" && document.querySelector(".file.selected").classList.contains("js")) {
         runCode();
-    } /* else if (event.key === "`" && (lastKey === "Control" || lastKey === "Command")) {
+    } else if (event.key === "`" && (lastKey === "Control" || lastKey === "Command")) {
         event.preventDefault();
-        const terminal = document.querySelector("#console");
-        const editor = document.querySelector("#edit");
-        if (editor.style.height !== "inherit") {
-            terminal.style.transform = "translateY(130%)";
-            const height = window.getComputedStyle(fileExp).getPropertyValue("height");
-            document.querySelector("#edit").style.height = window.getComputedStyle(fileExp).getPropertyValue("height");
-        } else {
-            terminal.style.transform = "none";
-            editor.style.height = "66%";
-        }
-    } */
+        hideConsole();
+    }
     keyHistory.push(event.key);
 }
 
