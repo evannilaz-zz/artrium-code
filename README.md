@@ -7,10 +7,6 @@ As you download the file you've edited, your browser may say that 'This kind of 
 
 Note: Debugged on Google Chrome/Windows 10.
 
-## How-to
-- Rename your file by double-clicking on the file
-- Delete your file/tab by right-clicking on the file
-
 ## Shortcut Keys
 - **⌘ + S**: Save file
 - **⌘ + Space**: Enable Autocomplete
