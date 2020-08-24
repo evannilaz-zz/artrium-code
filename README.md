@@ -17,6 +17,7 @@ Note: Debugged on Google Chrome/Windows 10.
 - **⌥ + Number**: Open nth file
 - **⌥ + W**: Delete tab
 - **⌥ + N**: Switch to next tab
+- **⇧ + F5**: Run File (JavaScript Only)
 
 Note for Windows: ⌘ (Control), ⌥ (Alt)
 
