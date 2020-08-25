@@ -335,6 +335,8 @@ span.cm-conditional, span.cm-bracket {
 }
 
 #console #terminal {
+    display: flex;
+    flex-direction: column;
     padding: 5px;
     overflow: scroll;
 }
@@ -342,11 +344,23 @@ span.cm-conditional, span.cm-bracket {
 #console #terminal div {
     padding: 5px;
     font-family: SFMono-Regular, Consolas, Ubuntu Mono, Liberation Mono, Menlo, monospace !important;
-    border-bottom: 1.5px solid gray;
 }
 
-#console #terminal div:last-child {
-    border-bottom: none;
+#console #terminal div:nth-child(2) {
+    order: 999;
+}
+
+#console #terminal form {
+    display: inline-block;
+    width: 90%;
+}
+
+#console #terminal input[type=text] {
+    width: 90%;
+    background: none;
+    border: none;
+    color: white;
+    font-family: SFMono-Regular, Consolas, Ubuntu Mono, Liberation Mono, Menlo, monospace !important;
 }
 
 h3 {

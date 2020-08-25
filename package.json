@@ -1,0 +1,19 @@
+{
+  "name": "artrium-code",
+  "version": "0.4.0",
+  "description": "Code editor built by web standard",
+  "main": "editor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ldhan0715/artrium-code.git"
+  },
+  "author": "Lucas Han",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ldhan0715/artrium-code/issues"
+  },
+  "homepage": "https://github.com/ldhan0715/artrium-code#readme"
+}

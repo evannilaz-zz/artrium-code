@@ -21,6 +21,7 @@
         <script src="https://codemirror.net/addon/hint/xml-hint.js"></script>
         <script src="https://codemirror.net/addon/comment/comment.js"></script>
         <script src="https://codemirror.net/addon/selection/active-line.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     </head>
     <body>
         <div id="contextmenu" class="hidden">
@@ -62,7 +63,10 @@
             <div id="console">
                 <div id="mode"><div>Error</div><div>Terminal</div></div>
                 <div id="error" class="hidden">No Errors have occured yet.</div>
-                <div id="terminal" class="hidden"></div>
+                <div id="terminal" class="hidden">
+                    <div>Artrium Code Terminal: v0.1<br>https://github.com/ldhan0715/artrium-code<br></div>
+                    <div>> <form><input type="text"></form></div>
+                </div>
             </div>
         </div>
         <input type="file" id="open" accept=".js,.html,.txt,.css,.json" style="display: none">

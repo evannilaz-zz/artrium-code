@@ -10,11 +10,34 @@ function setMode(event) {
 
 function setHistorySaver() {
     console.stdlog = console.log.bind(console);
-    console.logs = {history: new Array(), clear: function() {this.history.length = 0}};
+    console.stderr = console.log.bind(console);
     console.log = function() {
-        console.logs.history.push(...arguments);
         console.stdlog.apply(console,arguments);
+        if (!document.querySelector(".file.selected")) {
+            document.querySelector("#terminal").innerHTML += `<div>Console: ${arguments[0]}</div>`;
+            document.querySelector("#terminal input").focus();
+        } else {
+            document.querySelector("#terminal").innerHTML += `<div>${document.querySelector(".file.selected").innerText}: ${arguments[0]}</div>`;
+        }
     }
+    console.error = function() {
+        console.stderr.apply(console,arguments);
+        document.querySelector("#error").innerHTML = arguments[0];
+    }
+}
+
+function runCode_terminal(event) {
+    event.preventDefault();
+    const selected = document.querySelector(".file.selected");
+    if (selected) selected.classList.remove("selected");
+    eval(`
+    try {
+        ${event.target.querySelector("input").value};
+    } catch (err) {
+        console.error(err);
+    }
+    `);
+    if (selected) selected.classList.add("selected");
 }
 
 function runCode() {
@@ -22,13 +45,9 @@ function runCode() {
     const code = `
     try {
         ${cm_editor.getValue()}
-        document.querySelector("#terminal").innerHTML += "<div>" + document.querySelector(".file.selected").innerText + ": " + console.logs.history[console.logs.history.length - 1] + "</div>";
     } catch (err) {
-        let errMsg = new Array();
-        err.message.split(" ").forEach((str) => {
-            errMsg.push(str[0].toUpperCase() + str.slice(1));
-        });
-        document.querySelector("#error").innerHTML = err;
+        console.error(err);
+        document.querySelector("#mode div").click();
     }
     `;
     eval(code);
@@ -44,7 +63,7 @@ const hideConsole = function() {
         full = true;
     } else {
         editor.style.height = "66%";
-        terminal.style.display = "block";
+        terminal.style.display = "flex";
         terminal.style.transform = "none"
         full = false;
     }
@@ -54,6 +73,7 @@ function init() {
     setHistorySaver();
     document.querySelectorAll("#console #mode div").forEach((div) => {div.addEventListener("click",setMode)});
     document.querySelectorAll("#console #mode div")[1].click();
+    // document.querySelector("#console #terminal form").addEventListener("submit",runCode_terminal);
 }
 
 init();

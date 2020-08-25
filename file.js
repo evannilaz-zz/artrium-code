@@ -119,6 +119,8 @@ const activateEditor = function(event) {
 
 
 function renameFile(event) {
+    event.preventDefault();
+    // console.stdlog(event.target.tagName === "FORM");
     if (contexted.tagName === "DIV") {
         let clickedShortcut = contexted;
         prevFileName = clickedShortcut.innerText;
@@ -134,8 +136,7 @@ function renameFile(event) {
             }
         });
         contextmenu.classList.add("hidden");
-    } else if (event.target.tagName === "FORM") {
-        event.preventDefault();
+    } else {
         const inputValue = event.target.querySelector("input").value;
         let cancel;
 
@@ -320,7 +321,7 @@ function init() {
         fileShortcuts.forEach((shortcut) => {
             shortcut.addEventListener("click",activateEditor);
             shortcut.addEventListener("contextmenu",showContextmenu);
-            // shortcut.querySelector("form").addEventListener("submit",(e) => {e.preventDefault()});
+            $(shortcut).on("submit",(event) => {renameFile(event); return false});
             shortcut.addEventListener("dragstart",drag);
             shortcut.addEventListener("drop",drop);
             shortcut.addEventListener("dragover",allowDrop);
@@ -339,6 +340,7 @@ function init() {
         });
     });
     document.querySelector("#delete").addEventListener("click",deleteFile);
+    // document.querySelector("#rename").addEventListener("click",renameFile);
     document.querySelector("#rename").addEventListener("click",() => {alert("Sorry. Renaming file is not available for a moment.\nWe'll fix this as soon as we can.")});
 }
 
