@@ -73,7 +73,7 @@ function init() {
     setHistorySaver();
     document.querySelectorAll("#console #mode div").forEach((div) => {div.addEventListener("click",setMode)});
     document.querySelectorAll("#console #mode div")[1].click();
-    // document.querySelector("#console #terminal form").addEventListener("submit",runCode_terminal);
+    document.querySelector("#console #terminal form").addEventListener("submit",runCode_terminal);
 }
 
 init();
