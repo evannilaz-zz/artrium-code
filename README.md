@@ -10,6 +10,8 @@ Note: Debugged on Google Chrome/Windows 10.
 ## Shortcut Keys
 - **⌘ + S**: Save file
 - **⌘ + Space**: Enable Autocomplete
+- **⌘ + /**: Toggle Line Comment
+- **⌘ + `**: Toggle Terminal
 - **⌥ + Number**: Open nth file
 - **⌥ + W**: Delete tab
 - **⌥ + N**: Switch to next tab
