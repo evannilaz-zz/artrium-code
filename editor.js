@@ -61,11 +61,6 @@ function syntaxHighlight() {
             }
         });
     });
-    if (cm_editor.options.mode === "" || cm_editor.options.mode === "markdown") {
-        document.querySelectorAll(".CodeMirror *").forEach((element) => {element.style.color = "#c8d6e5"});
-    } else {
-        document.querySelectorAll(".CodeMirror *").forEach((element) => {element.style.color = "#89ddff"});
-    }
 }
 
 function init() {
