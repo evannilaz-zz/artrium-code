@@ -401,21 +401,15 @@ h3 {
     height: 23px;
 }
 
-.file form {
-    display: none;
+.file input {
     width: 60%;
     height: 95%;
-}
-
-.file form input {
-    width: 100%;
-    height: 100%;
     border: none;
     border-bottom: 1.5px solid #78909c;
     text-align: right;
 }
 
-.file form input:focus {
+.file input:focus {
     border-bottom: 1.5px solid white;
 }
 

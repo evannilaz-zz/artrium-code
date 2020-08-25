@@ -119,25 +119,16 @@ const activateEditor = function(event) {
 
 
 function renameFile(event) {
-    event.preventDefault();
-    // console.stdlog(event.target.tagName === "FORM");
-    if (contexted.tagName === "DIV") {
+    if (contexted.tagName === "DIV" && event.target.tagName === "BUTTON") {
         let clickedShortcut = contexted;
         prevFileName = clickedShortcut.innerText;
         clickedShortcut.innerHTML = clickedShortcut.innerHTML.slice(0,clickedShortcut.innerHTML.lastIndexOf(">") + 1);
-        clickedShortcut.querySelector("form").style.display = "initial";
-        clickedShortcut.querySelector("form>input").value = prevFileName;
-        clickedShortcut.querySelector("form>input").focus();
-        tabIndicator.querySelectorAll(".tab").forEach((tab) => {
-            if (tab.innerText === prevFileName) {
-                tab.parentElement.removeChild(tab);
-                if (tabIndicator.querySelector(".tab")) tabIndicator.querySelector(".tab").click();
-                else deactivateEditor();
-            }
-        });
+        clickedShortcut.querySelector("input").classList.remove("hidden");
+        clickedShortcut.querySelector("input").value = prevFileName;
+        clickedShortcut.querySelector("input").focus();
         contextmenu.classList.add("hidden");
-    } else {
-        const inputValue = event.target.querySelector("input").value;
+    } else if (event.target.tagName === "INPUT") {
+        const inputValue = event.target.value;
         let cancel;
 
         files.forEach((file) => {
@@ -153,9 +144,10 @@ function renameFile(event) {
                 files[parseInt(event.target.parentElement.id)].name = inputValue;
                 files[parseInt(event.target.parentElement.id)].type = inputValue.split(".")[1];
                 event.target.parentElement.className = `file ${inputValue.split(".")[1]}`;
-                event.target.parentElement.innerHTML = `<span><img src="https://raw.githubusercontent.com/dmhendricks/file-icon-vectors/master/dist/icons/high-contrast/${inputValue.split(".")[1]}.svg"></span><form><input type="text"></form>${inputValue}`;
-                tabIndicator.querySelectorAll(".tab").forEach((tab) => {if (tab.innerText === prevFileName) tab.innerText = inputValue});
+                event.target.parentElement.innerHTML = `<span><img src="https://raw.githubusercontent.com/dmhendricks/file-icon-vectors/master/dist/icons/high-contrast/${inputValue.split(".")[1]}.svg"></span><input type="text" class="hidden">${inputValue}`;
+                tabIndicator.querySelectorAll(".tab").forEach((tab) => {if (tab.innerText === prevFileName) tab.innerHTML = tab.innerHTML.slice(0,5) + inputValue + tab.innerHTML.slice(tab.innerHTML.indexOf("</div>"))});
                 saveFile();
+                fired = true;
             }
         }
     }
@@ -256,7 +248,7 @@ function crtNewFile(fileName,innerCode) {
 
 function displayFile(file) {
     const div = document.createElement("div");
-    div.innerHTML = `<span><img src="https://raw.githubusercontent.com/dmhendricks/file-icon-vectors/master/dist/icons/high-contrast/${file.type}.svg"></span><form><input type="text"></form>${file.name}`;
+    div.innerHTML = `<span><img src="https://raw.githubusercontent.com/dmhendricks/file-icon-vectors/master/dist/icons/high-contrast/${file.type}.svg"></span><input type="text" class="hidden">${file.name}`;
     div.draggable = "true";
     div.classList.add("file");
     div.classList.add(file.type);
@@ -321,7 +313,8 @@ function init() {
         fileShortcuts.forEach((shortcut) => {
             shortcut.addEventListener("click",activateEditor);
             shortcut.addEventListener("contextmenu",showContextmenu);
-            $(shortcut).on("submit",(event) => {renameFile(event); return false});
+            shortcut.querySelector("input").addEventListener("keydown",(event) => {if (event.keyCode === 13 && !fired) renameFile(event)});
+            shortcut.querySelector("input").addEventListener("keyup",(event) => {fired = false});
             shortcut.addEventListener("dragstart",drag);
             shortcut.addEventListener("drop",drop);
             shortcut.addEventListener("dragover",allowDrop);
@@ -340,8 +333,8 @@ function init() {
         });
     });
     document.querySelector("#delete").addEventListener("click",deleteFile);
-    // document.querySelector("#rename").addEventListener("click",renameFile);
-    document.querySelector("#rename").addEventListener("click",() => {alert("Sorry. Renaming file is not available for a moment.\nWe'll fix this as soon as we can.")});
+    document.querySelector("#rename").addEventListener("click",renameFile);
+    // document.querySelector("#rename").addEventListener("click",() => {alert("Sorry. Renaming file is not available for a moment.\nWe'll fix this as soon as we can.")});
 }
 
 init();
