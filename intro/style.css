@@ -1,0 +1,80 @@
+@import url('https://rsms.me/inter/inter.css');
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter var', sans-serif; }
+}
+
+* {
+    font-family: -apple-system, Inter, sans-serif;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background: linear-gradient(30deg, #9fb8ad 0%,#1fc8db 51%,#2cb5e8 75%) no-repeat;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 200px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,.3);
+    overflow: hidden;
+    color: white;
+}
+
+h1 {
+    font-size: 35px;
+    font-weight: 600;
+    animation: fadeUp .5s;
+}
+
+body>div {
+    margin-top: 50px;
+}
+
+button {
+    height: 50px;
+    padding: 15px;
+    margin: 15px;
+    color: white;
+    font-size: 16px;
+    border: 1.5px solid white;
+    border-radius: 25px;
+    background: none;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0,0,0,.2);
+    transition: color .3s, background .3s, box-shadow .3s;
+    animation: fadeIn .8s;
+}
+
+button:hover {
+    background: white;
+    color: #1fc8db;
+    box-shadow: 3px 3px 10px rgba(0,0,0,.35);
+}
+
+footer {
+    position: absolute;
+    left: 44%;
+    bottom: 1%;
+}
+
+img {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 70px;
+    filter: drop-shadow(0px 0px 5px rgba(0,0,0,.5));
+}
+
+@keyframes fadeUp {
+    from {filter: opacity(.3); transform: translateY(150px)}
+    to {}
+}
+
+@keyframes fadeIn {
+    from {filter: opacity(.3)}
+    to {}
+}
