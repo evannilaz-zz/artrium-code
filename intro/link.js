@@ -1,5 +1,5 @@
 document.querySelectorAll("div>button")[0].addEventListener("click",() => {
-    localStorage.setItem("files","");
+    localStorage.setItem("files",JSON.stringify(new Array()));
     location.href = "../index.html";
 });
 
