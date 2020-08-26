@@ -240,11 +240,10 @@ nav a img:hover {
 .CodeMirror * {
     font-family: SFMono-Regular, Consolas, Ubuntu Mono, Liberation Mono, Menlo, monospace !important;
     font-size: 14.5px;
-    color: #89ddff;
 }
 
-.CodeMirror-linenumbers {
-    padding-right: 5px !important;
+.CodeMirror-default {
+    color: #89ddff;
 }
 
 span.cm-variable, span.cm-variable-2 {
@@ -263,7 +262,7 @@ span.cm-keyword {
     font-style: italic !important;
 }
 
-span.cm-conditional, span.cm-bracket {
+span.cm-keyword-2, span.cm-bracket {
     color: #89ddff !important;
 }
 
@@ -453,7 +452,7 @@ h3 {
 }
 
 .tab input[type=button]:active {
-    transform: scale(.9);
+    transform: scale(1.1);
 }
 
 .tab:hover {

@@ -1,22 +1,78 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- License Acknowledgements: https://code.artrium.app/LICENSE -->
         <title>Artrium Code</title>
         <meta charset="utf-8">
         <meta name="author" content="Lucas Han">
-        <link rel="stylesheet" href="css/welcome.css">
+        <link rel="stylesheet" href="css/style.css">
         <link rel="shortcut icon" href="favicon.ico">
         <link rel="icon" href="favicon.ico">
+        <script src="https://codemirror.net/lib/codemirror.js"></script>
+        <script src="https://codemirror.net/addon/edit/closebrackets.js"></script>
+        <script src="https://codemirror.net/addon/edit/closetag.js"></script>
+        <script src="https://codemirror.net/addon/edit/continuelist.js"></script>
+        <script src="https://codemirror.net/addon/edit/trailingspace.js"></script>
+        <script src="https://codemirror.net/addon/hint/anyword-hint.js"></script>
+        <script src="https://codemirror.net/addon/hint/javascript-hint.js"></script>
+        <script src="https://codemirror.net/addon/hint/css-hint.js"></script>
+        <script src="https://codemirror.net/addon/hint/html-hint.js"></script>
+        <script src="https://codemirror.net/addon/hint/sql-hint.js"></script>
+        <script src="https://codemirror.net/addon/hint/xml-hint.js"></script>
+        <script src="https://codemirror.net/addon/comment/comment.js"></script>
     </head>
     <body>
-        <img src="img/artrium.png">
-        <h1>Welcome to Artrium Code!</h1>
-        <div>
-            <button>Wanna Start Right Away?</button>
-            ...or
-            <button>Read Documentation</button>
+        <div id="contextmenu" class="hidden">
+            <button type="button" id="delete">Delete</button>
+            <button type="button" id="rename">Rename</button>
         </div>
-        <footer>© Copyright 2020 Lucas Han</footer>
-        <script src="js/welcome.js"></script>
+        <nav>
+            <h3>
+                <a href="https://code.artrium.app">Artrium Code<span>:</span></a>
+                <div></div>
+            </h3>
+            <span>Beta v0.4.5</span>
+            <button id="download" title="Download file">
+                <img src="img/download.webp">
+            </button>
+            <button id="toggle" title="Toggle Sidebar">
+                <img src="img/toggle.webp">
+            </button>
+            <label for="open" title="Open File">
+                <img src="img/open.webp">
+            </label>
+            <a href="https://github.com/ldhan0715/artrium-code" title="GitHub Repo">
+                <img src="img/github.webp">
+            </a>
+        </nav>
+        <div id="fileExplorer">
+            <button>+ Create New File</button>
+            <form class="hidden"><input type="text" autocomplete="false" spellcheck="false" placeholder="Enter File Name"></form>
+        </div>
+        <div id="full-edit">
+            <div id="edit">
+                <div id="tabs"></div>
+                <textarea class="hidden"></textarea>
+                <div id="logoPage">
+                    <img src="img/artrium.png">
+                    <div>No File Selected</div>
+                </div>
+            </div>
+            <div id="console">
+                <div id="mode"><div>Error</div><div>Terminal</div></div>
+                <div id="error" class="hidden">No Errors have occured yet.</div>
+                <div id="terminal" class="hidden">
+                    <div>Artrium Code Terminal: v0.1<br>https://github.com/ldhan0715/artrium-code<br></div>
+                    <div>> <input type="text" onkeydown="runCode_terminal(event)"></div>
+                </div>
+            </div>
+        </div>
+        <input type="file" id="open" style="display: none">
+        <script src="js/init.js"></script>
+        <script src="js/editor.js"></script>
+        <script src="js/file.js"></script>
+        <script src="js/console.js"></script>
+        <script src="js/shortcut.js"></script>
+        <script src="js/avi.js"></script>
     </body>
 </html>

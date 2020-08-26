@@ -1,12 +1,8 @@
 document.querySelectorAll("div>button")[0].addEventListener("click",() => {
-    localStorage.setItem("files",JSON.stringify(new Array()));
-    location.replace("main");
+    localStorage.setItem("visited",JSON.stringify(true));
+    location.replace("index");
 });
 
 document.querySelectorAll("div>button")[1].addEventListener("click",() => {
     location.href = "https://github.com/ldhan0715/artrium-code/#readme";
 });
-
-if (localStorage.getItem("files") !== null) {
-    location.replace("main");
-}
