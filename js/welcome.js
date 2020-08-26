@@ -8,5 +8,5 @@ document.querySelectorAll("div>button")[1].addEventListener("click",() => {
 });
 
 if (localStorage.getItem("files") !== null) {
-    location.replace("main.html");
+    location.replace("main");
 }
