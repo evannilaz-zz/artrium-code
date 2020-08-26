@@ -1,6 +1,6 @@
 document.querySelectorAll("div>button")[0].addEventListener("click",() => {
     localStorage.setItem("files",JSON.stringify(new Array()));
-    location.href = "index.html";
+    location.replace("index");
 });
 
 document.querySelectorAll("div>button")[1].addEventListener("click",() => {
