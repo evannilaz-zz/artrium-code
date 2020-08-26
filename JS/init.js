@@ -13,14 +13,7 @@ function bringOfflineResource() {
     });
 }
 
-function intro() {
-    if (localStorage.getItem("files") === null) {
-        location.replace("welcome");
-    }
-}
-
 checkMobile();
-intro();
 
 if (location.href.includes("127.0.0.1") || location.href.includes("localhost") || location.href.includes("C:/")) {
     bringOfflineResource();
