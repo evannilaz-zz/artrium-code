@@ -11,7 +11,6 @@
     outline: none;
     user-select: none;
     -webkit-user-select: none;
-    -moz-user-select: none;
     box-sizing: border-box;
 }
 
@@ -392,6 +391,7 @@ h3 {
     border-radius: 2px;
     display: flex;
     margin: 0;
+    margin-left: 2px;
     margin-right: auto;
     justify-self: flex-start;
     align-items: center;
