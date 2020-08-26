@@ -10,34 +10,27 @@ function setMode(event) {
 
 function setHistorySaver() {
     console.stdlog = console.log.bind(console);
-    console.stderr = console.log.bind(console);
+    console.stderr = console.error.bind(console);
     console.log = function() {
-        console.stdlog.apply(console,arguments);
-        if (!document.querySelector(".file.selected")) {
-            document.querySelector("#terminal").innerHTML += `<div>Console: ${arguments[0]}</div>`;
-            document.querySelector("#terminal input").focus();
-        } else {
-            document.querySelector("#terminal").innerHTML += `<div>${document.querySelector(".file.selected").innerText}: ${arguments[0]}</div>`;
-        }
+        document.querySelector("#terminal").innerHTML += `<div>>> ${arguments[0]}</div>`;
+        document.querySelector("#terminal input").focus();
     }
     console.error = function() {
-        console.stderr.apply(console,arguments);
         document.querySelector("#error").innerHTML = arguments[0];
     }
 }
 
 function runCode_terminal(event) {
-    event.preventDefault();
-    const selected = document.querySelector(".file.selected");
-    if (selected) selected.classList.remove("selected");
-    eval(`
-    try {
-        ${event.target.querySelector("input").value};
-    } catch (err) {
-        console.error(err);
+    if (event.keyCode === 13) {
+        eval(`
+        try {
+            ${event.target.value};
+        } catch (err) {
+            console.error(err);
+        }
+        `);
+        event.target.value = "";
     }
-    `);
-    if (selected) selected.classList.add("selected");
 }
 
 function runCode() {
@@ -73,7 +66,6 @@ function init() {
     setHistorySaver();
     document.querySelectorAll("#console #mode div").forEach((div) => {div.addEventListener("click",setMode)});
     document.querySelectorAll("#console #mode div")[1].click();
-    document.querySelector("#console #terminal form").addEventListener("submit",runCode_terminal);
 }
 
 init();

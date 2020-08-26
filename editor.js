@@ -23,6 +23,8 @@ const languageLists = {
     txt: ""
 };
 
+const keywords = ["const","var","let","func","function","def","class"];
+
 let cm = document.querySelector(".CodeMirror");
 
 function importLang(file) {
@@ -48,9 +50,8 @@ function saveChanges() {
 
 function syntaxHighlight() {
     document.querySelectorAll("span.cm-keyword").forEach((keyword) => {
-        if (keyword.innerHTML !== "var" && keyword.innerHTML !== "const" && keyword.innerHTML !== "let" && keyword.innerHTML !== "function" && !keyword.classList.contains("cm-conditional")) {
+        if (!keywords.includes(keyword.innerHTML)) {
             keyword.classList.add("cm-conditional");
-            keyword.classList.add("cm-keyword");
         }
     });
     document.querySelectorAll("span.cm-variable").forEach((variable) => {

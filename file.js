@@ -147,7 +147,7 @@ function renameFile(event) {
                 event.target.parentElement.innerHTML = `<span><img src="https://raw.githubusercontent.com/dmhendricks/file-icon-vectors/master/dist/icons/high-contrast/${inputValue.split(".")[1]}.svg"></span><input type="text" class="hidden">${inputValue}`;
                 tabIndicator.querySelectorAll(".tab").forEach((tab) => {if (tab.innerText === prevFileName) tab.innerHTML = tab.innerHTML.slice(0,5) + inputValue + tab.innerHTML.slice(tab.innerHTML.indexOf("</div>"))});
                 saveFile();
-                fired = true;
+                ren_fired = true;
             }
         }
     }
@@ -313,8 +313,8 @@ function init() {
         fileShortcuts.forEach((shortcut) => {
             shortcut.addEventListener("click",activateEditor);
             shortcut.addEventListener("contextmenu",showContextmenu);
-            shortcut.querySelector("input").addEventListener("keydown",(event) => {if (event.keyCode === 13 && !fired) renameFile(event)});
-            shortcut.querySelector("input").addEventListener("keyup",(event) => {fired = false});
+            shortcut.querySelector("input").addEventListener("keydown",(event) => {if (event.keyCode === 13 && !ren_fired) renameFile(event)});
+            shortcut.querySelector("input").addEventListener("keyup",(event) => {ren_fired = false});
             shortcut.addEventListener("dragstart",drag);
             shortcut.addEventListener("drop",drop);
             shortcut.addEventListener("dragover",allowDrop);

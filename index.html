@@ -20,7 +20,6 @@
         <script src="https://codemirror.net/addon/hint/sql-hint.js"></script>
         <script src="https://codemirror.net/addon/hint/xml-hint.js"></script>
         <script src="https://codemirror.net/addon/comment/comment.js"></script>
-        <script src="https://codemirror.net/addon/selection/active-line.js"></script>
     </head>
     <body>
         <div id="contextmenu" class="hidden">
@@ -64,7 +63,7 @@
                 <div id="error" class="hidden">No Errors have occured yet.</div>
                 <div id="terminal" class="hidden">
                     <div>Artrium Code Terminal: v0.1<br>https://github.com/ldhan0715/artrium-code<br></div>
-                    <div>> <form><input type="text"></form></div>
+                    <div>> <input type="text" onkeydown="runCode_terminal(event)"></div>
                 </div>
             </div>
         </div>
