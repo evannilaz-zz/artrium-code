@@ -15,7 +15,7 @@ function bringOfflineResource() {
 
 function intro() {
     if (localStorage.getItem("files") === null) {
-        location.replace(location.href.slice(0,location.href.lastIndexOf("/")) + "/intro");
+        location.replace("welcome.html");
     }
 }
 
