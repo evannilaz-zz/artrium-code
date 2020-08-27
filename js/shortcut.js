@@ -1,4 +1,5 @@
 let next_fired = false;
+let hidden = false;
 
 function shortcutKey(event) {
     if (event.ctrlKey &&  event.key === "s") {
@@ -38,13 +39,15 @@ function shortcutKey(event) {
     } else if (event.ctrlKey && event.key === "b") {
         const explorer = document.querySelector("#fileExplorer");
         const editor = document.querySelector("#full-edit");
-        if (editor.style.width === "98%") {
+        if (hidden) {
             editor.style.width = "78%";
             explorer.style.transform = "none";
+            hidden = false;
         } else {
             explorer.style.transform = "translateX(-110%)";
             editor.style.width = "98%";
             cm.style.width = "98%";
+            hidden = true;
         }
     }
 }
