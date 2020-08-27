@@ -18,19 +18,6 @@ navHeader.addEventListener("mouseleave",() => {
     setTimeout(() => {navHeader.querySelector("div").style.marginLeft = "0"},200);
 });
 
-navToggle.addEventListener("click",() => {
-    const explorer = document.querySelector("#fileExplorer");
-    const editor = document.querySelector("#full-edit");
-    if (editor.style.width === "98%") {
-        editor.style.width = "78%";
-        explorer.style.transform = "none";
-    } else {
-        explorer.style.transform = "translateX(-110%)";
-        editor.style.width = "98%";
-        cm.style.width = "98%";
-    }
-})
-
 navDownload.addEventListener("click", () => {
     if (fileExp.querySelector(".selected")) {
         const file = new Blob([cm_editor.getValue()]);

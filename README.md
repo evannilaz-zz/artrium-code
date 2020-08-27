@@ -9,6 +9,7 @@ Note: Debugged on Google Chrome/Windows 10.
 
 ## Shortcut Keys
 - **⌘ + S**: Save file
+- **⌘ + B**: Toggle File Explorer
 - **⌘ + Space**: Enable Autocomplete
 - **⌘ + /**: Toggle Line Comment
 - **⌘ + `**: Toggle Terminal

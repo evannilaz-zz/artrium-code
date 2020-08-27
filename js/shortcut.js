@@ -35,6 +35,17 @@ function shortcutKey(event) {
     } else if (event.ctrlKey && event.key === "`") {
         event.preventDefault();
         hideConsole();
+    } else if (event.ctrlKey && event.key === "b") {
+        const explorer = document.querySelector("#fileExplorer");
+        const editor = document.querySelector("#full-edit");
+        if (editor.style.width === "98%") {
+            editor.style.width = "78%";
+            explorer.style.transform = "none";
+        } else {
+            explorer.style.transform = "translateX(-110%)";
+            editor.style.width = "98%";
+            cm.style.width = "98%";
+        }
     }
 }
 

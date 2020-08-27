@@ -88,61 +88,36 @@ nav>span {
     transition: filter .2s .1s;
 }
 
-nav #toggle, nav #download, nav label, nav>a {
+nav div {
     display: flex;
-    border: none;
-    align-items: center;
-    margin-right: 10px;
     justify-self: flex-end;
-    cursor: pointer;
-}
-
-nav #toggle {
-    margin-right: 15px;
-}
-
-nav #download {
-    position: relative;
-    left: 15px;
     margin-left: auto;
 }
 
-nav label {
-    position: relative;
-    right: 10px;
-}
-
-nav #toggle:hover, nav #download:hover, nav label:hover {
-    border: none;
-}
-
-nav #toggle img, nav #download img, nav label img {
-    width: 30px;
-    transition: filter .2s;
-}
-
-nav label img {
-    width: 23px;
-}
-
-nav #toggle img:hover, nav #download img:hover, nav label img:hover {
-    filter: opacity(.7);
-}
-
-nav>a {
+nav div>* {
     display: flex;
-    margin-left: 0;
-    justify-self: flex-end;
     align-items: center;
+    justify-content: center;
+    border: none;
+    margin-right: 15px;
+    cursor: pointer;
+    background: none;
 }
 
-nav a img {
-    margin-right: 5px;
+nav div #download {
+    margin-right: 8px;
+}
+
+nav div img {
     width: 26px;
     transition: filter .2s;
 }
 
-nav a img:hover {
+nav div #download img {
+    width: 30px;
+}
+
+nav div img:hover {
     filter: opacity(.7);
 }
 
