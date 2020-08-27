@@ -43,7 +43,7 @@ function configure(event) {
     if (!lang) lang = event.target.classList[1];
     cm_editor.setValue(files[event.target.id].code);
     setTimeout(() => cm_editor.setOption("mode",lang));
-    if (lang === "xml") cm_editor.setOption("htmlMode",false); else cm_editor.setOption("htmlMode",true);
+    // if (lang === "xml") cm_editor.setOption("htmlMode",false); else cm_editor.setOption("htmlMode",true);
 }
 
 function saveChanges() {

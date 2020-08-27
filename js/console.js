@@ -11,12 +11,20 @@ function setMode(event) {
 function setHistorySaver() {
     console.stdlog = console.log.bind(console);
     console.stderr = console.error.bind(console);
+    console.stdwrn = console.warn.bind(console);
     console.log = function() {
         document.querySelector("#terminal").innerHTML += `<div>>> ${arguments[0]}</div>`;
         document.querySelector("#terminal input").focus();
     }
     console.error = function() {
-        document.querySelector("#error").innerHTML = arguments[0];
+        document.querySelector("#problems div").classList.add("hidden");
+        document.querySelector("#problems").innerHTML += `<div class="err">[${arguments[1] ? document.querySelector(".file.selected").innerText : 'Anonymous'}] ${arguments[0]}</div>`;
+        document.querySelector("#mode div").click();
+    }
+    console.warn = function() {
+        document.querySelector("#problems div").classList.add("hidden");
+        document.querySelector("#problems").innerHTML += `<div class="wrn">[${arguments[1] ? document.querySelector(".file.selected").innerHTML : 'Anonymous'}] ${arguments[0]}</div>`;
+        document.querySelector("#mode div").click();
     }
 }
 
@@ -26,7 +34,7 @@ function runCode_terminal(event) {
         try {
             ${event.target.value};
         } catch (err) {
-            console.error(err);
+            console.error(err,false);
         }
         `);
         event.target.value = "";
@@ -39,8 +47,7 @@ function runCode() {
     try {
         ${cm_editor.getValue()}
     } catch (err) {
-        console.error(err);
-        document.querySelector("#mode div").click();
+        console.error(err,true);
     }
     `;
     eval(code);

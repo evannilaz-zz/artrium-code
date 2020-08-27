@@ -322,14 +322,28 @@ span.cm-keyword-2, span.cm-bracket {
     border-bottom: 2px solid turquoise;
 }
 
-#console #error {
+#console #problems {
+    overflow: scroll;
+    height: 90%;
+}
+
+#console #problems .err, #console #problems .wrn {
     margin-top: 5px;
     border-radius: 5px;
     padding: 5px;
     font-family: SFMono-Regular, Consolas, Ubuntu Mono, Liberation Mono, Menlo, monospace !important;
+}
+
+#console #problems .err {
     color: #ff8080;
     background: #290000;
     border: 1.5px solid #5c0000;
+}
+
+#console #problems .wrn {
+    color: #ffdd9e;
+    background: #332b00;
+    border: 1.5px solid #665500;
 }
 
 #console #terminal {
