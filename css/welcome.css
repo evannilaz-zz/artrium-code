@@ -15,7 +15,8 @@
 body {
     display: flex;
     height: 100vh;
-    background: linear-gradient(30deg, #9fb8ad 0%,#1fc8db 51%,#2cb5e8 75%) no-repeat;
+    background: linear-gradient(30deg, #5d4157, #a8caba), no-repeat;
+    /* background: linear-gradient(30deg, #9fb8ad 0%,#1fc8db 51%,#2cb5e8 75%) no-repeat; */
     flex-direction: column;
     align-items: center;
     padding-top: 200px;
@@ -45,13 +46,14 @@ button {
     background: none;
     cursor: pointer;
     box-shadow: 2px 2px 5px rgba(0,0,0,.2);
-    transition: color .3s, background .3s, box-shadow .3s;
+    transition: mix-blend-mode .2s, color .3s, background .3s, box-shadow .3s;
     animation: fadeIn .8s;
 }
 
 button:hover {
     background: white;
-    color: #1fc8db;
+    color: rgba(0,0,0,.5);
+    mix-blend-mode: overlay;
     box-shadow: 3px 3px 10px rgba(0,0,0,.35);
 }
 
@@ -63,10 +65,10 @@ footer {
 
 img {
     position: absolute;
-    top: 15px;
+    top: 30px;
     left: 15px;
     width: 70px;
-    filter: drop-shadow(0px 0px 5px rgba(0,0,0,.5));
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,.5));
 }
 
 @keyframes fadeUp {
