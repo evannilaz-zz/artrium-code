@@ -57,14 +57,12 @@ const hideConsole = function() {
     const terminal = document.querySelector("#console");
     const editor = document.querySelector("#edit");
     if (!full) {
-        terminal.style.transform = "translateY(130%)";
         terminal.style.display = "none";
         editor.style.height = "100%";
         full = true;
     } else {
         editor.style.height = "66%";
-        terminal.style.display = "flex";
-        terminal.style.transform = "none"
+        terminal.style.display = "initial";
         full = false;
     }
 }

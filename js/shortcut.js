@@ -29,7 +29,6 @@ function shortcutKey(event) {
             } else {
                 document.querySelector(".tab").click();
             }
-            next_fired = true;
         }
     } else if (event.key === "F5" && event.shiftKey && document.querySelector(".file.selected").classList.contains("js")) {
         runCode();
@@ -53,11 +52,9 @@ function shortcutKey(event) {
 }
 
 function init() {
-    document.querySelectorAll("*").forEach((element) => {
-        element.addEventListener("keydown",shortcutKey);
-        element.addEventListener("keyup",() => {next_fired = false});
-        element.addEventListener("mousedown",(event) => {if (event.target.id !== "contextmenu" && event.target.parentElement.id !== "contextmenu") document.querySelector("#contextmenu").classList.add("hidden")})
-    });
+    window.addEventListener("keydown",shortcutKey);
+    window.addEventListener("keyup",() => {next_fired = false});
+    window.addEventListener("mousedown",(event) => {if (event.target.id !== "contextmenu" && event.target.parentElement.id !== "contextmenu") document.querySelector("#contextmenu").classList.add("hidden")});
 }
 
 init();
