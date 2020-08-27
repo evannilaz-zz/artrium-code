@@ -240,10 +240,7 @@ nav a img:hover {
 .CodeMirror * {
     font-family: SFMono-Regular, Consolas, Ubuntu Mono, Liberation Mono, Menlo, monospace !important;
     font-size: 14.5px;
-}
-
-.CodeMirror-default {
-    color: #89ddff;
+    color: #c8d6e5;
 }
 
 span.cm-variable, span.cm-variable-2 {
@@ -262,7 +259,7 @@ span.cm-keyword {
     font-style: italic !important;
 }
 
-span.cm-keyword-2, span.cm-bracket {
+span.cm-keyword-2, span.cm-bracket, span.cm-symbol {
     color: #89ddff !important;
 }
 

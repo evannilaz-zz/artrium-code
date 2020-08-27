@@ -1,7 +1,6 @@
 let cm_editor = CodeMirror.fromTextArea(document.querySelector("textarea"),{
     theme: "material",
     lineNumbers: true,
-    autoCloseTags: true,
     autoCloseBrackets: true,
     indentUnit: 3,
     autofocus: true,
@@ -43,7 +42,7 @@ function configure(event) {
     if (!lang) lang = event.target.classList[1];
     cm_editor.setValue(files[event.target.id].code);
     setTimeout(() => cm_editor.setOption("mode",lang));
-    // if (lang === "xml") cm_editor.setOption("htmlMode",false); else cm_editor.setOption("htmlMode",true);
+    if (event.target.classList.contains("xml")) cm_editor.setOption("htmlMode",false); else cm_editor.setOption("htmlMode",true);
 }
 
 function saveChanges() {
@@ -51,10 +50,17 @@ function saveChanges() {
 }
 
 function syntaxHighlight() {
-    if (document.querySelector(".file.selected") && (document.querySelector(".file.selected").classList.contains("txt") || document.querySelector(".file.selected").classList.contains("md"))) {
-        cm.classList.remove("CodeMirror-default");
-    } else if (document.querySelector(".file.selected")) {
-        cm.classList.add("CodeMirror-default");
+    const selected = document.querySelector(".file.selected");
+    if (selected) {
+        if (selected.classList.contains("txt") || selected.classList.contains("md")) {
+            document.querySelector("#edit").querySelectorAll("span").forEach((span) => {span.classList.remove("cm-symbol")});
+        } else {
+            document.querySelector("#edit").querySelectorAll("span").forEach((span) => {
+                if (span.className === "") {
+                    span.classList.add("cm-symbol");
+                }
+            });
+        }
     }
     document.querySelectorAll("span.cm-keyword").forEach((keyword) => {
         if (!keywords.includes(keyword.innerHTML)) {
