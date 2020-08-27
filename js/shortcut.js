@@ -1,13 +1,12 @@
-const keyHistory = new Array();
+let next_fired = false;
 
 function shortcutKey(event) {
-    const lastKey = keyHistory[keyHistory.length - 1];
-    if ((lastKey === "Control" || lastKey === "Command") &&  event.key === "s") {
+    if (event.ctrlKey &&  event.key === "s") {
         event.preventDefault();
         saveFile(true);
-    } else if ((lastKey === "Alt" || lastKey === "Option") && /^[1-9]$/.test(event.key) && document.getElementById(parseInt(event.key) - 1)) {
+    } else if (event.altKey && /^[1-9]$/.test(event.key) && document.getElementById(parseInt(event.key) - 1)) {
         document.getElementById(parseInt(event.key) - 1).click();
-    } else if ((lastKey === "Alt" || lastKey === "Option") && (event.key === "w" || event.key === "n") && tabIndicator.querySelector(".tab")) {
+    } else if (event.altKey && (event.key === "w" || event.key === "n") && tabIndicator.querySelector(".tab")) {
         const toDelete = document.querySelector(".tab.selected");
         let tabIndex = new Array();
         document.querySelectorAll(".tab").forEach((tab) => tabIndex.push(tab));
@@ -20,28 +19,29 @@ function shortcutKey(event) {
                 if (document.querySelectorAll(".tab")[tabIndex - 1]) {
                     document.querySelectorAll(".tab")[tabIndex - 1].click();
                 } else {
-                    document.querySelector(".tab").click();
+                    deactivateEditor();
                 }
             },150);
-        } else if (event.key === "n") {
+        } else if (event.key === "n" && !next_fired) {
             if (document.querySelectorAll(".tab")[tabIndex + 1]) {
                 document.querySelectorAll(".tab")[tabIndex + 1].click();
             } else {
                 document.querySelector(".tab").click();
             }
+            next_fired = true;
         }
-    } else if (event.key === "F5" && lastKey === "Shift" && document.querySelector(".file.selected").classList.contains("js")) {
+    } else if (event.key === "F5" && event.shiftKey && document.querySelector(".file.selected").classList.contains("js")) {
         runCode();
-    } else if (event.key === "`" && (lastKey === "Control" || lastKey === "Command")) {
+    } else if (event.ctrlKey && event.key === "`") {
         event.preventDefault();
         hideConsole();
     }
-    keyHistory.push(event.key);
 }
 
 function init() {
     document.querySelectorAll("*").forEach((element) => {
         element.addEventListener("keydown",shortcutKey);
+        element.addEventListener("keyup",() => {next_fired = false});
         element.addEventListener("mousedown",(event) => {if (event.target.id !== "contextmenu" && event.target.parentElement.id !== "contextmenu") document.querySelector("#contextmenu").classList.add("hidden")})
     });
 }
