@@ -71,6 +71,15 @@ img {
     filter: drop-shadow(1px 1px 2px rgba(0,0,0,.5));
 }
 
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 @keyframes fadeUp {
     from {filter: opacity(.3); transform: translateY(150px)}
     to {}
