@@ -26,19 +26,25 @@ function setHistorySaver() {
         document.querySelector("#problems").innerHTML += `<div class="wrn">[${arguments[1] ? document.querySelector(".file.selected").innerHTML : 'Anonymous'}] ${arguments[0]}</div>`;
         document.querySelector("#mode div").click();
     }
+    clear = function() {
+        document.querySelectorAll("#terminal>div").forEach((div) => {
+            if (div.id !== "termInput") {
+                div.parentElement.removeChild(div);
+            }
+        });
+    }
 }
 
 function runCode_terminal(event) {
-    if (event.keyCode === 13) {
-        eval(`
-        try {
-            ${event.target.value};
-        } catch (err) {
-            console.error(err,false);
-        }
-        `);
-        event.target.value = "";
+    event.preventDefault();
+    eval(`
+    try {
+        ${event.target.querySelector("input").value};
+    } catch (err) {
+        console.error(err,false);
     }
+    `);
+    event.target.querySelector("input").value = "";
 }
 
 function runCode() {

@@ -330,8 +330,8 @@ span.cm-keyword-2, span.cm-bracket, span.cm-symbol {
     font-family: SFMono-Regular, Consolas, Ubuntu Mono, Liberation Mono, Menlo, monospace !important;
 }
 
-#console #terminal div:nth-child(2) {
-    order: 999;
+#console #terminal #termInput {
+    order: 9999;
 }
 
 #console #terminal form {
@@ -386,9 +386,14 @@ h3 {
     height: 20px;
 }
 
-.file input {
+.file form {
     width: 60%;
     height: 95%;
+}
+
+.file input {
+    width: 100%;
+    height: 100%;
     border: none;
     border-bottom: 1.5px solid #78909c;
     text-align: right;

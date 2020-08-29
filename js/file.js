@@ -118,16 +118,17 @@ const activateEditor = function(event) {
 
 
 function renameFile(event) {
+    event.preventDefault();
     if (contexted.tagName === "DIV" && event.target.tagName === "BUTTON") {
         let clickedShortcut = contexted;
         prevFileName = clickedShortcut.innerText;
         clickedShortcut.innerHTML = clickedShortcut.innerHTML.slice(0,clickedShortcut.innerHTML.lastIndexOf(">") + 1);
-        clickedShortcut.querySelector("input").classList.remove("hidden");
+        clickedShortcut.querySelector("form").classList.remove("hidden");
         clickedShortcut.querySelector("input").value = prevFileName;
         clickedShortcut.querySelector("input").focus();
         contextmenu.classList.add("hidden");
-    } else if (event.target.tagName === "INPUT") {
-        const inputValue = event.target.value;
+    } else if (event.target.tagName === "FORM") {
+        const inputValue = event.target.querySelector("input").value;
         let cancel;
 
         files.forEach((file) => {
@@ -247,7 +248,7 @@ function crtNewFile(fileName,innerCode) {
 
 function displayFile(file) {
     const div = document.createElement("div");
-    div.innerHTML = `<span><img src="https://raw.githubusercontent.com/dmhendricks/file-icon-vectors/master/dist/icons/high-contrast/${file.type}.svg"></span><input type="text" class="hidden">${file.name}`;
+    div.innerHTML = `<span><img src="https://raw.githubusercontent.com/dmhendricks/file-icon-vectors/master/dist/icons/high-contrast/${file.type}.svg"></span><form class="hidden" onsubmit="renameFile(event)"><input type="text"></form>${file.name}`;
     div.draggable = "true";
     div.classList.add("file");
     div.classList.add(file.type);
@@ -312,8 +313,6 @@ function init() {
         fileShortcuts.forEach((shortcut) => {
             shortcut.addEventListener("click",activateEditor);
             shortcut.addEventListener("contextmenu",showContextmenu);
-            shortcut.querySelector("input").addEventListener("keydown",(event) => {if (event.keyCode === 13 && !ren_fired) renameFile(event)});
-            shortcut.querySelector("input").addEventListener("keyup",(event) => {ren_fired = false});
             shortcut.addEventListener("dragstart",drag);
             shortcut.addEventListener("drop",drop);
             shortcut.addEventListener("dragover",allowDrop);
