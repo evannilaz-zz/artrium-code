@@ -47,7 +47,6 @@ window.addEventListener('beforeunload', (event) => {
 });
 
 setInterval(() => {
-    // document.querySelector("#console").style.top = (55 + parseInt(window.getComputedStyle(document.querySelector("#edit")).getPropertyValue("height").replace("px","")) - 15).toString() + "px";
     const loadedFiles = JSON.parse(localStorage.getItem("files"));
 
     if (files.length === loadedFiles.length) {

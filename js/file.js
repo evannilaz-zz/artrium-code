@@ -112,7 +112,6 @@ const activateEditor = function(event) {
             tabIndicator.appendChild(newTab);
             setTimeout(() => {newTab.style.width = "9.5%"});
             setTimeout(() => {newTab.querySelector("div").innerText = files[clickedShortcut.id].name;},180);
-            // cm_editor.focus();
         }
     }
 }
@@ -325,7 +324,7 @@ function init() {
                 currentTab = event.target;
                 currentTab.querySelector("input").style.filter = "opacity(1)";
             });
-            shortcut.addEventListener("mouseleave",(event) => {;
+            shortcut.addEventListener("mouseleave",(event) => {
                 currentTab.querySelector("input").style.filter = "opacity(0)";
             });
             shortcut.querySelector("input").addEventListener("click",deleteFile);
@@ -333,7 +332,6 @@ function init() {
     });
     document.querySelector("#delete").addEventListener("click",deleteFile);
     document.querySelector("#rename").addEventListener("click",renameFile);
-    // document.querySelector("#rename").addEventListener("click",() => {alert("Sorry. Renaming file is not available for a moment.\nWe'll fix this as soon as we can.")});
 }
 
 init();
