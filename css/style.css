@@ -230,8 +230,8 @@ span.cm-number {
     color: #f78660 !important;
 }
 
-span.cm-keyword {
-    font-style: italic !important;
+span.cm-keyword-2 {
+    font-style: italic;
 }
 
 span.cm-keyword-2, span.cm-bracket, span.cm-symbol {

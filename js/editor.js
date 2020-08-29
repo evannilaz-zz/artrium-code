@@ -23,7 +23,7 @@ const languageLists = {
     txt: "text",
 };
 
-const keywords = ["const","var","let","func","function","def","class"];
+const keywords = ["if","elif","else","for","while","do","import","export","return"];
 
 let cm = document.querySelector(".CodeMirror");
 
@@ -63,7 +63,7 @@ function syntaxHighlight() {
         }
     }
     document.querySelectorAll("span.cm-keyword").forEach((keyword) => {
-        if (!keywords.includes(keyword.innerHTML)) {
+        if (keywords.includes(keyword.innerHTML) || keyword.innerHTML.includes("@")) {
             keyword.classList.add("cm-keyword-2");
         }
     });
