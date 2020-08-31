@@ -322,6 +322,7 @@ span.cm-keyword-2, span.cm-bracket, span.cm-symbol {
     display: flex;
     flex-direction: column;
     padding: 5px;
+    height: 90%;
     overflow: scroll;
 }
 

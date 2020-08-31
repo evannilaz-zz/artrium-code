@@ -1,5 +1,7 @@
 const terminal = document.querySelector("#console");
+const terminalHistory = new Array();
 let full = false;
+let currentIndex;
 
 function setMode(event) {
     if (terminal.querySelector(".selected")) terminal.querySelector(".selected").classList.remove("selected");
@@ -14,16 +16,15 @@ function setHistorySaver() {
     console.stdwrn = console.warn.bind(console);
     console.log = function() {
         document.querySelector("#terminal").innerHTML += `<div>>> ${arguments[0]}</div>`;
-        document.querySelector("#terminal input").focus();
     }
     console.error = function() {
         document.querySelector("#problems div").classList.add("hidden");
-        document.querySelector("#problems").innerHTML += `<div class="err">[${arguments[1] ? document.querySelector(".file.selected").innerText : 'Anonymous'}] ${arguments[0]}</div>`;
+        document.querySelector("#problems").innerHTML += `<div class="err">[${arguments[1] ? document.querySelector(".file.selected").innerText : 'anonymous'}] ${arguments[0]}</div>`;
         document.querySelector("#mode div").click();
     }
     console.warn = function() {
         document.querySelector("#problems div").classList.add("hidden");
-        document.querySelector("#problems").innerHTML += `<div class="wrn">[${arguments[1] ? document.querySelector(".file.selected").innerHTML : 'Anonymous'}] ${arguments[0]}</div>`;
+        document.querySelector("#problems").innerHTML += `<div class="wrn">[${arguments[1] ? document.querySelector(".file.selected").innerHTML : 'anonymous'}] ${arguments[0]}</div>`;
         document.querySelector("#mode div").click();
     }
     clear = function() {
@@ -44,11 +45,14 @@ function runCode_terminal(event) {
         console.error(err,false);
     }
     `);
+    terminalHistory.push(event.target.querySelector("input").value);
     event.target.querySelector("input").value = "";
+    document.querySelector("#terminal input").focus();
 }
 
 function runCode() {
     event.preventDefault();
+    if (full) hideConsole();
     const code = `
     try {
         ${cm_editor.getValue()}
@@ -73,10 +77,26 @@ const hideConsole = function() {
     }
 }
 
+function recoverHistory(event) {
+    const termInput = document.querySelector("#termInput");
+    if (terminalHistory[0] !== undefined) {
+        debugger;
+        console.stdlog(terminalHistory[0])
+        if (!currentIndex) currentIndex = terminalHistory.length - 1;
+        console.stdlog(currentIndex);
+        // if (event.key === "ArrowUp") {
+        //     terminalInput.value = terminalHistory[currentIndex--];
+        // } else if (event.key === "ArrowDown") {
+        //     terminalInput.value = terminalHistory[currentIndex++];
+        // }
+    }
+}
+
 function init() {
     setHistorySaver();
     document.querySelectorAll("#console #mode div").forEach((div) => {div.addEventListener("click",setMode)});
     document.querySelectorAll("#console #mode div")[1].click();
+    // document.querySelector("#termInput").addEventListener("keydown",recoverHistory);
 }
 
 init();
